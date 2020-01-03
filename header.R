@@ -34,10 +34,9 @@ graphics.off()
 source("functions.R")
 
 project <- basename(getwd())
-project <- "analysis-template" # so runs with new working directory
 
 Sys.setenv("SLACK_CHANNEL" = project)
 
 dir <- paste0("~/Poisson/Data/", sub("-\\d\\d$", "", project))
 
-year <- 2019
+year <- 2020
