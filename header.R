@@ -40,3 +40,6 @@ Sys.setenv("SLACK_CHANNEL" = project)
 dir <- paste0("~/Poisson/Data/", sub("-\\d\\d$", "", project))
 
 year <- 2020
+tz_data <- "PST8PDT"
+tz_analysis <- "Etc/GMT+8"
+epsg <- 3005
