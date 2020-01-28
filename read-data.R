@@ -9,6 +9,8 @@ killobsdata<- read_xlsx(file.path(dir,year, "2017/2017_MasterKillsandObservation
 agesourcedata <- read_xlsx(file.path(dir,year, "DeerSampleMasterList20190130.xlsx"))
 agedata <-read_xlsx(file.path(dir,year, "AgeAnalysis20191121.xlsx"), sheet= "agedata")
 
+faradayevent <- read_xlsx(file.path(dir, year, "DatasheetsFaraday2018 FINAL.xlsx"), sheet = "HuntingEventsFaraday2018")
+faradaykill <- read_xlsx(file.path(dir, year, "DatasheetsFaraday2018 FINAL.xlsx"), sheet = "HuntingEncountersFaraday2018")
 
 #saves in directory as objects
 sbf_set_sub("read", rm = TRUE)
