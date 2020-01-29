@@ -8,11 +8,24 @@ agedata %<>%
   transmute(ToothID = as.integer(`Tooth ID`), 
          Age = as.integer(Age))
 
+x <- agesourcedata
+x$Time[is.na(x$Time)] <- "00"
+x$Hour <- x$Time
+x$Hour[nchar(x$Time) == 4] <- substr(x$Time, 1, 2)[nchar(x$Time) == 4] 
+x$Hour[nchar(x$Time) == 3] <- substr(x$Time, 1, 1)[nchar(x$Time) == 3] 
+x$Hour[nchar(x$Time) == 2] <- substr(x$Time, 1, 2)[nchar(x$Time) == 2] 
+x$Hour[x$Hour == "00"] <- NA_character_
+
+x$Minute <- x$Time
+x$Minute[nchar(x$Time) == 4] <- substr(x$Time, 3, 4)[nchar(x$Time) == 4] 
+x$Minute[nchar(x$Time) == 3] <- substr(x$Time, 2, 3)[nchar(x$Time) == 3] 
+x$Minute[nchar(x$Time) == 2] <- "00"
+
+agesourcedata <- x
+
 agesourcedata %<>% 
-  mutate(Hour = substr(Time, 1, 2),
-         Minute = substr(Time, 3, 4),
-         DateTimeAge = ISOdatetime(Year, Month, Day, Hour, Minute, 0L, tz = tz_data),
-         DateTimeAge = with_tz(DateTimeAge, tz = tz_analysis),
+  mutate(DateTimeAge = ISOdatetime(Year, Month, Day, Hour, Minute, 0L, tz = tz_data),
+         DateTimeAge = dtt_adjust_tz(DateTimeAge, tz = tz_analysis),
          ToothID = as.integer(ToothID)) %>%
   mutate (Sex = toupper(Sex))  %>%
   select(ToothID, SampleID, Island, DateTimeAge, HuntEvent, Sex)
@@ -20,7 +33,7 @@ agesourcedata %<>%
 chk_subset(agesourcedata$Sex, c("M", "F", NA))
 check_join(agedata, agesourcedata, "ToothID")
 
-age <- bind_rows(agedata, agesourcedata)
+age <- left_join(agesourcedata, agedata, "ToothID")
 
 bailingeffortdata <- bailingeffortdata %>%
   mutate(Island = IslandName, 
