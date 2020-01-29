@@ -34,6 +34,10 @@ chk_subset(agesourcedata$Sex, c("M", "F", NA))
 check_join(agedata, agesourcedata, "ToothID")
 
 age <- left_join(agesourcedata, agedata, "ToothID")
+age$Island <- paste(age$Island, "Island")
+
+age$Island[age$Island == "Hot Spring Island"] <- "Hotsprings Island"
+age$Island[age$Island == "Sgaan Gwaii Island"] <- "Sgang Gwaay Island"
 
 bailingeffortdata <- bailingeffortdata %>%
   mutate(Island = IslandName, 
@@ -62,7 +66,7 @@ eventdata <- eventdata %>%
                                         TRUE, FALSE),
          ShorelineWithDog = if_else(tolower(ShorelineWithDog) == "yes",
                                TRUE, FALSE),
-         TrackError = if_else(TrackFileMissingorCorruptororIncomplete == 1,
+         TrackFileError = if_else(TrackFileMissingorCorruptororIncomplete == 1,
                               TRUE, FALSE, missing = FALSE))
 
 message("if TrackFileMissingorCorruptorIncomplete == 1, set to TRUE else FALSE")
@@ -84,8 +88,8 @@ outing <- eventdata %>%
          HuntingTime = HuntingEventHuntingTime,
          TrackOverIslandTime = Totaltimeoftrackoverisland,
          HuntingTimeCalculated = TimeCalc,
-         TrackFileError = TrackFileMissingorCorruptororIncomplete,
-         CommentHunting = Comments)
+         TrackFileError,
+         CommentOuting = Comments)
 
 ### add some missing info from bailing effort table
 outing <- bailingeffortdata %>%
@@ -144,6 +148,8 @@ track2 <- eventdata %>%
          Hunter, 
          TrackLength) %>%
   filter(!is.na(TrackLength))
+
+message("why are track lengths different for the same outing/hunter combinations in bailingeffortdata and eventdata?")
   
 track <- bind_rows(track, track2)
 
@@ -162,6 +168,7 @@ encounter <- killobsdata %>%
                               DeerSex),
             DNASampleCode = if_else(DNASampleCode == "NA", NA_character_, DNASampleCode),
             DNASample = if_else(tolower(DNASample) != "yes", FALSE, TRUE),
+            ShorelineKillSubtype = if_else(SubTypeKillTechnique == "NA", NA_character_, SubTypeKillTechnique),
             Longitude,
             Latitude)
 
