@@ -77,9 +77,13 @@ check_key(event, "HuntingEventNumber")
 check_join(bailingeffortdata %>% filter(!is.na(HuntingEventNumber)), event, "HuntingEventNumber")
 check_join(faradayevent, event, "HuntingEventNumber")
 
+message("change aerial hotspot to aerial and add killsubtype")
 ########## event table issues ##########
 # 1. What are the definitions of the all of the time columns? (not in metadata) which to keep?
 # 2. Do we need to include NumberOfDogs, NumberOfBoats, etc.?
+message("recreate hunting team from faraday event table (fill in names from kill table when possible), delete dogs, boats, hunters in bailing effort as doesnt seem to be correct")
+message("for now were not gonna worry about filling out the team members for early events")
+### shoreline until may 20th one shooter, after that might be more team members
 # 3. Why is NumberOfDogs not the sum of the number of dogs in hunting team for bailingeffort events? how calculated?
 # 4. For faradayevent we have the number of crew members, but only a single name
 # (whereas bailingeffort we have names, etc.) - could recreate by naming Hunter1, 
@@ -144,6 +148,7 @@ check_key(huntingteam, c("HuntingEventNumber", "Hunter"))
 # (They are also not the sum of each individual team member)
 # 2. Why are there no tracks for the faraday events?
 
+message("nmight have to get track distance from time based on model")
 ########## encounter table ###########
 # primary key HuntingEventNumber, EncounterID
 # joins with event table by HuntingEventNumber
@@ -215,15 +220,20 @@ chk_true(identical(nrow(missing_sex), 0L))
 # 1. in faraday data why are there cases of DNASample No but DNASampleCode
 wrong_dnasample <- encounter %>%
   filter(!DNASample & !is.na(DNASampleCode))
-
+message("get rid of DNASample TRUE/FALSE")
 # 2. There are coords in the ocean that need to be fixed
 mapview::mapview(encounter)
 
 # 3. There are two coords with comments: Wpt 006 on Yo Dang and Wpt 007 on Yo Dang...does this mean anything to you? removing for now
+message("Robyn can get coors from these waypoints")
 # 4. There are 4 missing datetimes
+message("look for other kills in event? but just leave for now")
 # 5. Why is EncounterID not unique? There are 3 cases of reused EncounterIDs
+x <- ps_duplicates(encounter %>% ps_deactivate_sfc(), "EncounterID")
+#A214 change to A114b
+# add b to the later event for the others
 # 6. What happened to HuntingEventNumber RB-110? (exists in encounter table but not event data)
-
+message("dont leave hunter name out of encounter table")
 ########## age table ##########
 #### age data from DNASamples
 agedata %<>% 
@@ -303,6 +313,8 @@ x <- anti_join(age, tmp, c("SampleID" = "DNASampleCode"))
 
 # 2. How did get DeerStage and DeerSex columns in encounter table if impossible to connect to age table?
 # 3. Should remove DeerStage, DeerSex, DNASampleCode from encounter table and add EncounterID to age table
+message("move sex back to encoutner table because determined by hunter not dna")
+message("fix obvious samplecode errors by joining on datetime, send robyn file of remining problems")
 
 ########## lookups ##########
 hunter <- tibble(Hunter = unique(huntingteam$Hunter))
