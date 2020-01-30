@@ -3,169 +3,159 @@ source("header.R")
 sbf_set_sub("read")
 sbf_load_datas()
 
-agedata %<>% 
-  filter(Age != "X") %>%
-  transmute(ToothID = as.integer(`Tooth ID`), 
-         Age = as.integer(Age))
-
-x <- agesourcedata
-x$Time[is.na(x$Time)] <- "00"
-x$Hour <- x$Time
-x$Hour[nchar(x$Time) == 4] <- substr(x$Time, 1, 2)[nchar(x$Time) == 4] 
-x$Hour[nchar(x$Time) == 3] <- substr(x$Time, 1, 1)[nchar(x$Time) == 3] 
-x$Hour[nchar(x$Time) == 2] <- substr(x$Time, 1, 2)[nchar(x$Time) == 2] 
-x$Hour[x$Hour == "00"] <- NA_character_
-
-x$Minute <- x$Time
-x$Minute[nchar(x$Time) == 4] <- substr(x$Time, 3, 4)[nchar(x$Time) == 4] 
-x$Minute[nchar(x$Time) == 3] <- substr(x$Time, 2, 3)[nchar(x$Time) == 3] 
-x$Minute[nchar(x$Time) == 2] <- "00"
-
-agesourcedata <- x
-
-agesourcedata %<>% 
-  mutate(DateTimeAge = ISOdatetime(Year, Month, Day, Hour, Minute, 0L, tz = tz_data),
-         DateTimeAge = dtt_adjust_tz(DateTimeAge, tz = tz_analysis),
-         ToothID = as.integer(ToothID)) %>%
-  mutate (Sex = toupper(Sex))  %>%
-  select(ToothID, SampleID, Island, DateTimeAge, HuntEvent, Sex)
-
-chk_subset(agesourcedata$Sex, c("M", "F", NA))
-check_join(agedata, agesourcedata, "ToothID")
-
-age <- left_join(agesourcedata, agedata, "ToothID")
-age$Island <- paste(age$Island, "Island")
-
-age$Island[age$Island == "Hot Spring Island"] <- "Hotsprings Island"
-age$Island[age$Island == "Sgaan Gwaii Island"] <- "Sgang Gwaay Island"
-
-bailingeffortdata <- bailingeffortdata %>%
+########## Event Table ##########
+# event table has key of HuntingEventNumber - hunting team and tracks moved to other tables
+event <- eventdata %>%
   mutate(Island = IslandName, 
-         Hunter = HunterName,
          TrackLength = `Length(m)`,
-         DateTimeStart = ISOdatetime(HuntingStartYear, HuntingStartMonth, 
-                                            HuntingStartDay, HuntingStartHour,
-                                            HuntingStartMinute, 0L, tz = tz_data), 
-         DateTimeEnd = ISOdatetime(HuntingStopYear, HuntingStopMonth, 
-                                          HuntingStopDay, HuntingStopHour, 
-                                          HuntingStopMinute, 0L, tz = tz_data))
-
-eventdata <- eventdata %>%
-  mutate(Island = IslandName, 
-         Hunter = HunterName,
-         TrackLength = `Length(m)`,
-         DateTimeStart = ISOdatetime(HuntingStartYear, HuntingStartMonth, 
-                                     HuntingStartDay, HuntingStartHour,
-                                     HuntingStartMinute, 0L, tz = tz_data), 
-         DateTimeEnd = ISOdatetime(HuntingStopYear, HuntingStopMonth, 
-                                   HuntingStopDay, HuntingStopHour, 
-                                   HuntingStopMinute, 0L, tz = tz_data),
+         DateTimeOutingStart = ISOdatetime(HuntingStartYear, HuntingStartMonth, 
+                                           HuntingStartDay, HuntingStartHour,
+                                           HuntingStartMinute, 0L, tz = tz_data), 
+         DateTimeOutingEnd = ISOdatetime(HuntingStopYear, HuntingStopMonth, 
+                                         HuntingStopDay, HuntingStopHour, 
+                                         HuntingStopMinute, 0L, tz = tz_data),
          OpportunisticHunting = if_else(tolower(OpportunisticHunting) == "yes",
                                         TRUE, FALSE),
          TeamHunting = if_else(tolower(TeamHunting) == "yes",
-                                        TRUE, FALSE),
-         ShorelineWithDog = if_else(tolower(ShorelineWithDog) == "yes",
                                TRUE, FALSE),
-         TrackFileError = if_else(TrackFileMissingorCorruptororIncomplete == 1,
-                              TRUE, FALSE, missing = FALSE))
-
-message("if TrackFileMissingorCorruptorIncomplete == 1, set to TRUE else FALSE")
-check_join(bailingeffortdata %>% filter(!is.na(HuntingEventNumber)), eventdata, "HuntingEventNumber")
-
-message("should check that values for Island, Type, Hunter, Start, End are identical in both tables")
-
-outing <- eventdata %>%
-  select(OutingID = HuntingEventNumber,
-         DateTimeOutingStart = DateTimeStart,
-         DateTimeOutingEnd = DateTimeEnd,
-         Island,
-         Hunter,
-         HuntingType,
-         OpportunisticHunting,
-         TeamHunting,
-         ShorelineWithDog,
-         HuntingPhase,
-         HuntingTime = HuntingEventHuntingTime,
-         TrackOverIslandTime = Totaltimeoftrackoverisland,
-         HuntingTimeCalculated = TimeCalc,
-         TrackFileError,
-         CommentOuting = Comments)
+         ShorelineWithDog = if_else(tolower(ShorelineWithDog) == "yes",
+                                    TRUE, FALSE),
+         BaitStationID = if_else(BaitStationID %in% c("Ra00", "RA00", "RAS",
+                                                      "LYS", "NA", "MAS", "HAS"), NA_character_, BaitStationID))
 
 ### add some missing info from bailing effort table
-outing <- bailingeffortdata %>%
-  select(OutingID = HuntingEventNumber,
+event <- bailingeffortdata %>%
+  select(HuntingEventNumber,
          NumberOfDogs = Dogs,
          NumberOfHunters = Hunters,
          NumberOfBoats = Boats,
          Heli) %>%
-  group_by(OutingID) %>%
+  group_by(HuntingEventNumber) %>%
   slice(1) %>%
+  ungroup() %>%
   mutate(Heli = if_else(Heli == 1, TRUE, FALSE)) %>%
-  right_join(outing, "OutingID")
+  right_join(event, "HuntingEventNumber")
 
-### add faraday event data
-outing <- faradayevent %>%
-  transmute(OutingID = HuntingEventNumber,
+event <- event %>%
+  select(HuntingEventNumber,
+         DateTimeOutingStart,
+         DateTimeOutingEnd,
+         Island,
+         HuntingType,
+         NumberOfDogs,
+         NumberOfHunters,
+         NumberOfBoats,
+         OpportunisticHunting,
+         TeamHunting,
+         ShorelineWithDog,
+         HuntingPhase,
+         BaitStationID,
+         HuntingTime = HuntingEventHuntingTime,
+         TrackOverIslandTime = Totaltimeoftrackoverisland,
+         HuntingTimeCalculated = TimeCalc,
+         CommentEvent = Comments)
+
+### add faraday events
+event_faraday <- faradayevent %>%
+  transmute(HuntingEventNumber,
             HuntingType,
             Island = paste(IslandName, "Island"), 
-            Hunter = LeadHunterName,
             NumberOfHunters,
             NumberOfDogs,
             NumberOfBoats,
             DateTimeOutingStart = ISOdatetime(HuntingStartYear, HuntingStartMonth, 
-                                        HuntingStartDay, HuntingStartHour,
-                                        HuntingStartMinute, 0L, tz = tz_data), 
+                                              HuntingStartDay, HuntingStartHour,
+                                              HuntingStartMinute, 0L, tz = tz_data), 
             DateTimeOutingEnd = ISOdatetime(HuntingStopYear, HuntingStopMonth, 
-                                      HuntingStopDay, HuntingStopHour, 
-                                      HuntingStopMinute, 0L, tz = tz_data)) %>%
-  bind_rows(outing)
+                                            HuntingStopDay, HuntingStopHour, 
+                                            HuntingStopMinute, 0L, tz = tz_data)) 
 
-message("is NumberOfDogs etc. same as Dogs, Hunters, etc. in eventdata table.
-        why doesnt this match number of dogs in eventdata table?")
-check_key(outing, "OutingID")
+event <- bind_rows(event, event_faraday)
 
-baitstation <- eventdata %>%
-  filter(!is.na(BaitStationID), !(BaitStationID %in% c("Ra00", "RA00", "RAS",
-                                                       "LYS", "NA", "MAS", "HAS"))) %>%
-  select(OutingID = HuntingEventNumber,
-         BaitStationID)
+### check that all HuntingEventNumbers accounted for in event table
+check_key(event, "HuntingEventNumber")
+check_join(bailingeffortdata %>% filter(!is.na(HuntingEventNumber)), event, "HuntingEventNumber")
+check_join(faradayevent, event, "HuntingEventNumber")
 
-### confirmed that all baitstation OutingID had HuntingType == "Bait Station"
-check_join(baitstation, outing, "OutingID")
+########## event table issues ##########
+# 1. What are the definitions of the all of the time columns? (not in metadata) which to keep?
+# 2. Do we need to include NumberOfDogs, NumberOfBoats, etc.?
+# 3. Why is NumberOfDogs not the sum of the number of dogs in hunting team for bailingeffort events? how calculated?
+# 4. For faradayevent we have the number of crew members, but only a single name
+# (whereas bailingeffort we have names, etc.) - could recreate by naming Hunter1, 
+# Hunter2 etc. and allowing user to recreate summary from huntingteam table
+summary <- bailingeffortdata %>%
+  group_by(HuntingEventNumber) %>%
+  summarise(NumberOfDogs = sum(str_detect(tolower(HunterName), "dog")),
+         NumberOfHunters = sum(!str_detect(tolower(HunterName), "dog|boat|helicopter|heli")),
+         NumberOfBoats = sum(str_detect(tolower(HunterName), "boat")),
+         Heli = if_else("helicopter" %in% tolower(HunterName), TRUE, FALSE)) %>%
+  ungroup()
 
-message("make sure that keeping dogs to calculate effort in bailing")
-message("do we need a separate bailingeffort table? with dogs, heli, ")
-message("why does number of dogs in Dogs column not match Dog in HunterName column")
+summary2 <- bailingeffortdata %>%
+  select(HuntingEventNumber, Dogs, Hunters, Boats, Heli) %>%
+  group_by(HuntingEventNumber) %>%
+  slice(1) %>%
+  ungroup()
 
-track <- bailingeffortdata %>%
-  select(OutingID = HuntingEventNumber,
-         Hunter, 
-         TrackLength) %>%
-  filter(!is.na(TrackLength))
+########## Hunting team table (includes track and situations where multiple team members) ##########
+# primary key HuntingEventNumber and Hunter
+# TrackFileError has 1 or NA - turn NA into false for eventdata and bailingeffort
+# TrackFileError for faradayevent is NA because no information
+huntingteam_event <- eventdata %>%
+  transmute(HuntingEventNumber,
+         Hunter = HunterName,
+         TrackFileError = TrackFileMissingorCorruptororIncomplete,
+         TrackFileError = if_else(TrackFileError == 1, TRUE, FALSE, missing = FALSE),
+         TrackLength = `Length(m)`)
 
-track2 <- eventdata %>%
-  select(OutingID = HuntingEventNumber, 
-         Hunter, 
-         TrackLength) %>%
-  filter(!is.na(TrackLength))
+# remove bailingeffor events from eventdata
+huntingteam_event <- huntingteam_event %>%
+  filter(!(HuntingEventNumber %in% unique(bailingeffortdata$HuntingEventNumber)))
 
-message("why are track lengths different for the same outing/hunter combinations in bailingeffortdata and eventdata?")
+huntingteam_bailing <- bailingeffortdata %>%
+  transmute(HuntingEventNumber,
+         Hunter = HunterName,
+         TrackFileError = TrackFileMissingorCorruptororIncomplete,
+         TrackFileError = if_else(TrackFileError == 1, TRUE, FALSE, missing = FALSE),
+         TrackLength = `Length(m)`)
+
+huntingteam_faraday <- faradayevent %>%
+  transmute(HuntingEventNumber,
+         Hunter = LeadHunterName,
+         TrackFileError = NA,
+         TrackLength = NA)
   
-track <- bind_rows(track, track2)
+huntingteam <- bind_rows(huntingteam_event, huntingteam_bailing, huntingteam_faraday)
 
-check_join(track, outing, "OutingID")
-  
+# give unique hunter name if in same event (e.g. Boat1, Boat2, Dog1, Dog2)
+huntingteam <- huntingteam %>%
+  # get rid of original numbering scheme because inconsistent
+  mutate(Hunter = gsub('[[:digit:]]+', '', Hunter)) %>%
+  group_by(HuntingEventNumber, Hunter) %>%
+  mutate(n = 1:n(),
+         n2 = n()) %>%
+  ungroup() %>%
+  mutate(Hunter = if_else(n2 > 1, p0(Hunter, n), Hunter))
+
+check_key(huntingteam, c("HuntingEventNumber", "Hunter"))
+########## huntingteam table issues ##########
+# 1. Why are trackLengths different for bailingeffort events in bailingeffort table vs eventdata table
+# (They are also not the sum of each individual team member)
+# 2. Why are there no tracks for the faraday events?
+
+########## encounter table ###########
+# primary key HuntingEventNumber, EncounterID
+# joins with event table by HuntingEventNumber
 encounter <- killobsdata %>%
-  transmute(OutingID = HuntingEventNumber,
+  transmute(HuntingEventNumber = gsub(" ", "", HuntingEventNumber),
             EncounterID = RecordNumber,
             DateTimeEncounter = ISOdatetime(Year, Month, Day, EncounterHour, 
                                             EncounterMinute, 0L, tz = tz_data),
             DateTimeEncounter = dtt_adjust_tz(DateTimeEncounter, tz = tz_analysis),
-            Killed = if_else(tolower(DeerStatus) == "killed", TRUE, FALSE),
-            DeerLifestage = if_else(tolower(DeerLifestage) == "unknown", NA_character_,
-                                    DeerLifestage),
-            DeerSex = if_else(tolower(DeerSex) == "unknown", NA_character_,
-                              DeerSex),
+            DeerStatus = DeerStatus,
+            DeerLifestage = DeerLifestage,
+            DeerSex = DeerSex,
             DNASampleCode = if_else(DNASampleCode == "NA", NA_character_, DNASampleCode),
             DNASample = if_else(tolower(DNASample) != "yes", FALSE, TRUE),
             ShorelineKillSubtype = if_else(SubTypeKillTechnique == "NA", NA_character_, SubTypeKillTechnique),
@@ -173,7 +163,7 @@ encounter <- killobsdata %>%
             Latitude)
 
 faradaykill <- faradaykill %>%
-  transmute(OutingID = HuntingEventNumber,
+  transmute(HuntingEventNumber,
             EncounterID = EncounterNumber,
             Longitude, 
             Latitude,
@@ -182,20 +172,14 @@ faradaykill <- faradaykill %>%
                                             EncounterMinute, 0L, tz = tz_data),
             DateTimeEncounter = dtt_adjust_tz(DateTimeEncounter, tz = tz_analysis),
             ## all were killed
-            Killed = TRUE,
-            DeerLifestage = if_else(tolower(DeerLifestage) == "unknown", NA_character_,
-                                    DeerLifestage),
-            DeerSex = if_else(tolower(DeerSex) == "unknown", NA_character_,
-                              DeerSex),
+            DeerStatus = DeerStatus,
+            DeerLifestage = DeerLifestage,
+            DeerSex = DeerSex,
             DNASampleCode = if_else(DNASampleCode == "NA", NA_character_, DNASampleCode),
             DNASample = if_else(tolower(DNASample) != "yes", FALSE, TRUE),
             Comments)
 
-message("in faraday data why are there cases of `No` for DNASample but also a DNASampleCode")
-
 ### deal with coordinates
-message("There are two coords with messages: Wpt 006 on Yo Dang and 
-Wpt 007 on Yo Dang...does this mean anything to you? removing for now")
 encounter$Longitude[encounter$Longitude == "NA"] <- NA_character_
 encounter$Longitude[encounter$Longitude == "WPT 006 on Yo Dang"] <- NA_character_
 encounter$Longitude[encounter$Longitude == "WPT 007 on Yo Dang"] <- NA_character_
@@ -218,27 +202,125 @@ encounter <- encounter %>%
 
 encounter <- bind_rows(encounter, faradaykill)
 
+check_key(encounter, c("HuntingEventNumber", "EncounterID"))
+anti_join(encounter, event, "HuntingEventNumber")
+
 encounter %<>% ps_coords_to_sfc(c("Longitude", "Latitude"), crs = 4326)
 
-### check that coords make sense
-mapview::mapview(encounter %>% filter(str_detect(EncounterID, "F")))
-
-message("need to fix coords not on an island")
-
-missing_sex <- filter(encounter, (DNASample) & is.na(DeerSex))
 # there are no cases  where there is DNASampleCode but no sex info
+missing_sex <- filter(encounter, (DNASample) & is.na(DeerSex))
 chk_true(identical(nrow(missing_sex), 0L))
 
-hunter <- tibble(Hunter = unique(outing$Hunter))
-island <- tibble(Island = unique(outing$Island))
-huntingtype <- tibble(HuntingType = unique(outing$HuntingType))
+########## encounter table issues ##########
+# 1. in faraday data why are there cases of DNASample No but DNASampleCode
+wrong_dnasample <- encounter %>%
+  filter(!DNASample & !is.na(DNASampleCode))
+
+# 2. There are coords in the ocean that need to be fixed
+mapview::mapview(encounter)
+
+# 3. There are two coords with comments: Wpt 006 on Yo Dang and Wpt 007 on Yo Dang...does this mean anything to you? removing for now
+# 4. There are 4 missing datetimes
+# 5. Why is EncounterID not unique? There are 3 cases of reused EncounterIDs
+# 6. What happened to HuntingEventNumber RB-110? (exists in encounter table but not event data)
+
+########## age table ##########
+#### age data from DNASamples
+agedata %<>% 
+  filter(Age != "X") %>%
+  transmute(ToothID = as.integer(`Tooth ID`), 
+            Age = as.integer(Age))
+
+### fix date times
+x <- agesourcedata
+x$Time[is.na(x$Time)] <- "00"
+x$Hour <- x$Time
+x$Hour[nchar(x$Time) == 4] <- substr(x$Time, 1, 2)[nchar(x$Time) == 4] 
+x$Hour[nchar(x$Time) == 3] <- substr(x$Time, 1, 1)[nchar(x$Time) == 3] 
+x$Hour[nchar(x$Time) == 2] <- substr(x$Time, 1, 2)[nchar(x$Time) == 2] 
+x$Hour[x$Hour == "00"] <- NA_character_
+
+x$Minute <- x$Time
+x$Minute[nchar(x$Time) == 4] <- substr(x$Time, 3, 4)[nchar(x$Time) == 4] 
+x$Minute[nchar(x$Time) == 3] <- substr(x$Time, 2, 3)[nchar(x$Time) == 3] 
+x$Minute[nchar(x$Time) == 2] <- "00"
+
+agesourcedata <- x
+
+agesourcedata %<>% 
+  mutate(DateTimeAge = ISOdatetime(Year, Month, Day, Hour, Minute, 0L, tz = tz_data),
+         DateTimeAge = dtt_adjust_tz(DateTimeAge, tz = tz_analysis),
+         ToothID = as.integer(ToothID),
+         Sex = if_else(tolower(Sex) == "m", "Male", "Female", missing = NA_character_)) %>%
+  select(ToothID, SampleID, Island, DateTimeAge, HuntEvent, Sex)
+
+chk_subset(agesourcedata$Sex, c("Male", "Female", NA))
+check_join(agedata, agesourcedata, "ToothID")
+
+age <- left_join(agesourcedata, agedata, "ToothID")
+age$Island <- paste(age$Island, "Island")
+
+age$Island[age$Island == "Hot Spring Island"] <- "Hotsprings Island"
+age$Island[age$Island == "Sgaan Gwaii Island"] <- "Sgang Gwaay Island"
+
+### fix encounter DNASampleCodes so can join to age table
+# remove spaces
+encounter %<>% ps_deactivate_sfc()
+x <- filter(encounter, !is.na(DNASampleCode))
+x$DNASampleCode <- gsub(" ", "", x$DNASampleCode)
+x$DNASampleCode <- gsub("_", "-", x$DNASampleCode)
+x$DNASampleCode[x$DNASampleCode == "D136-RB517"] <- "D136-RB-517"
+
+# add leading 0s that were removed at some point
+x$first <- str_split_fixed(x$DNASampleCode, "-", 2)[,1]
+x$second <- substring(x$first, 2)
+x$first <- substr(x$first, 1, 1)
+x$first <- p0(x$first, formatC(as.numeric(x$second), width = 3, flag = "0"))
+
+x$second <- str_split_fixed(x$DNASampleCode, "-", 3)[,2]
+unique(x$second)
+x$third <- str_split_fixed(x$DNASampleCode, "-", 3)[,3]
+x$third <- formatC(as.numeric(x$third), width = 3, flag = "0")
+chk_true(all(nchar(x$third) == 3))
+
+x$DNASampleCode <- p0(x$first, "-", x$second, x$third)
+
+encounter$DNASampleCode2 <- encounter$DNASampleCode
+encounter$DNASampleCode <- NULL
+encounter <- x %>%
+  select(EncounterID, HuntingEventNumber, DNASampleCode) %>%
+  right_join(encounter, c("HuntingEventNumber", "EncounterID"))
+
+tmp <- encounter %>% 
+  select(HuntingEventNumber, EncounterID, DNASampleCode, DNASampleCode2)
+View(tmp)
+
+
+########## age table issues ##########
+# 1. Each record in age table should join with an encounter in encounter table based on DNASampleCode
+# there are many cases where cannot match
+x <- anti_join(age, tmp, c("SampleID" = "DNASampleCode"))
+
+# 2. How did get DeerStage and DeerSex columns in encounter table if impossible to connect to age table?
+# 3. Should remove DeerStage, DeerSex, DNASampleCode from encounter table and add EncounterID to age table
+
+########## lookups ##########
+hunter <- tibble(Hunter = unique(huntingteam$Hunter))
+island <- tibble(Island = unique(event$Island))
+huntingtype <- tibble(HuntingType = unique(event$HuntingType))
+deerlifestage <- tibble(DeerLifeStage = setdiff(unique(encounter$DeerLifestage), NA))
+deersex <- tibble(DeerSex = setdiff(unique(encounter$DeerSex), NA))
+deerstatus <- tibble(DeerStatus = c("Killed", "Observed", "Wounded"))
 
 sbf_set_sub("prepare")
-sbf_save_data(outing)
+sbf_save_data(event)
 sbf_save_data(age)
 sbf_save_data(encounter)
-sbf_save_data(track)
+sbf_save_data(huntingteam)
 sbf_save_data(hunter)
 sbf_save_data(island)
 sbf_save_data(huntingtype)
+sbf_save_data(deerstatus)
+sbf_save_data(deerlifestage)
+sbf_save_data(deersex)
 
