@@ -42,9 +42,6 @@ event <- event %>%
          DateTimeOutingEnd,
          Island,
          HuntingType,
-         NumberOfDogs,
-         NumberOfHunters,
-         NumberOfBoats,
          OpportunisticHunting,
          TeamHunting,
          ShorelineWithDog,
@@ -60,9 +57,6 @@ event_faraday <- faradayevent %>%
   transmute(HuntingEventNumber,
             HuntingType,
             Island = paste(IslandName, "Island"), 
-            NumberOfHunters,
-            NumberOfDogs,
-            NumberOfBoats,
             DateTimeOutingStart = ISOdatetime(HuntingStartYear, HuntingStartMonth, 
                                               HuntingStartDay, HuntingStartHour,
                                               HuntingStartMinute, 0L, tz = tz_data), 
@@ -70,14 +64,21 @@ event_faraday <- faradayevent %>%
                                             HuntingStopDay, HuntingStopHour, 
                                             HuntingStopMinute, 0L, tz = tz_data)) 
 
-event <- bind_rows(event, event_faraday)
+event_rb110 <- tibble(HuntingEventNumber = "RB-110", 
+                      Island = "Ramsay Island", 
+                      HuntingType = "Aerial",
+                      DateTimeOutingStart = ymd_hms("2017-05-08 20:10:00", tz = tz_data),
+                      DateTimeOutingEnd = ymd_hms("2017-05-08 21:30:00", tz = tz_data))
+
+event <- bind_rows(event, event_faraday, event_rb110)
+event$DateTimeOutingStart %<>% dtt_adjust_tz(tz_analysis)
+event$DateTimeOutingEnd %<>% dtt_adjust_tz(tz_analysis)
 
 ### check that all HuntingEventNumbers accounted for in event table
 check_key(event, "HuntingEventNumber")
 check_join(bailingeffortdata %>% filter(!is.na(HuntingEventNumber)), event, "HuntingEventNumber")
 check_join(faradayevent, event, "HuntingEventNumber")
 
-message("change aerial hotspot to aerial and add killsubtype")
 ########## event table issues ##########
 # 1. What are the definitions of the all of the time columns? (not in metadata) which to keep?
 # 2. Do we need to include NumberOfDogs, NumberOfBoats, etc.?
@@ -130,7 +131,15 @@ huntingteam_faraday <- faradayevent %>%
          TrackFileError = NA,
          TrackLength = NA)
   
-huntingteam <- bind_rows(huntingteam_event, huntingteam_bailing, huntingteam_faraday)
+huntingteam_rb110 <- tibble(
+  HuntingEventNumber = "RB-110",
+  Hunter = "Norm Macdonald",
+  TrackFileError = NA,
+  TrackLength = NA
+)
+
+huntingteam <- bind_rows(huntingteam_event, huntingteam_bailing,
+                         huntingteam_faraday, huntingteam_rb110)
 
 # give unique hunter name if in same event (e.g. Boat1, Boat2, Dog1, Dog2)
 huntingteam <- huntingteam %>%
@@ -315,6 +324,26 @@ x <- anti_join(age, tmp, c("SampleID" = "DNASampleCode"))
 # 3. Should remove DeerStage, DeerSex, DNASampleCode from encounter table and add EncounterID to age table
 message("move sex back to encoutner table because determined by hunter not dna")
 message("fix obvious samplecode errors by joining on datetime, send robyn file of remining problems")
+
+########## fix aerial
+hot_spot_events <- event$HuntingEventNumber[str_detect(tolower(event$HuntingType), "aerial hot spot hunting")]
+grid_events <- event$HuntingEventNumber[str_detect(tolower(event$HuntingType), "aerial grid search")]
+
+event$HuntingType[str_detect(tolower(event$HuntingType), "aerial")] <- "Aerial"
+encounter$KillSubtype <- encounter$ShorelineKillSubtype
+encounter$ShorelineKillSubtype <- NULL
+
+encounter$KillSubtype[encounter$HuntingEventNumber %in% hot_spot_events] <- 4
+encounter$KillSubtype[encounter$HuntingEventNumber %in% grid_events] <- 5
+
+killsubtype <- tibble(KillSubtype = 0:5,
+                      Type = c(rep("Shoreline", 4), rep("Aerial", 2)),
+                      Description = c("observed",
+                                      "shot from boat",
+                                      "shot from shore",
+                                      "active pursuit with indicator dog",
+                                      "hot spot hunting",
+                                      "grid search"))
 
 ########## lookups ##########
 hunter <- tibble(Hunter = unique(huntingteam$Hunter))
