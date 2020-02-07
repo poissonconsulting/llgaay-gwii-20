@@ -36,9 +36,15 @@ DBI::dbGetQuery(conn,
 rws_write(deersex, conn = conn)
 
 DBI::dbGetQuery(conn,
+                "CREATE TABLE DeerStatus (
+                DeerStatus TEXT PRIMARY KEY NOT NULL)")
+
+rws_write(deerstatus, conn = conn)
+
+DBI::dbGetQuery(conn,
                 "CREATE TABLE ShorelineKillSubtype (
-                ShorelineKillSubtype INTEGER NOT NULL,
-                ShorelineKillSubtypeDescription TEXT NOT NULL)")
+                ShorelineKillSubtype INTEGER PRIMARY KEY NOT NULL,
+                Description TEXT NOT NULL)")
 
 rws_write(shorelinekillsubtype, conn = conn)
 
@@ -49,11 +55,6 @@ DBI::dbGetQuery(conn,
                 Island TEXT NOT NULL,
                 DateTimeOutingStart TEXT NOT NULL,
                 DateTimeOutingEnd TEXT NOT NULL,
-                Hunter TEXT NOT NULL,
-                NumberOfHunters INTEGER,
-                NumberOfDogs INTEGER,
-                NumberOfBoats INTEGER,
-                Heli BOOLEAN,
                 OpportunisticHunting BOOLEAN,
                 TeamHunting BOOLEAN,
                 ShorelineWithDog BOOLEAN,
@@ -61,35 +62,43 @@ DBI::dbGetQuery(conn,
                 HuntingTime INTEGER,
                 TrackOverIslandTime INTEGER,
                 HuntingTimeCalculated INTEGER,
-                TrackFileError BOOLEAN,
-                CommentOuting TEXT,
+                BaitStationID TEXT,
+                CommentEvent TEXT,
                 FOREIGN KEY (Island) REFERENCES Island (Island),
-                FOREIGN KEY (HuntingType) REFERENCES HuntingType (HuntingType),
-                FOREIGN KEY (Hunter) REFERENCES Hunter (Hunter))")
+                FOREIGN KEY (HuntingType) REFERENCES HuntingType (HuntingType))")
 
 rws_write(event, conn = conn)
 
 DBI::dbGetQuery(conn,
-                "CREATE TABLE Track (
-                OutingID TEXT NOT NULL,
+                "CREATE TABLE HuntingTeam (
+                HuntingEventNumber TEXT NOT NULL,
                 Hunter TEXT NOT NULL,
-                TrackLength REAL NOT NULL,
-                PRIMARY KEY (OutingID, Hunter),
-                FOREIGN KEY (OutingID) REFERENCES Outing (OutingID))")
+                TrackLength REAL,
+                TrackFileError BOOLEAN,
+                PRIMARY KEY (HuntingEventNumber, Hunter),
+                FOREIGN KEY (HuntingEventNumber) REFERENCES Event (HuntingEventNumber))")
 
-rws_write(track, conn = conn)
+rws_write(huntingteam, conn = conn)
 
 DBI::dbGetQuery(conn,
                 "CREATE TABLE Encounter (
-                OutingID TEXT NOT NULL,
                 EncounterID TEXT NOT NULL,
+                HuntingEventNumber TEXT NOT NULL,
                 DateTimeEncounter TEXT,
-                Killed BOOLEAN NOT NULL,
+                Hunter TEXT NOT NULL,
+                DeerStatus BOOLEAN NOT NULL,
                 DeerLifeStage TEXT,
                 DeerSex TEXT,
-                TrackLength REAL NOT NULL,
-                PRIMARY KEY (OutingID, EncounterID),
-                FOREIGN KEY (OutingID) REFERENCES Outing (OutingID))")
+                ShorelineKillSubtype INTEGER,
+                DNASampleCode TEXT,
+                CommentEncounter TEXT,
+                geometry TEXT,
+                PRIMARY KEY (EncounterID),
+                FOREIGN KEY (HuntingEventNumber) REFERENCES event (HuntingEventNumber),
+                FOREIGN KEY (DeerStatus) REFERENCES DeerStatus (DeerStatus),
+                FOREIGN KEY (DeerLifeStage) REFERENCES DeerLifeStage (DeerLifeStage),
+                FOREIGN KEY (DeerSex) REFERENCES DeerSex (DeerSex),
+                FOREIGN KEY (ShorelineKillSubtype) REFERENCES ShorelineKillSubtype (ShorelineKillSubtype))")
 
 rws_write(encounter, conn = conn)
 

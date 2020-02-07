@@ -74,6 +74,13 @@ event <- bind_rows(event, event_faraday, event_rb110)
 event$DateTimeOutingStart %<>% dtt_adjust_tz(tz_analysis)
 event$DateTimeOutingEnd %<>% dtt_adjust_tz(tz_analysis)
 
+### fix hunting types to match those in metadata
+event$HuntingType[event$HuntingType == "Indicator"] <- "Indicator Dog"
+event$HuntingType[event$HuntingType == "Bailer"] <- "Bailing Dog"
+event$HuntingType[event$HuntingType == "Aerial hot spot hunting"] <- "Aerial Hot Spot Search"
+event$HuntingType[event$HuntingType == "Aerial grid search"] <- "Aerial Grid Search"
+event$HuntingType[event$HuntingType == "Dog hot spot hunting"] <- "Dog Hot Spot Hunting"
+
 ### check that all HuntingEventNumbers accounted for in event table
 check_key(event, "HuntingEventNumber")
 check_join(bailingeffortdata %>% filter(!is.na(HuntingEventNumber)), event, "HuntingEventNumber")
@@ -82,26 +89,24 @@ check_join(faradayevent, event, "HuntingEventNumber")
 ########## event table issues ##########
 # 1. What are the definitions of the all of the time columns? (not in metadata) which to keep?
 # 2. Do we need to include NumberOfDogs, NumberOfBoats, etc.?
-message("recreate hunting team from faraday event table (fill in names from kill table when possible), delete dogs, boats, hunters in bailing effort as doesnt seem to be correct")
-message("for now were not gonna worry about filling out the team members for early events")
+message("remove NumberOfDogs, etc. cols as not accurate and can be recreated from huntingteam table")
+message("(fill in hunter names of faraday huntingteam from kill table where possible)")
+message("for now were not going to worry about filling out the team members for early events")
 ### shoreline until may 20th one shooter, after that might be more team members
-# 3. Why is NumberOfDogs not the sum of the number of dogs in hunting team for bailingeffort events? how calculated?
-# 4. For faradayevent we have the number of crew members, but only a single name
-# (whereas bailingeffort we have names, etc.) - could recreate by naming Hunter1, 
-# Hunter2 etc. and allowing user to recreate summary from huntingteam table
-summary <- bailingeffortdata %>%
-  group_by(HuntingEventNumber) %>%
-  summarise(NumberOfDogs = sum(str_detect(tolower(HunterName), "dog")),
-         NumberOfHunters = sum(!str_detect(tolower(HunterName), "dog|boat|helicopter|heli")),
-         NumberOfBoats = sum(str_detect(tolower(HunterName), "boat")),
-         Heli = if_else("helicopter" %in% tolower(HunterName), TRUE, FALSE)) %>%
-  ungroup()
 
-summary2 <- bailingeffortdata %>%
-  select(HuntingEventNumber, Dogs, Hunters, Boats, Heli) %>%
-  group_by(HuntingEventNumber) %>%
-  slice(1) %>%
-  ungroup()
+# summary <- bailingeffortdata %>%
+#   group_by(HuntingEventNumber) %>%
+#   summarise(NumberOfDogs = sum(str_detect(tolower(HunterName), "dog")),
+#          NumberOfHunters = sum(!str_detect(tolower(HunterName), "dog|boat|helicopter|heli")),
+#          NumberOfBoats = sum(str_detect(tolower(HunterName), "boat")),
+#          Heli = if_else("helicopter" %in% tolower(HunterName), TRUE, FALSE)) %>%
+#   ungroup()
+# 
+# summary2 <- bailingeffortdata %>%
+#   select(HuntingEventNumber, Dogs, Hunters, Boats, Heli) %>%
+#   group_by(HuntingEventNumber) %>%
+#   slice(1) %>%
+#   ungroup()
 
 ########## Hunting team table (includes track and situations where multiple team members) ##########
 # primary key HuntingEventNumber and Hunter
@@ -125,11 +130,19 @@ huntingteam_bailing <- bailingeffortdata %>%
          TrackFileError = if_else(TrackFileError == 1, TRUE, FALSE, missing = FALSE),
          TrackLength = `Length(m)`)
 
-huntingteam_faraday <- faradayevent %>%
-  transmute(HuntingEventNumber,
-         Hunter = LeadHunterName,
+huntingteam_faraday <- map_df(1:nrow(faradayevent), function(a){
+  x <- faradayevent[a,]
+  id <- x$HuntingEventNumber
+  hunters <- rep("Hunter", x$NumberOfHunters) %>% paste0(1:x$NumberOfHunters)
+  boats <- rep("Boat", x$NumberOfBoats) %>% paste0(1:x$NumberOfBoats)
+  dogs <- rep("Dog", x$NumberOfDogs) %>% paste0(1:x$NumberOfDogs)
+  y <- c(x$LeadHunterName, hunters, boats, dogs)
+  y <- y[!(y == "1" | y == "0" | y == "Hunter1")]
+  tibble(HuntingEventNumber = rep(id, length(y)),
+         Hunter = y,
          TrackFileError = NA,
          TrackLength = NA)
+})
   
 huntingteam_rb110 <- tibble(
   HuntingEventNumber = "RB-110",
@@ -149,21 +162,25 @@ huntingteam <- huntingteam %>%
   mutate(n = 1:n(),
          n2 = n()) %>%
   ungroup() %>%
-  mutate(Hunter = if_else(n2 > 1, p0(Hunter, n), Hunter))
+  mutate(Hunter = if_else(n2 > 1, p0(Hunter, n), Hunter),
+         n = NULL,
+         n2 = NULL)
 
 check_key(huntingteam, c("HuntingEventNumber", "Hunter"))
 ########## huntingteam table issues ##########
 # 1. Why are trackLengths different for bailingeffort events in bailingeffort table vs eventdata table
 # (They are also not the sum of each individual team member)
+message("using track times in bailingeffort data")
 # 2. Why are there no tracks for the faraday events?
+message("nmight have to get track distance from time based on model for farday")
 
-message("nmight have to get track distance from time based on model")
 ########## encounter table ###########
 # primary key HuntingEventNumber, EncounterID
 # joins with event table by HuntingEventNumber
 encounter <- killobsdata %>%
   transmute(HuntingEventNumber = gsub(" ", "", HuntingEventNumber),
             EncounterID = RecordNumber,
+            Hunter = HunterName,
             DateTimeEncounter = ISOdatetime(Year, Month, Day, EncounterHour, 
                                             EncounterMinute, 0L, tz = tz_data),
             DateTimeEncounter = dtt_adjust_tz(DateTimeEncounter, tz = tz_analysis),
@@ -171,7 +188,6 @@ encounter <- killobsdata %>%
             DeerLifestage = DeerLifestage,
             DeerSex = DeerSex,
             DNASampleCode = if_else(DNASampleCode == "NA", NA_character_, DNASampleCode),
-            DNASample = if_else(tolower(DNASample) != "yes", FALSE, TRUE),
             ShorelineKillSubtype = if_else(SubTypeKillTechnique == "NA", NA_character_, SubTypeKillTechnique),
             Longitude,
             Latitude)
@@ -179,6 +195,7 @@ encounter <- killobsdata %>%
 faradaykill <- faradaykill %>%
   transmute(HuntingEventNumber,
             EncounterID = EncounterNumber,
+            Hunter = HunterName,
             Longitude, 
             Latitude,
             DateTimeEncounter = ISOdatetime(EncounterYear, EncounterMonth, 
@@ -190,7 +207,6 @@ faradaykill <- faradaykill %>%
             DeerLifestage = DeerLifestage,
             DeerSex = DeerSex,
             DNASampleCode = if_else(DNASampleCode == "NA", NA_character_, DNASampleCode),
-            DNASample = if_else(tolower(DNASample) != "yes", FALSE, TRUE),
             Comments)
 
 ### deal with coordinates
@@ -222,27 +238,32 @@ anti_join(encounter, event, "HuntingEventNumber")
 encounter %<>% ps_coords_to_sfc(c("Longitude", "Latitude"), crs = 4326)
 
 # there are no cases  where there is DNASampleCode but no sex info
-missing_sex <- filter(encounter, (DNASample) & is.na(DeerSex))
+missing_sex <- filter(encounter, (!is.na(DNASampleCode) & is.na(DeerSex)))
 chk_true(identical(nrow(missing_sex), 0L))
 
+### fix duplicate encounterID
+x <- ps_duplicates(encounter %>% ps_deactivate_sfc(), "EncounterID")
+encounter$EncounterID[encounter$HuntingEventNumber == "RB-253" & encounter$EncounterID == "A214"] <- "A214b"
+encounter$EncounterID[encounter$HuntingEventNumber == "RB-449" & encounter$EncounterID == "B408"] <- "B408b"
+encounter$EncounterID[encounter$HuntingEventNumber == "RB-449" & encounter$EncounterID == "B409"] <- "B409b"
+
+check_key(encounter, "EncounterID")
 ########## encounter table issues ##########
 # 1. in faraday data why are there cases of DNASample No but DNASampleCode
-wrong_dnasample <- encounter %>%
-  filter(!DNASample & !is.na(DNASampleCode))
-message("get rid of DNASample TRUE/FALSE")
+# wrong_dnasample <- encounter %>%
+#   filter(!DNASample & !is.na(DNASampleCode))
+message("remove DNASample TRUE/FALSE as redundant")
 # 2. There are coords in the ocean that need to be fixed
 mapview::mapview(encounter)
-
+message("need to fix coords in ocean")
 # 3. There are two coords with comments: Wpt 006 on Yo Dang and Wpt 007 on Yo Dang...does this mean anything to you? removing for now
-message("Robyn can get coors from these waypoints")
+message("get coords from wpt 006 and 007")
 # 4. There are 4 missing datetimes
-message("look for other kills in event? but just leave for now")
+message("look for other kills in event to fill in missing date times...leaving for now")
 # 5. Why is EncounterID not unique? There are 3 cases of reused EncounterIDs
-x <- ps_duplicates(encounter %>% ps_deactivate_sfc(), "EncounterID")
-#A214 change to A114b
-# add b to the later event for the others
+message("renaming duplicate EncounterIDs") 
 # 6. What happened to HuntingEventNumber RB-110? (exists in encounter table but not event data)
-message("dont leave hunter name out of encounter table")
+message("added event RB-110")
 ########## age table ##########
 #### age data from DNASamples
 agedata %<>% 
@@ -309,41 +330,43 @@ encounter$DNASampleCode <- NULL
 encounter <- x %>%
   select(EncounterID, HuntingEventNumber, DNASampleCode) %>%
   right_join(encounter, c("HuntingEventNumber", "EncounterID"))
+encounter %<>% rename(CommentEncounter = Comments)
 
 tmp <- encounter %>% 
-  select(HuntingEventNumber, EncounterID, DNASampleCode, DNASampleCode2)
-View(tmp)
-
+  select(HuntingEventNumber, EncounterID, DNASampleCode, DNASampleCode2, DateTimeEncounter)
+# View(tmp)
+encounter$DNASampleCode2 <- NULL
 
 ########## age table issues ##########
 # 1. Each record in age table should join with an encounter in encounter table based on DNASampleCode
 # there are many cases where cannot match
 x <- anti_join(age, tmp, c("SampleID" = "DNASampleCode"))
+y <- left_join(x, encounter, c("DateTimeAge" = "DateTimeEncounter"))
 
 # 2. How did get DeerStage and DeerSex columns in encounter table if impossible to connect to age table?
 # 3. Should remove DeerStage, DeerSex, DNASampleCode from encounter table and add EncounterID to age table
-message("move sex back to encoutner table because determined by hunter not dna")
+message("move sex back to encounter table because determined by hunter not dna")
 message("fix obvious samplecode errors by joining on datetime, send robyn file of remining problems")
 
-########## fix aerial
-hot_spot_events <- event$HuntingEventNumber[str_detect(tolower(event$HuntingType), "aerial hot spot hunting")]
-grid_events <- event$HuntingEventNumber[str_detect(tolower(event$HuntingType), "aerial grid search")]
-
-event$HuntingType[str_detect(tolower(event$HuntingType), "aerial")] <- "Aerial"
-encounter$KillSubtype <- encounter$ShorelineKillSubtype
-encounter$ShorelineKillSubtype <- NULL
-
-encounter$KillSubtype[encounter$HuntingEventNumber %in% hot_spot_events] <- 4
-encounter$KillSubtype[encounter$HuntingEventNumber %in% grid_events] <- 5
-
-killsubtype <- tibble(KillSubtype = 0:5,
-                      Type = c(rep("Shoreline", 4), rep("Aerial", 2)),
-                      Description = c("observed",
-                                      "shot from boat",
-                                      "shot from shore",
-                                      "active pursuit with indicator dog",
-                                      "hot spot hunting",
-                                      "grid search"))
+# ########## fix aerial
+# hot_spot_events <- event$HuntingEventNumber[str_detect(tolower(event$HuntingType), "aerial hot spot hunting")]
+# grid_events <- event$HuntingEventNumber[str_detect(tolower(event$HuntingType), "aerial grid search")]
+# 
+# event$HuntingType[str_detect(tolower(event$HuntingType), "aerial")] <- "Aerial"
+# encounter$KillSubtype <- encounter$ShorelineKillSubtype
+# encounter$ShorelineKillSubtype <- NULL
+# 
+# encounter$KillSubtype[encounter$HuntingEventNumber %in% hot_spot_events] <- 4
+# encounter$KillSubtype[encounter$HuntingEventNumber %in% grid_events] <- 5
+# 
+# killsubtype <- tibble(KillSubtype = 0:5,
+#                       Type = c(rep("Shoreline", 4), rep("Aerial", 2)),
+#                       Description = c("observed",
+#                                       "shot from boat",
+#                                       "shot from shore",
+#                                       "active pursuit with indicator dog",
+#                                       "hot spot hunting",
+#                                       "grid search"))
 
 ########## lookups ##########
 hunter <- tibble(Hunter = unique(huntingteam$Hunter))
@@ -352,6 +375,10 @@ huntingtype <- tibble(HuntingType = unique(event$HuntingType))
 deerlifestage <- tibble(DeerLifeStage = setdiff(unique(encounter$DeerLifestage), NA))
 deersex <- tibble(DeerSex = setdiff(unique(encounter$DeerSex), NA))
 deerstatus <- tibble(DeerStatus = c("Killed", "Observed", "Wounded"))
+shorelinekillsubtype <- tibble(ShorelineKillSubtype = 0:3, 
+                               Description = c("observed", "shot from boat", 
+                                               "shot from shore",
+                                               "active pursuit with indicator dog"))
 
 sbf_set_sub("prepare")
 sbf_save_data(event)
@@ -364,4 +391,5 @@ sbf_save_data(huntingtype)
 sbf_save_data(deerstatus)
 sbf_save_data(deerlifestage)
 sbf_save_data(deersex)
+sbf_save_data(shorelinekillsubtype)
 
