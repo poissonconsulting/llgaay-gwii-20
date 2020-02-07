@@ -47,9 +47,7 @@ event <- event %>%
          ShorelineWithDog,
          HuntingPhase,
          BaitStationID,
-         HuntingTime = HuntingEventHuntingTime,
-         TrackOverIslandTime = Totaltimeoftrackoverisland,
-         HuntingTimeCalculated = TimeCalc,
+         HuntingTimeCalculated = `Hours(Calc)`,
          CommentEvent = Comments)
 
 ### add faraday events
