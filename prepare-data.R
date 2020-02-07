@@ -247,6 +247,13 @@ encounter$EncounterID[encounter$HuntingEventNumber == "RB-253" & encounter$Encou
 encounter$EncounterID[encounter$HuntingEventNumber == "RB-449" & encounter$EncounterID == "B408"] <- "B408b"
 encounter$EncounterID[encounter$HuntingEventNumber == "RB-449" & encounter$EncounterID == "B409"] <- "B409b"
 
+### fix hunter names
+encounter$Hunter[encounter$Hunter == "Lenny Sparks"] <- "Lennard Sparks"
+encounter$Hunter[encounter$Hunter == "Pete McClelland"] <- "Peter McClelland"
+huntingteam$Hunter[huntingteam$Hunter == "Pete McLelland"] <- "Peter McClelland"
+huntingteam$Hunter[huntingteam$Hunter == "Pete Dyment"] <- "Peter Dyment"
+encounter$Hunter[encounter$Hunter == "Pete Dyment"] <- "Peter Dyment"
+
 check_key(encounter, "EncounterID")
 ########## encounter table issues ##########
 # 1. in faraday data why are there cases of DNASample No but DNASampleCode
@@ -369,7 +376,8 @@ message("fix obvious samplecode errors by joining on datetime, send robyn file o
 #                                       "grid search"))
 
 ########## lookups ##########
-hunter <- tibble(Hunter = unique(huntingteam$Hunter))
+hunter <- tibble(Hunter = c(unique(huntingteam$Hunter), "Jonas Prevost",
+                            "Gerry Morigeau", "James Nickerson"))
 island <- tibble(Island = unique(event$Island))
 huntingtype <- tibble(HuntingType = unique(event$HuntingType))
 deerlifestage <- tibble(DeerLifeStage = setdiff(unique(encounter$DeerLifestage), NA))

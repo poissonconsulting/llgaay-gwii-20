@@ -1,6 +1,6 @@
 source("header.R")
 
-conn <- sbf_open_db(project, exists = FALSE)
+conn <- sbf_open_db("llgaay-gwii", exists = FALSE)
 
 sbf_set_sub("prepare")
 sbf_load_datas()
@@ -98,6 +98,7 @@ DBI::dbGetQuery(conn,
                 FOREIGN KEY (DeerStatus) REFERENCES DeerStatus (DeerStatus),
                 FOREIGN KEY (DeerLifeStage) REFERENCES DeerLifeStage (DeerLifeStage),
                 FOREIGN KEY (DeerSex) REFERENCES DeerSex (DeerSex),
+                FOREIGN KEY (Hunter) REFERENCES Hunter (Hunter),
                 FOREIGN KEY (ShorelineKillSubtype) REFERENCES ShorelineKillSubtype (ShorelineKillSubtype))")
 
 rws_write(encounter, conn = conn)
