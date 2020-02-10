@@ -6,12 +6,13 @@ if (FALSE) {
 }
 
 source("read-data.R")
-source("clean-data.R")
-source("tidy-data.R")
+source("prepare-data.R")
 
 source("create-database.R")
 
 source("input-data.R")
+source("clean-data.R")
+source("tidy-data.R")
 
 source("map.R")
 
