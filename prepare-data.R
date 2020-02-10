@@ -259,7 +259,7 @@ check_key(encounter, "EncounterID")
 #   filter(!DNASample & !is.na(DNASampleCode))
 message("remove DNASample TRUE/FALSE as redundant")
 # 2. There are coords in the ocean that need to be fixed
-mapview::mapview(encounter)
+# mapview::mapview(encounter)
 message("need to fix coords in ocean")
 # 3. There are two coords with comments: Wpt 006 on Yo Dang and Wpt 007 on Yo Dang...does this mean anything to you? removing for now
 message("get coords from wpt 006 and 007")
