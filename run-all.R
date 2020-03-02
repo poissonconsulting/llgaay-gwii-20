@@ -13,6 +13,7 @@ source("create-database.R")
 source("input-data.R")
 source("clean-data.R")
 source("tidy-data.R")
+source("plot-data.R")
 
 source("map.R")
 
