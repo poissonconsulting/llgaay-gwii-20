@@ -15,17 +15,10 @@ source("clean-data.R")
 source("tidy-data.R")
 source("plot-data.R")
 
-source("map.R")
-
-source("manipulate-count.R")
-source("analyse-count.R")
-source("predict-count.R")
-
-source("sensitivity-count.R")
-
 source("knit-report.R")
 
-source("style.R")
 source("session-info.R")
 
-source("replace-database.R")
+if (FALSE) {
+  source("archive-database.R")
+}

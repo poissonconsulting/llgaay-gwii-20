@@ -2,10 +2,6 @@ library(poispkgs)
 
 stopifnot(packageVersion("poispkgs") >= "0.0.1.9017")
 
-if(!"package:conflicted" %in% search()) {
-  source("conflict-prefer.R")
-}
-
 if (getDoParWorkers() == 1) {
   message("registering 4 workers")
   registerDoParallel(4)

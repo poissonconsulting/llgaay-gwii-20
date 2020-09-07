@@ -15,7 +15,7 @@ gp <- ggplot(age, aes(Age)) +
   NULL
 
 sbf_open_window()
-print(gp)
+sbf_print(gp)
 sbf_save_plot(x_name = "AgeStackBar", caption = "A plot frequency of different ages of animals by sex.")
 #can scale the plot to be proportional - look at stack overflow
 
@@ -25,7 +25,7 @@ gp <- ggplot(age, aes(x=DateTimeAge,y=Age))+
   NULL
 
 sbf_open_window()
-print(gp)
+sbf_print(gp)
 sbf_save_plot(x_name='agethrutime', caption="Plot of age of deer through time during operations.")
 
 gp <-ggplot(encenv, aes(x=DateTimeOutingStart, y=Total))+
@@ -34,7 +34,7 @@ gp <-ggplot(encenv, aes(x=DateTimeOutingStart, y=Total))+
   NULL
 
 sbf_open_window()
-print(gp)
+sbf_print(gp)
 sbf_save_plot(x_name='numbersoverallthrutime', caption="Plot of totals killed or observed through time.")
 
 
