@@ -1,9 +1,7 @@
 source("header.R")
 
-library(poisreport)
-knit_report(paste0(project, ".Rmd"), ask = FALSE)
+poisreport::knit_report("llgaay-gwii-20.Rmd", ask = FALSE)
 
-if (require(poisblogdown)) report_to_blogdown()
+if (require(poisblogdown)) poisblogdown::report_to_blogdown()
 
-report_to_directory()
-report_to_directory(dir = "~/Poisson/Clients - Transfer/Analysis Template")
+poisreport::report_to_directory()
