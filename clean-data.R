@@ -16,9 +16,10 @@ event %<>%
          HuntingTimeCalculated, BaitStationID) %>%
   mutate(BaitStationID = factor(BaitStationID),
          HuntingType = if_else(str_detect(HuntingType, "Aerial"), "Aerial", HuntingType),
+         HuntingType = str_replace(HuntingType, "Shoreline", "Boat"),
          HuntingType = str_replace(HuntingType, "Walking", "Opportunistic"),
          HuntingType = str_replace(HuntingType, "Dog Hot Spot Hunting", "Indicator Dog"),
-         HuntingType = factor(HuntingType, levels = c("Bait Station", "Aerial", "Shoreline", "Bailing Dog", "Indicator Dog", "Opportunistic")))
+         HuntingType = factor(HuntingType, levels = c("Bait Station", "Aerial", "Boat", "Bailing Dog", "Indicator Dog", "Opportunistic")))
 
 # set hunting types as factor
 
