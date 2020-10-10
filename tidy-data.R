@@ -4,12 +4,11 @@ sbf_set_sub("clean")
 
 sbf_load_datas()
 
-groupedbyvars<- group_by(encounter,HuntingEventNumber) %>%
-  summarise(Total = n(), .groups = "drop_last") %>%
-  ungroup()
+encounter %<>% 
+  left_join(age, by = c(DNASampleCode = "SampleID")) %>%
+  select(-DNASampleCode)
 
-encenv<-left_join(event,groupedbyvars, by="HuntingEventNumber")
-encenv %<>% replace_na(list(Total=0L))
+rm(age)
 
 sbf_set_sub("tidy", rm = TRUE)
 
