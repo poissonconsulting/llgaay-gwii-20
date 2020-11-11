@@ -152,19 +152,33 @@ huntingteam_rb110 <- tibble(
 huntingteam <- bind_rows(huntingteam_event, huntingteam_bailing,
                          huntingteam_faraday, huntingteam_rb110)
 
+huntingteam$Hunter %<>%
+  str_replace("^Lenny\\s+", "Lennard ") %>%
+  str_replace("^Pete\\s+", "Peter ") %>%
+  str_replace("McLelland$", "McClelland") %>%
+  str_replace("^Dog-Patrick Dawson$", "Dog") %>%
+  str_replace("^Patrick Dawson [(]from dog[)]$", "Patrick Dawson") %>%
+  str_replace("^Gem$", "Dog") %>%
+  str_replace("^Meg$", "Dog") %>%
+  str_replace("^Bug$", "Dog") %>%
+  str_replace("^Sue$", "Dog") %>%
+  str_replace("^Helicopter$", "Norm Macdonald") %>%
+  str_replace("^Dog1 [(]Lenny[)]$", "Dog") %>%
+  gsub('[[:digit:]]+', '', .) %>%
+  identity()
+
 # give unique hunter name if in same event (e.g. Boat1, Boat2, Dog1, Dog2)
-huntingteam <- huntingteam %>%
+huntingteam %<>%
   # get rid of original numbering scheme because inconsistent
-  mutate(Hunter = gsub('[[:digit:]]+', '', Hunter)) %>%
   group_by(HuntingEventNumber, Hunter) %>%
   mutate(n = 1:n(),
-         n2 = n()) %>%
+         ntotal = n()) %>%
   ungroup() %>%
-  mutate(Hunter = if_else(n2 > 1, p0(Hunter, n), Hunter),
-         n = NULL,
-         n2 = NULL)
+  mutate(Hunter = if_else(ntotal > 1, p0(Hunter, n), Hunter)) %>%
+  select(-n, -ntotal)
 
 check_key(huntingteam, c("HuntingEventNumber", "Hunter"))
+
 ########## huntingteam table issues ##########
 # 1. Why are trackLengths different for bailingeffort events in bailingeffort table vs eventdata table
 # (They are also not the sum of each individual team member)
@@ -248,12 +262,6 @@ encounter$EncounterID[encounter$HuntingEventNumber == "RB-449" & encounter$Encou
 ### fix hunter names
 
 encounter$Hunter %<>%
-  str_replace("^Lenny\\s+", "Lennard ") %>%
-  str_replace("^Pete\\s+", "Peter ") %>%
-  str_replace("McLelland", "McClelland") %>%
-  identity()
-
-huntingteam$Hunter %<>%
   str_replace("^Lenny\\s+", "Lennard ") %>%
   str_replace("^Pete\\s+", "Peter ") %>%
   str_replace("McLelland", "McClelland") %>%
