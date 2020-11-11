@@ -2,7 +2,8 @@ if (FALSE) {
   source("install-packages.R")
   source("update-packages.R")
 
-  source("remove-all.R")
+  source("archive-main.R")
+  source("remove-main.R")
 }
 
 source("read-data.R")

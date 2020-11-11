@@ -33,7 +33,7 @@ project <- basename(getwd())
 
 Sys.setenv("SLACK_CHANNEL" = project)
 
-dir <- paste0("~/Poisson/Data/", sub("-\\d\\d$", "", project))
+dir <- paste0("~/Poisson/Data/llgaay-gwii")
 
 year <- 2020
 tz_data <- "PST8PDT"

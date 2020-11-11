@@ -1,5 +1,7 @@
 source("header.R")
 
+year <- "2020b"
+
 bailingeffortdata <- read_csv(file.path(dir, year, "2017/Effort_Calculations/2017_BailerHunting01Nov2017.csv"))
 
 eventdata <- read_xlsx(file.path(dir,year, "2017/2017_MasterHuntingEvents21Nov2017.xlsx"), sheet="MasterHuntingEvents17Oct2017")

@@ -246,11 +246,18 @@ encounter$EncounterID[encounter$HuntingEventNumber == "RB-449" & encounter$Encou
 encounter$EncounterID[encounter$HuntingEventNumber == "RB-449" & encounter$EncounterID == "B409"] <- "B409b"
 
 ### fix hunter names
-encounter$Hunter[encounter$Hunter == "Lenny Sparks"] <- "Lennard Sparks"
-encounter$Hunter[encounter$Hunter == "Pete McClelland"] <- "Peter McClelland"
-huntingteam$Hunter[huntingteam$Hunter == "Pete McLelland"] <- "Peter McClelland"
-huntingteam$Hunter[huntingteam$Hunter == "Pete Dyment"] <- "Peter Dyment"
-encounter$Hunter[encounter$Hunter == "Pete Dyment"] <- "Peter Dyment"
+
+encounter$Hunter %<>%
+  str_replace("^Lenny\\s+", "Lennard ") %>%
+  str_replace("^Pete\\s+", "Peter ") %>%
+  str_replace("McLelland", "McClelland") %>%
+  identity()
+
+huntingteam$Hunter %<>%
+  str_replace("^Lenny\\s+", "Lennard ") %>%
+  str_replace("^Pete\\s+", "Peter ") %>%
+  str_replace("McLelland", "McClelland") %>%
+  identity()
 
 check_key(encounter, "EncounterID")
 ########## encounter table issues ##########
