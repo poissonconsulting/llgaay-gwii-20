@@ -286,26 +286,11 @@ message("renaming duplicate EncounterIDs")
 message("added event RB-110")
 ########## age table ##########
 #### age data from DNASamples
+
 agedata %<>% 
   filter(Age != "X") %>%
   transmute(ToothID = as.integer(`Tooth ID`), 
             Age = as.integer(Age))
-
-### fix date times
-x <- agesourcedata
-x$Time[is.na(x$Time)] <- "00"
-x$Hour <- x$Time
-x$Hour[nchar(x$Time) == 4] <- substr(x$Time, 1, 2)[nchar(x$Time) == 4] 
-x$Hour[nchar(x$Time) == 3] <- substr(x$Time, 1, 1)[nchar(x$Time) == 3] 
-x$Hour[nchar(x$Time) == 2] <- substr(x$Time, 1, 2)[nchar(x$Time) == 2] 
-x$Hour[x$Hour == "00"] <- NA_character_
-
-x$Minute <- x$Time
-x$Minute[nchar(x$Time) == 4] <- substr(x$Time, 3, 4)[nchar(x$Time) == 4] 
-x$Minute[nchar(x$Time) == 3] <- substr(x$Time, 2, 3)[nchar(x$Time) == 3] 
-x$Minute[nchar(x$Time) == 2] <- "00"
-
-agesourcedata <- x
 
 agesourcedata %<>% 
   mutate(DateTimeAge = ISOdatetime(Year, Month, Day, Hour, Minute, 0L, tz = tz_data),
@@ -362,6 +347,8 @@ encounter$DNASampleCode2 <- NULL
 # there are many cases where cannot match
 x <- anti_join(age, tmp, c("SampleID" = "DNASampleCode"))
 y <- left_join(x, encounter, c("DateTimeAge" = "DateTimeEncounter"))
+
+write_csv(x, "nonmatchingsampleid.csv")
 
 # 2. How did get DeerStage and DeerSex columns in encounter table if impossible to connect to age table?
 # 3. Should remove DeerStage, DeerSex, DNASampleCode from encounter table and add EncounterID to age table
