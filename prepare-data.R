@@ -376,8 +376,7 @@ message("fix obvious samplecode errors by joining on datetime, send robyn file o
 #                                       "grid search"))
 
 ########## lookups ##########
-hunter <- tibble(Hunter = c(unique(huntingteam$Hunter), "Jonas Prevost",
-                            "Gerry Morigeau", "James Nickerson"))
+hunter <- tibble(Hunter = c(unique(huntingteam$Hunter), "Jonas Prevost", "James Nickerson"))
 island <- tibble(Island = unique(event$Island))
 huntingtype <- tibble(HuntingType = unique(event$HuntingType))
 deerlifestage <- tibble(DeerLifeStage = setdiff(unique(encounter$DeerLifestage), NA))
