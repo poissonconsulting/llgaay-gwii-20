@@ -10,7 +10,7 @@ sbf_save_table(missing_age)
 
 message("check 'Dog Hot Spot Hunting' is Indicator Dog")
 event %<>% 
-  filter(Island == "Ramsay Island") %>%
+  filter(Island == "Ramsay Island"| Island == "Murchison Island") %>%
    mutate(HuntingType = if_else(!is.na(OpportunisticHunting) & OpportunisticHunting, "Opportunistic", HuntingType)) %>%
   select(HuntingEventNumber, HuntingType, DateTimeOutingStart, 
          HuntingTimeCalculated, BaitStationID) %>%
