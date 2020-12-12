@@ -387,6 +387,17 @@ shorelinekillsubtype <- tibble(ShorelineKillSubtype = 0:3,
                                                "shot from shore",
                                                "active pursuit with indicator dog"))
 
+
+huntingteam %<>%
+  mutate(
+    Hunter = if_else(HuntingEventNumber == "RB18-017" & Hunter == "Hunter1", "Tauren Collinson", Hunter),
+    Hunter = if_else(HuntingEventNumber == "RB18-017" & Hunter == "Hunter2", "Gerry Morigeau", Hunter),
+    Hunter = if_else(HuntingEventNumber == "RB18-019" & Hunter == "Hunter1", "Jay Jones", Hunter),
+    Hunter = if_else(HuntingEventNumber == "RB18-019" & Hunter == "Hunter2", "Jonas Prevost", Hunter),
+    Hunter = if_else(HuntingEventNumber == "RB18-019" & Hunter == "Hunter3", "Judson Brown", Hunter),
+    Hunter = if_else(HuntingEventNumber == "RB18-019" & Hunter == "Hunter4", "Gerry Morigeau", Hunter),
+    Hunter = if_else(HuntingEventNumber == "RB18-019" & Hunter == "Hunter5", "Tauren Collinson", Hunter))
+
 sbf_set_sub("prepare")
 sbf_save_data(event)
 sbf_save_data(age)
