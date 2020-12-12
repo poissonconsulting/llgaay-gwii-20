@@ -17,6 +17,7 @@ report*/
 *.pdf
 *.log
 *.tex
+*.csv
 
 *.doc
 *.docx
