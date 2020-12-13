@@ -70,6 +70,15 @@ age %<>%
   select(-Island, -HuntEvent, -DateTimeAge, -Sex) %>%
   filter(!ToothID %in% c(14, 17))
 
+x <- ps_activate_sfc(left_join(encounter, select(event, Island, HuntingEventNumber))) %>%
+  group_split(Island)
+
+islands <- vapply(x, function(x) x$Island[1], "")
+
+names(x) <- islands
+
+mapview(x)
+
 encounter %<>%
   poisspatial::ps_activate_sfc() %>%
   poisspatial::ps_sfc_to_coords() %>%
