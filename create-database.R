@@ -71,6 +71,7 @@ DBI::dbGetQuery(conn,
                 "CREATE TABLE HuntingTeam (
                 HuntingEventNumber TEXT NOT NULL,
                 Hunter TEXT NOT NULL,
+                HuntLead BOOLEAN NOT NULL,
                 TrackLength REAL,
                 TrackFileError BOOLEAN,
                 PRIMARY KEY (HuntingEventNumber, Hunter),
