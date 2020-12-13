@@ -89,8 +89,7 @@ encounter %<>%
   mutate(CommentEncounter = Description) %>%
   select(-ShorelineKillSubtype, -Description) %>%
   left_join(age, by = "SampleID") %>%
-  select(HuntingEventNumber, EncounterID, DateTimeEncounter, Hunter, DeerStatus, DeerLifeStage, DeerSex, SampleID, ToothID, Age,
-         X, Y, CommentEncounter, everything())
+  select(HuntingEventNumber, EncounterID, DateTimeEncounter, Hunter, DeerStatus, DeerLifeStage, DeerSex, SampleID, ToothID, Age, Latitude = Y, Longitude = X, CommentEncounter, everything())
 
 rm(shorelinekillsubtype, age)
 
