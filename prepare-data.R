@@ -113,6 +113,7 @@ message("for now were not going to worry about filling out the team members for 
 huntingteam_event <- eventdata %>%
   transmute(HuntingEventNumber,
          Hunter = HunterName,
+         HuntLead = TRUE,
          TrackFileError = TrackFileMissingorCorruptororIncomplete,
          TrackFileError = if_else(TrackFileError == 1, TRUE, FALSE, missing = FALSE),
          TrackLength = `Length(m)`)
@@ -124,6 +125,7 @@ huntingteam_event <- huntingteam_event %>%
 huntingteam_bailing <- bailingeffortdata %>%
   transmute(HuntingEventNumber,
          Hunter = HunterName,
+         HuntLead = HuntLead == "Yes",
          TrackFileError = TrackFileMissingorCorruptororIncomplete,
          TrackFileError = if_else(TrackFileError == 1, TRUE, FALSE, missing = FALSE),
          TrackLength = `Length(m)`)
@@ -138,13 +140,15 @@ huntingteam_faraday <- map_df(1:nrow(faradayevent), function(a){
   y <- y[!(y == "1" | y == "0" | y == "Hunter1")]
   tibble(HuntingEventNumber = rep(id, length(y)),
          Hunter = y,
+         HuntLead = c(TRUE, rep(FALSE, length(y) - 1)),
          TrackFileError = NA,
          TrackLength = NA)
 })
-  
+
 huntingteam_rb110 <- tibble(
   HuntingEventNumber = "RB-110",
   Hunter = "Norm Macdonald",
+  HuntLead = TRUE,
   TrackFileError = NA,
   TrackLength = NA
 )
