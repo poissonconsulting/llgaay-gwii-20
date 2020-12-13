@@ -7,17 +7,6 @@ if (FALSE) {
 }
 
 source("read-data.R")
-source("prepare-data.R")
-
-source("create-database.R")
-
-source("input-data.R")
-
-source("dump-data.R")
-
-source("clean-data.R")
-source("tidy-data.R")
-source("plot-data.R")
 
 source("knit-report.R")
 
