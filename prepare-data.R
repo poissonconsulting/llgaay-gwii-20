@@ -252,7 +252,7 @@ encounter <- bind_rows(encounter, faradaykill)
 check_key(encounter, c("HuntingEventNumber", "EncounterID"))
 anti_join(encounter, event, "HuntingEventNumber")
 
-encounter %<>% ps_coords_to_sfc(c("Longitude", "Latitude"), crs = 4326)
+encounter %<>% ps_coords_to_sfc(c("Longitude", "Latitude"), crs = 4269)
 
 # there are no cases  where there is DNASampleCode but no sex info
 missing_sex <- filter(encounter, (!is.na(DNASampleCode) & is.na(DeerSex)))
