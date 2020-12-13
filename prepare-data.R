@@ -126,6 +126,7 @@ huntingteam_bailing <- bailingeffortdata %>%
   transmute(HuntingEventNumber,
          Hunter = HunterName,
          HuntLead = HuntLead == "Yes",
+         TrackTime = Totaltimeoftrackoverisland,
          TrackFileError = TrackFileMissingorCorruptororIncomplete,
          TrackFileError = if_else(TrackFileError == 1, TRUE, FALSE, missing = FALSE),
          TrackLength = `Length(m)`)
