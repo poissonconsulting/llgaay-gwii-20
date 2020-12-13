@@ -7,6 +7,7 @@ if (FALSE) {
 }
 
 source("read-data.R")
+source("prepare-data.R")
 
 source("knit-report.R")
 
