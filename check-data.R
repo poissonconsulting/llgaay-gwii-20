@@ -23,10 +23,13 @@ check_key(huntingteam, key = c("HuntingEventNumber", "Hunter"))
 
 chk_join(encounter, event, by = "HuntingEventNumber")
 
-
+#Mapview no longer works. Have to backconvert island to a character for funtion, but a NA appears, really confusing about what vapply needs and why it sometimes
+#works and soemtimes doesn't... need help debugging. Could reorder again in run=all .
+event$Island<-as.character(event$Island, rm.na=TRUE)
 x <- left_join(encounter, select(event, Island, HuntingEventNumber), by = "HuntingEventNumber") %>%
   group_split(Island)
 islands <- vapply(x, function(x) x$Island[1], "")
+islands<- na.omit(islands)
 names(x) <- islands
 mapview(x)
 

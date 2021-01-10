@@ -7,11 +7,11 @@ if (FALSE) {
 }
 
 source("read-data.R")
-source("check-data.R")
 source("clean-data.R")
-
-
 source("tidy-data.R")
+
+source("check-data.R") #mapview no longer works
+
 
 source("plot-deer.R")
 
