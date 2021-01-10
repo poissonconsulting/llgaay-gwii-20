@@ -1,0 +1,32 @@
+source("header.R")
+
+sbf_set_sub("clean")
+sbf_load_datas()
+
+check_data(event, values = list(
+  HuntingEventNumber = "",
+  Dogs = as.numeric(0:7)
+))
+
+# check_data(encounter, values = list(
+#   HuntingEventNumber = "",
+#   EncounterID = "",
+#   LifeStage = factor(c("", NA))
+# ))
+
+
+#check all primary key values for each of three datafiles is unique
+check_key(event, key = "HuntingEventNumber")
+check_key(encounter, key = c("HuntingEventNumber", "EncounterID"))
+check_key(huntingteam, key = c("HuntingEventNumber", "Hunter"))
+
+chk_join(encounter, event, by = "HuntingEventNumber")
+
+
+x <- left_join(encounter, select(event, Island, HuntingEventNumber), by = "HuntingEventNumber") %>%
+  group_split(Island)
+islands <- vapply(x, function(x) x$Island[1], "")
+names(x) <- islands
+mapview(x)
+
+#no saving because this is just a checkpoint; clean and tidy data get saved

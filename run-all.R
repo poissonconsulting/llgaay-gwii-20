@@ -7,7 +7,12 @@ if (FALSE) {
 }
 
 source("read-data.R")
-source("prepare-data.R")
+source("clean-data.R")
+source("check-data.R")
+
+source("tidy-data.R")
+
+source("plot-deer.R")
 
 source("knit-report.R")
 

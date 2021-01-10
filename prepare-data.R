@@ -14,3 +14,5 @@ islands <- vapply(x, function(x) x$Island[1], "")
 names(x) <- islands
 
 mapview(x)
+sbf_set_sub("prepare")
+sbf_save_datas()
