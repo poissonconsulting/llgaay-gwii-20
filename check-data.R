@@ -1,6 +1,6 @@
 source("header.R")
 
-sbf_set_sub("read")
+sbf_set_sub("clean")
 sbf_load_datas()
 
 check_data(event, values = list(
@@ -25,11 +25,10 @@ chk_join(encounter, event, by = "HuntingEventNumber")
 
 #Mapview no longer works. Have to backconvert island to a character for funtion, but a NA appears, really confusing about what vapply needs and why it sometimes
 #works and soemtimes doesn't... need help debugging. Could reorder again in run=all .
-event$Island<-as.character(event$Island, rm.na=TRUE)
+#event$Island<-as.character(event$Island, rm.na=TRUE)
 x <- left_join(encounter, select(event, Island, HuntingEventNumber), by = "HuntingEventNumber") %>%
   group_split(Island)
-islands <- vapply(x, function(x) x$Island[1], "")
-islands<- na.omit(islands)
+islands <- vapply(x, function(x) as.character(x$Island[1]), "")
 names(x) <- islands
 mapview(x)
 
