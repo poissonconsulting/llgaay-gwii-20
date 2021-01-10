@@ -1,6 +1,6 @@
 source("header.R")
 
-sbf_set_sub("clean")
+sbf_set_sub("read")
 sbf_load_datas()
 
 check_data(event, values = list(
@@ -8,6 +8,7 @@ check_data(event, values = list(
   Dogs = as.numeric(0:7)
 ))
 
+#Bug found here by Joe Jan 9/2021
 # check_data(encounter, values = list(
 #   HuntingEventNumber = "",
 #   EncounterID = "",
