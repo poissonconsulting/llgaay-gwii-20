@@ -1,5 +1,7 @@
 source("header.R")
 
+#changing of single dataframe happens in clean
+
 sbf_set_sub("read")
 sbf_load_datas()
 
@@ -35,8 +37,12 @@ event %<>%
   )) %>%
   mutate(LeadHunter = factor (LeadHunter)) %>%
   mutate(PrimaryHuntingType = factor (PrimaryHuntingType)) %<>%
+  mutate(DateTimeOutingStart = dtt_date_time(DateTimeOutingStart)) %>%
+  mutate(DateTimeOutingEnd = dtt_date_time(DateTimeOutingEnd)) %>%
   rename(Type = PrimaryHuntingType)
 
+#getting time on the ground in event
+event$DiffTime<-as.numeric(difftime(event$DateTimeOutingEnd, event$DateTimeOutingStart,units = c("mins")))
 
 sbf_set_sub("clean", rm = TRUE)
 sbf_save_datas()
