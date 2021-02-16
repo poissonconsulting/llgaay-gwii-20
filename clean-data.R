@@ -44,5 +44,7 @@ event %<>%
 #getting time on the ground in event
 event$DiffTime<-as.numeric(difftime(event$DateTimeOutingEnd, event$DateTimeOutingStart,units = c("mins")))
 
+#costs - do i need it in here for it to carry through
+
 sbf_set_sub("clean", rm = TRUE)
 sbf_save_datas()

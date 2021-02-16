@@ -1,73 +1,4 @@
 HuntingEventNumber,PrimaryHuntingType,Island,LeadHunter,BaitStationID,DateTimeOutingStart,DateTimeOutingEnd,Dogs,Hunters,Boats,Helicopters,OpportunisticHunting,GridSearch,CommentEvent
-RB-161,Bailing Dog,Bischof Islands,Cameron Stevenson,NA,2017-05-17 18:00,2017-05-17 19:00,2,1,0,0,FALSE,FALSE,NA
-RB-167,Bailing Dog,Bischof Islands,Lennard Sparks,NA,2017-05-18 11:45,2017-05-18 14:20,2,1,0,0,FALSE,FALSE,NA
-RB-185,Bailing Dog,Bischof Islands,Cameron Stevenson,NA,2017-05-20 14:20,2017-05-20 16:45,1,1,0,0,FALSE,FALSE,NA
-RB-193,Bailing Dog,Hotspring Island,Cameron Stevenson,NA,2017-05-23 13:50,2017-05-23 14:25,2,1,0,0,FALSE,FALSE,NA
-RB-198,Bailing Dog,House Island,Cameron Stevenson,NA,2017-05-23 9:50,2017-05-23 13:50,2,1,0,0,FALSE,FALSE,NA
-RB-233,Bailing Dog,Murchison Island,Cameron Stevenson,NA,2017-05-28 10:30,2017-05-28 11:40,1,2,0,0,FALSE,FALSE,jordan and Lenny in boats in support
-RB-234,Indicator Dog,Murchison Island,Patrick Dawson,NA,2017-05-28 10:40,2017-05-28 11:40,1,1,0,0,FALSE,FALSE,NA
-RB-282,Bailing Dog,Murchison Island,Cameron Stevenson,NA,2017-06-05 15:30,2017-06-05 16:00,1,4,2,0,FALSE,FALSE,NA
-RB-299,Bailing Dog,Ramsay Island,Cameron Stevenson,NA,2017-06-09 7:10,2017-06-09 13:20,1,5,2,0,FALSE,FALSE,NA
-RB-305,Bailing Dog,Ramsay Island,Cameron Stevenson,NA,2017-06-10 9:00,2017-06-10 13:15,2,6,2,0,FALSE,FALSE,NA
-RB-311,Bailing Dog,Ramsay Island,Cameron Stevenson,NA,2017-06-11 13:10,2017-06-11 15:30,2,3,0,0,FALSE,FALSE,NA
-RB-312,Bailing Dog,House Island,Cameron Stevenson,NA,2017-06-11 11:00,2017-06-11 12:30,1,3,0,0,FALSE,FALSE,NA
-RB-385,Bailing Dog,Ramsay Island,Cameron Stevenson,NA,2017-06-23 10:20,2017-06-23 13:20,2,3,2,0,FALSE,FALSE,NA
-RB-392,Bailing Dog,Ramsay Island,Cameron Stevenson,NA,2017-06-24 9:50,2017-06-24 14:10,2,2,0,0,FALSE,FALSE,NA
-RB-395,Bailing Dog,Ramsay Island,Cameron Stevenson,NA,2017-06-25 9:30,2017-06-25 12:15,2,3,2,0,FALSE,FALSE,NA
-RB-409,Bailing Dog,Ramsay Island,Cameron Stevenson,NA,2017-06-27 9:20,2017-06-27 12:00,3,6,1,0,FALSE,FALSE,NA
-RB-413,Bailing Dog,Ramsay Island,Lennard Sparks,NA,2017-06-28 8:15,2017-06-28 14:00,1,1,0,0,FALSE,FALSE,NA
-RB-414,Bailing Dog,Ramsay Island,Cameron Stevenson,NA,2017-06-28 8:15,2017-06-28 13:45,2,1,0,0,FALSE,FALSE,NA
-RB-421,Bailing Dog,Ramsay Island,Cameron Stevenson,NA,2017-06-29 8:45,2017-06-29 9:15,2,1,0,0,FALSE,FALSE,NA
-RB-422,Bailing Dog,Ramsay Island,Patrick Dawson,NA,2017-06-29 9:25,2017-06-29 11:20,1,1,0,0,FALSE,FALSE,NA
-RB-431,Bailing Dog,Ramsay Island,Cameron Stevenson,NA,2017-06-30 7:30,2017-06-30 9:30,2,1,0,0,FALSE,FALSE,NA
-RB-432,Bailing Dog,Ramsay Island,John Clark,NA,2017-06-30 10:05,2017-06-30 11:25,2,1,0,0,FALSE,FALSE,NA
-RB-435,Bailing Dog,Ramsay Island,Lennard Sparks,NA,2017-07-01 11:40,2017-07-01 13:10,1,1,0,0,FALSE,FALSE,NA
-RB-436,Bailing Dog,Ramsay Island,Cameron Stevenson,NA,2017-07-01 9:45,2017-07-01 11:20,2,2,2,0,FALSE,FALSE,NA
-RB-445,Bailing Dog,Ramsay Island,Cameron Stevenson,NA,2017-07-02 9:45,2017-07-02 11:30,2,3,2,0,FALSE,FALSE,NA
-RB-446,Bailing Dog,House Island,Cameron Stevenson,NA,2017-07-02 11:30,2017-07-02 12:45,3,3,2,0,FALSE,FALSE,NA
-RB-447,Bailing Dog,House Island,Patrick Dawson,NA,2017-07-02 11:30,2017-07-02 12:45,1,1,0,0,FALSE,FALSE,NA
-RB-462,Indicator Dog,Ramsay Island,Cameron Stevenson,NA,2017-07-05 7:30,2017-07-05 11:40,3,2,2,0,FALSE,FALSE,NA
-RB-463,Bailing Dog,Ramsay Island,Patrick Dawson,NA,2017-07-05 9:20,2017-07-05 11:40,1,1,0,0,FALSE,FALSE,NA
-RB-466,Bailing Dog,Ramsay Island,Cameron Stevenson,NA,2017-07-06 8:00,2017-07-06 12:30,1,4,2,0,FALSE,FALSE,NA
-RB-473,Bailing Dog,Ramsay Island,Cameron Stevenson,NA,2017-07-08 8:00,2017-07-08 12:55,3,3,2,0,FALSE,FALSE,NA
-RB-477,Bailing Dog,Ramsay Island,Cameron Stevenson,NA,2017-07-09 7:30,2017-07-09 13:30,2,5,2,0,FALSE,FALSE,"Helicopter, two boats, Pat, John, and Lenny"
-RB-487,Bailing Dog,Ramsay Island,Cameron Stevenson,NA,2017-07-11 7:30,2017-07-11 13:30,3,4,2,0,FALSE,FALSE,"Supported by helicopter, two boats, Jordan and John"
-RB-491,Bailing Dog,Ramsay Island,Cameron Stevenson,NA,2017-07-12 7:30,2017-07-12 12:30,2,5,2,0,FALSE,FALSE,"Supported by helicopter, two boats, Patrick, Lennard, and John"
-RB-495,Bailing Dog,Ramsay Island,Cameron Stevenson,NA,2017-07-14 9:20,2017-07-14 11:00,3,6,2,0,FALSE,FALSE,"Supported by helicopter, two boats, Jordan, John, and Patrick"
-RB-510,Bailing Dog,Ramsay Island,Cameron Stevenson,NA,2017-07-18 7:28,2017-07-18 13:30,2,4,1,0,FALSE,FALSE,Team hunting
-RB-517,Bailing Dog,House Island,Cameron Stevenson,NA,2017-07-19 7:00,2017-07-19 10:20,2,6,2,0,FALSE,FALSE,Team hunting with two boats
-RB-532,Bailing Dog,Murchison Island,Lennard Sparks,NA,2017-09-15 14:20,2017-09-15 15:33,2,4,0,0,FALSE,FALSE,Hunted with Meg and Sue (2 dogs)
-RB-533,Boat,Murchison Island,Lennard Sparks,NA,2017-09-15 15:33,2017-09-15 16:20,0,4,1,0,FALSE,FALSE,Four hunters in two boats did circumnav of Murchison
-RB-535,Bailing Dog,House Island,Lennard Sparks,NA,2017-09-16 8:10,2017-09-16 8:50,1,5,0,0,FALSE,FALSE,"Four hunters walking house, two hunters in boats on shoreline"
-RB-536,Bailing Dog,Hotspring Island,Lennard Sparks,NA,2017-09-16 9:15,2017-09-16 10:00,1,5,0,0,FALSE,FALSE,"One hunter with 2 dogs, 2 walkers, 2 boat support"
-RB-537,Indicator Dog,Murchison Island,Lennard Sparks,NA,2017-09-16 10:15,2017-09-16 14:50,1,2,0,0,FALSE,FALSE,Two hunters with 1 dog (Sue).
-RB-538,Indicator Dog,Murchison Island,Lennard Sparks,NA,2017-09-17 8:55,2017-09-17 14:30,1,3,0,0,FALSE,FALSE,Three hunters with 1 dog (Sue)
-RB-539,Bailing Dog,Murchison Island,Lennard Sparks,NA,2017-09-17 15:00,2017-09-17 16:50,1,5,0,0,FALSE,FALSE,"2 boats, 5 hunters, 1 dog (Meg)"
-RB-540,Bailing Dog,Murchison Island,Lennard Sparks,NA,2017-09-18 8:20,2017-09-18 11:00,1,5,0,0,FALSE,FALSE,"2 boats, 5 hunters, 1 dog (Meg)"
-RB-541,Indicator Dog,Murchison Island,Lennard Sparks,NA,2017-09-18 12:15,2017-09-18 16:20,1,3,0,0,FALSE,FALSE,"3 hunters, 1 dog (Sue)"
-RB-542,Line Push,Murchison Island,Lennard Sparks,NA,2017-09-19 7:30,2017-09-19 13:15,0,5,0,0,FALSE,FALSE,"4 hunters, 1 dog (Sue), 1 boat support, Line push"
-RB-543,Bailing Dog,Murchison Island,Lennard Sparks,NA,2017-09-19 14:00,2017-09-19 16:40,1,5,0,0,FALSE,FALSE,"2 boats, 5 hunters, 1 dog (Meg)"
-RB-544,Line Push,Murchison Island,Lennard Sparks,NA,2017-09-20 8:00,2017-09-20 10:30,0,5,0,0,FALSE,FALSE,"2 dogs; 5 hunters, 0 boats, line push"
-RB-545,Line Push,Murchison Island,Lennard Sparks,NA,2017-09-20 11:15,2017-09-20 13:30,0,5,0,0,FALSE,FALSE,"2 dogs, 5 hunters, 1 boat"
-RB-546,Line Push,Murchison Island,Lennard Sparks,NA,2017-09-21 7:30,2017-09-21 11:45,0,5,0,0,FALSE,FALSE,"2 dogs, 5 hunters, 1 boat"
-RB-547,Line Push,Murchison Island,Lennard Sparks,NA,2017-09-21 12:15,2017-09-21 15:25,0,5,0,0,FALSE,FALSE,"1 dog, 5 hunters, 1 boat"
-RB-548,Line Push,Murchison Island,Lennard Sparks,NA,2017-09-22 8:05,2017-09-22 14:35,0,5,0,0,FALSE,FALSE,"2 dogs, 5 hunters, 1 boat"
-RB-549,Indicator Dog,Murchison Island,Lennard Sparks,NA,2017-09-29 14:00,2017-09-29 17:30,1,2,0,0,FALSE,FALSE,"1 dog, 2 hunter"
-RB-550,Boat,Murchison Island,Lennard Sparks,NA,2017-09-29 19:00,2017-09-29 21:30,0,4,1,0,FALSE,FALSE,"2 boats, 4 hunters"
-RB-551,Line Push,Murchison Island,Lennard Sparks,NA,2017-09-30 7:40,2017-09-30 14:40,0,4,0,0,FALSE,FALSE,"2 dogs, 1 boat, 4 hunters"
-RB-552,Boat,Murchison Island,Lennard Sparks,NA,2017-09-30 19:30,2017-09-30 21:30,0,4,1,0,FALSE,FALSE,"4 hunters, 2 boats, 0 dogs"
-RB-553,Indicator Dog,Murchison Island,Lennard Sparks,NA,2017-10-01 7:30,2017-10-01 12:20,1,4,0,0,FALSE,FALSE,"4 hunters, 1 dog (Sue)."
-RB-554,Bailing Dog,Murchison Island,Lennard Sparks,NA,2017-10-01 13:00,2017-10-01 17:30,1,4,0,0,FALSE,FALSE,"4 hunters, 2 dogs"
-RB-556,Bailing Dog,Murchison Island,Lennard Sparks,NA,2017-10-02 7:30,2017-10-02 8:00,1,4,0,0,FALSE,FALSE,"4 hunters, 2 dogs, 2 boats (The hunter count includes those on the boats)"
-RB-557,Bailing Dog,Murchison Island,Lennard Sparks,NA,2017-10-02 8:15,2017-10-02 13:00,1,4,0,0,FALSE,FALSE,"4 hunters, 2 dogs, 1 boat"
-RB-560,Walking,Faraday Island,Gerry Morigeau,NA,2017-10-03 7:45,2017-10-03 13:15,0,3,0,0,FALSE,FALSE,"3 hunters, 0 dogs"
-RB-561,Line Push,Murchison Island,Lennard Sparks,NA,2017-10-03 14:30,2017-10-03 16:30,0,6,0,0,FALSE,FALSE,"6 hunters, 1 dog"
-RB-562,Line Push,Murchison Island,Lennard Sparks,NA,2017-10-04 8:00,2017-10-04 15:00,0,7,0,0,FALSE,FALSE,"6 hunters, 2 dogs"
-RB-563,Line Push,Murchison Island,Lennard Sparks,NA,2017-10-05 8:30,2017-10-05 14:40,0,5,0,0,FALSE,FALSE,"5 hunters, 2 dogs, 1 boat"
-RB-564,Line Push,Murchison Island,Lennard Sparks,NA,2017-10-06 8:00,2017-10-06 11:00,0,5,0,0,FALSE,FALSE,"5 hunters, 2 dogs, 1 boat"
-RB-565,Line Push,Murchison Island,Lennard Sparks,NA,2017-10-06 11:30,2017-10-06 14:00,0,5,0,0,FALSE,FALSE,"5 hunters, 2 dogs, 2 boats"
-RB-566,Bailing Dog,Hotspring Island,Lennard Sparks,NA,2017-10-06 14:30,2017-10-06 16:00,1,4,0,0,FALSE,FALSE,"4 hunters, 1 boat, 2 dogs"
-RB-568,Indicator Dog,Faraday Island,Lennard Sparks,NA,2017-10-07 8:00,2017-10-07 15:45,1,3,0,0,FALSE,FALSE,"3 hunters, 1 dog (Sue)"
 RB-001,Bait Station,Ramsay Island,Dane Stevens,RA01,2017-04-21 15:00,2017-04-21 21:45,0,1,0,0,FALSE,FALSE,NA
 RB-002,Bait Station,Ramsay Island,Jason Reger,RA15,2017-04-21 16:15,2017-04-21 21:15,0,1,0,0,FALSE,FALSE,NA
 RB-003,Bait Station,Ramsay Island,Tony DeNicola,RA02,2017-04-21 14:00,2017-04-21 21:00,0,1,0,0,FALSE,FALSE,NA
@@ -177,6 +108,7 @@ RB-106,Boat,Moresby Island,Tony DeNicola,NA,2017-05-11 17:00,2017-05-11 20:45,0,
 RB-107,Boat,Moresby Island,Ryan Rodts,NA,2017-05-11 16:30,2017-05-11 21:00,0,1,1,0,FALSE,FALSE,NA
 RB-108,Helicopter,Hotspring Island,Norm Macdonald,NA,2017-05-10 11:05,2017-05-10 11:09,0,1,0,1,FALSE,FALSE,Times taken from track
 RB-109,Helicopter,Ramsay Island,Norm Macdonald,NA,2017-05-08 8:52,2017-05-08 10:48,0,1,0,1,FALSE,FALSE,"Time taken from track. Went back for fuel? 9:52 to 10:38 and 10:53 to 11:48, total time of 101 mins. DELETED RB110 because times overlapped with Lyell. This event was split up afterward and looks like the time was double counted."
+RB-110,Helicopter,Ramsay Island,Norm Macdonald,NA,2017-05-08 19:10,2017-05-08 20:30,0,1,0,1,FALSE,FALSE,NA
 RB-111,Helicopter,Hotspring Island,Norm Macdonald,NA,2017-05-11 17:57,2017-05-11 18:02,0,1,0,1,FALSE,FALSE,Time taken from track
 RB-112,Helicopter,House Island,Norm Macdonald,NA,2017-05-11 18:02,2017-05-11 18:07,0,1,0,1,FALSE,FALSE,Time taken from track
 RB-113,Helicopter,Ramsay Island,Norm Macdonald,NA,2017-05-11 18:14,2017-05-11 19:06,0,1,0,1,FALSE,FALSE,Time taken from track
@@ -227,11 +159,13 @@ RB-157,Indicator Dog,Ramsay Island,Patrick Dawson,NA,2017-05-17 9:45,2017-05-17 
 RB-158,Indicator Dog,Ramsay Island,John Clark,NA,2017-05-17 9:55,2017-05-17 16:00,1,1,0,0,FALSE,FALSE,NA
 RB-159,Indicator Dog,House Island,Patrick Dawson,NA,2017-05-17 16:30,2017-05-17 18:00,1,1,0,0,FALSE,FALSE,NA
 RB-160,Indicator Dog,House Island,John Clark,NA,2017-05-17 16:30,2017-05-17 18:00,1,1,0,0,FALSE,FALSE,NA
+RB-161,Bailing Dog,Bischof Islands,Cameron Stevenson,NA,2017-05-17 18:00,2017-05-17 19:00,2,1,0,0,FALSE,FALSE,NA
 RB-162,Helicopter,Ramsay Island,Norm Macdonald,NA,2017-05-17 19:55,2017-05-17 20:54,0,1,0,1,FALSE,FALSE,Times taken from track
 RB-163,Bait Station,Ramsay Island,James Bulbrook,RA08,2017-05-17 19:40,2017-05-17 23:05,0,1,0,0,FALSE,FALSE,NA
 RB-164,Bait Station,Ramsay Island,Jay Jones,RA09,2017-05-17 19:30,2017-05-17 23:10,0,1,0,0,FALSE,FALSE,NA
 RB-165,Helicopter,Ramsay Island,Norm Macdonald,NA,2017-05-18 6:36,2017-05-18 7:36,0,1,0,1,FALSE,FALSE,Times taken from track
 RB-166,Indicator Dog,Murchison Island,Lennard Sparks,NA,2017-05-18 7:20,2017-05-18 10:10,1,1,0,0,FALSE,FALSE,NA
+RB-167,Bailing Dog,Bischof Islands,Lennard Sparks,NA,2017-05-18 11:45,2017-05-18 14:20,2,1,0,0,FALSE,FALSE,NA
 RB-168,Indicator Dog,Ramsay Island,Jordan Munn,NA,2017-05-18 7:40,2017-05-18 14:30,1,1,0,0,FALSE,FALSE,NA
 RB-169,Indicator Dog,Ramsay Island,Cameron Stevenson,NA,2017-05-18 8:30,2017-05-18 15:00,1,1,0,0,FALSE,FALSE,NA
 RB-170,Indicator Dog,Ramsay Island,Patrick Dawson,NA,2017-05-18 7:40,2017-05-18 14:45,1,1,0,0,FALSE,FALSE,NA
@@ -249,6 +183,7 @@ RB-181,Indicator Dog,Ramsay Island,Cameron Stevenson,NA,2017-05-20 7:15,2017-05-
 RB-182,Indicator Dog,Ramsay Island,Patrick Dawson,NA,2017-05-20 7:15,2017-05-20 12:00,1,1,0,0,FALSE,FALSE,NA
 RB-183,Indicator Dog,Ramsay Island,John Clark,NA,2017-05-20 7:15,2017-05-20 12:00,1,1,0,0,FALSE,FALSE,NA
 RB-184,Helicopter,Ramsay Island,Norm Macdonald,NA,2017-05-20 8:54,2017-05-20 9:53,0,1,0,1,FALSE,FALSE,Times taken from track
+RB-185,Bailing Dog,Bischof Islands,Cameron Stevenson,NA,2017-05-20 14:20,2017-05-20 16:45,1,1,0,0,FALSE,FALSE,NA
 RB-186,Indicator Dog,Ramsay Island,Jordan Munn,NA,2017-05-21 7:20,2017-05-21 13:40,1,1,0,0,FALSE,FALSE,NA
 RB-187,Indicator Dog,Ramsay Island,Lennard Sparks,NA,2017-05-21 7:30,2017-05-21 13:20,1,1,0,0,FALSE,FALSE,NA
 RB-188,Indicator Dog,Ramsay Island,Cameron Stevenson,NA,2017-05-21 7:30,2017-05-21 13:20,1,1,0,0,FALSE,FALSE,NA
@@ -256,10 +191,12 @@ RB-189,Indicator Dog,Ramsay Island,Patrick Dawson,NA,2017-05-21 7:20,2017-05-21 
 RB-190,Indicator Dog,Ramsay Island,John Clark,NA,2017-05-21 7:20,2017-05-21 14:00,1,1,0,0,FALSE,FALSE,NA
 RB-191,Indicator Dog,Hotspring Island,Jordan Munn,NA,2017-05-23 13:50,2017-05-23 14:25,1,1,0,0,FALSE,FALSE,NA
 RB-192,Indicator Dog,Hotspring Island,Lennard Sparks,NA,2017-05-23 13:50,2017-05-23 14:25,1,1,0,0,FALSE,FALSE,Did not get off the boat.
+RB-193,Bailing Dog,Hotspring Island,Cameron Stevenson,NA,2017-05-23 13:50,2017-05-23 14:25,2,1,0,0,FALSE,FALSE,NA
 RB-194,Indicator Dog,Hotspring Island,Patrick Dawson,NA,2017-05-23 13:50,2017-05-23 14:25,1,1,0,0,FALSE,FALSE,NA
 RB-195,Indicator Dog,Hotspring Island,John Clark,NA,2017-05-23 13:50,2017-05-23 14:25,1,1,0,0,FALSE,FALSE,NA
 RB-196,Indicator Dog,House Island,Jordan Munn,NA,2017-05-23 9:50,2017-05-23 13:50,1,1,0,0,FALSE,FALSE,NA
 RB-197,Indicator Dog,House Island,Lennard Sparks,NA,2017-05-23 9:50,2017-05-23 13:50,1,1,0,0,FALSE,FALSE,NA
+RB-198,Bailing Dog,House Island,Cameron Stevenson,NA,2017-05-23 9:50,2017-05-23 13:50,2,1,0,0,FALSE,FALSE,NA
 RB-199,Indicator Dog,House Island,Patrick Dawson,NA,2017-05-23 9:50,2017-05-23 13:50,1,1,0,0,FALSE,FALSE,NA
 RB-200,Indicator Dog,House Island,John Clark,NA,2017-05-23 9:50,2017-05-23 13:50,1,1,0,0,FALSE,FALSE,NA
 RB-201,Helicopter,Ramsay Island,Norm Macdonald,NA,2017-05-23 16:15,2017-05-23 16:33,0,1,0,1,FALSE,FALSE,Times taken from track. Flew over House.
@@ -294,6 +231,8 @@ RB-229,Helicopter,Ramsay Island,Norm Macdonald,NA,2017-05-27 19:19,2017-05-27 20
 RB-230,Boat,Bischof Islands,Patrick Dawson,NA,2017-05-27 20:35,2017-05-27 20:45,0,1,1,0,FALSE,FALSE,NA
 RB-231,Helicopter,Ramsay Island,Norm Macdonald,NA,2017-05-28 6:08,2017-05-28 7:11,0,1,0,1,FALSE,FALSE,Times taken from track
 RB-232,Boat,Murchison Island,Jordan Munn,NA,2017-05-28 10:40,2017-05-28 10:55,0,1,1,0,FALSE,FALSE,NA
+RB-233,Bailing Dog,Murchison Island,Cameron Stevenson,NA,2017-05-28 10:30,2017-05-28 11:40,1,2,0,0,FALSE,FALSE,jordan and Lenny in boats in support
+RB-234,Indicator Dog,Murchison Island,Patrick Dawson,NA,2017-05-28 10:40,2017-05-28 11:40,1,1,0,0,FALSE,FALSE,NA
 RB-235,Helicopter,Murchison Island,Norm Macdonald,NA,2017-05-28 10:11,2017-05-28 11:42,0,1,0,1,FALSE,FALSE,"supporting bailing dogs. BAILING EVENT. Heli tracks go from 11:11 to 11:19 and 11:27 to 12:42, for a total flight time over Murchison of 83 mins."
 RB-236,Helicopter,Ramsay Island,Norm Macdonald,NA,2017-05-29 6:18,2017-05-29 7:23,0,1,0,1,FALSE,FALSE,Times taken from track
 RB-237,Indicator Dog,Ramsay Island,Jordan Munn,NA,2017-05-29 7:30,2017-05-29 15:20,1,1,0,0,FALSE,FALSE,NA
@@ -341,6 +280,7 @@ RB-278,Indicator Dog,Ramsay Island,Cameron Stevenson,NA,2017-06-04 11:30,2017-06
 RB-279,Indicator Dog,Ramsay Island,Patrick Dawson,NA,2017-06-04 11:30,2017-06-04 16:30,1,1,0,0,FALSE,FALSE,NA
 RB-280,Indicator Dog,Ramsay Island,John Clark,NA,2017-06-04 11:30,2017-06-04 16:30,1,1,0,0,FALSE,FALSE,NA
 RB-281,Helicopter,Lyell Island,Norm Macdonald,NA,2017-06-05 19:34,2017-06-05 20:12,0,1,0,1,FALSE,FALSE,Time taken from tracks
+RB-282,Bailing Dog,Murchison Island,Cameron Stevenson,NA,2017-06-05 15:30,2017-06-05 16:00,1,4,2,0,FALSE,FALSE,NA
 RB-283,Boat,Lyell Island,Jordan Munn,NA,2017-06-06 19:00,2017-06-06 19:10,0,1,1,0,FALSE,FALSE,NA
 RB-284,Helicopter,Ramsay Island,Norm Macdonald,NA,2017-06-07 12:31,2017-06-07 12:55,0,1,0,1,FALSE,FALSE,Times taken from track. Also fly by Murchison
 RB-285,Indicator Dog,Ramsay Island,Jordan Munn,NA,2017-06-07 8:30,2017-06-07 15:20,1,1,0,0,FALSE,FALSE,NA
@@ -357,16 +297,20 @@ RB-295,Helicopter,Ramsay Island,Patrick Dawson,NA,2017-06-08 9:30,2017-06-08 9:4
 RB-296,Helicopter,Ramsay Island,Norm Macdonald,NA,2017-06-08 18:54,2017-06-08 19:28,0,1,0,1,FALSE,FALSE,Times take from track
 RB-297,Boat,Ramsay Island,Lennard Sparks,NA,2017-06-08 19:20,2017-06-08 22:15,0,1,1,0,FALSE,FALSE,NA
 RB-298,Boat,Ramsay Island,Cameron Stevenson,NA,2017-06-08 19:20,2017-06-08 21:40,0,1,1,0,FALSE,FALSE,NA
+RB-299,Bailing Dog,Ramsay Island,Cameron Stevenson,NA,2017-06-09 7:10,2017-06-09 13:20,1,5,2,0,FALSE,FALSE,NA
 RB-300,Helicopter,Ramsay Island,Norm Macdonald,NA,2017-06-09 13:23,2017-06-09 14:01,0,1,0,1,FALSE,FALSE,Times taken from track
 RB-301,Helicopter,Ramsay Island,Norm Macdonald,NA,2017-06-09 19:01,2017-06-09 19:48,0,1,0,1,FALSE,FALSE,Times taken from track. Three minute track over House
 RB-302,Boat,Ramsay Island,Cameron Stevenson,NA,2017-06-09 20:40,2017-06-09 23:20,0,1,1,0,FALSE,FALSE,NA
 RB-303,Boat,Ramsay Island,Lennard Sparks,NA,2017-06-09 19:20,2017-06-09 23:00,0,1,1,0,FALSE,FALSE,NA
 RB-304,Indicator Dog,Ramsay Island,Patrick Dawson,NA,2017-06-10 9:00,2017-06-10 14:10,1,1,0,0,FALSE,FALSE,NA
+RB-305,Bailing Dog,Ramsay Island,Cameron Stevenson,NA,2017-06-10 9:00,2017-06-10 13:15,2,6,2,0,FALSE,FALSE,NA
 RB-306,Helicopter,Ramsay Island,Norm Macdonald,NA,2017-06-10 19:52,2017-06-10 20:33,0,1,0,1,FALSE,FALSE,Times taken from track
 RB-307,Boat,Ramsay Island,Cameron Stevenson,NA,2017-06-11 21:00,2017-06-11 23:40,0,1,1,0,FALSE,FALSE,NA
 RB-308,Boat,Ramsay Island,Lennard Sparks,NA,2017-06-11 21:00,2017-06-12 1:15,0,1,1,0,FALSE,FALSE,NA
 RB-309,Helicopter,House Island,Norm Macdonald,NA,2017-06-11 9:25,2017-06-11 9:29,0,1,0,1,FALSE,FALSE,Times taken from track
 RB-310,Helicopter,Ramsay Island,Norm Macdonald,NA,2017-06-11 8:30,2017-06-11 9:25,0,1,0,1,FALSE,FALSE,Times taken from track
+RB-311,Bailing Dog,Ramsay Island,Cameron Stevenson,NA,2017-06-11 13:10,2017-06-11 15:30,2,3,0,0,FALSE,FALSE,NA
+RB-312,Bailing Dog,House Island,Cameron Stevenson,NA,2017-06-11 11:00,2017-06-11 12:30,1,3,0,0,FALSE,FALSE,NA
 RB-313,Helicopter,Ramsay Island,Norm Macdonald,NA,2017-06-11 15:37,2017-06-11 16:29,0,1,0,1,FALSE,FALSE,Times taken from track. Deer being spotted in dense areas
 RB-314,Boat,Ramsay Island,Lennard Sparks,NA,2017-06-11 20:50,2017-06-12 1:20,0,1,1,0,FALSE,FALSE,NA
 RB-315,Helicopter,Ramsay Island,Norm Macdonald,NA,2017-06-12 6:50,2017-06-12 8:00,0,1,0,1,FALSE,FALSE,Track taken from FLIR track with no record from 5:07am to 6:06. No track found between 7 50 and 9am.
@@ -439,14 +383,17 @@ RB-381,Indicator Dog,Ramsay Island,John Clark,NA,2017-06-22 5:00,2017-06-22 10:0
 RB-382,Helicopter,Ramsay Island,Norm Macdonald,NA,2017-06-22 15:11,2017-06-22 16:03,0,1,0,1,FALSE,FALSE,Time taken from track
 RB-383,Helicopter,Ramsay Island,Norm Macdonald,NA,2017-06-23 8:36,2017-06-23 9:29,0,1,0,1,FALSE,FALSE,Time taken from track
 RB-384,Indicator Dog,Ramsay Island,Jordan Munn,NA,2017-06-23 11:20,2017-06-23 14:40,1,1,0,0,FALSE,FALSE,NA
+RB-385,Bailing Dog,Ramsay Island,Cameron Stevenson,NA,2017-06-23 10:20,2017-06-23 13:20,2,3,2,0,FALSE,FALSE,NA
 RB-386,Indicator Dog,Ramsay Island,Patrick Dawson,NA,2017-06-23 13:00,2017-06-23 14:50,1,1,0,0,FALSE,FALSE,NA
 RB-387,Indicator Dog,Ramsay Island,John Clark,NA,2017-06-23 10:30,2017-06-23 13:35,1,1,0,0,FALSE,FALSE,NA
 RB-388,Helicopter,Ramsay Island,Norm Macdonald,NA,2017-06-23 19:30,2017-06-23 20:30,0,1,0,1,FALSE,FALSE,Time taken from track
 RB-389,Helicopter,Ramsay Island,Norm Macdonald,NA,2017-06-24 7:36,2017-06-24 8:36,0,1,0,1,FALSE,FALSE,"Time taken from track. Additional times for hauling 10:07 to 11:35, 13:08 to 13:17, 14:55 to 15:14 and 19:34 to 20:35. Total hunting time 60 mins, total hauling time?"
 RB-390,Indicator Dog,Ramsay Island,John Clark,NA,2017-06-24 9:40,2017-06-24 14:10,1,1,0,0,FALSE,FALSE,NA
 RB-391,Indicator Dog,Ramsay Island,Patrick Dawson,NA,2017-06-24 9:40,2017-06-24 14:20,1,1,0,0,FALSE,FALSE,NA
+RB-392,Bailing Dog,Ramsay Island,Cameron Stevenson,NA,2017-06-24 9:50,2017-06-24 14:10,2,2,0,0,FALSE,FALSE,NA
 RB-393,Helicopter,Ramsay Island,Norm Macdonald,NA,2017-06-25 7:40,2017-06-25 8:17,0,1,0,1,FALSE,FALSE,"Time taken from tracks. Hunt time 8:40 to 9:17, 50 mins. Haul afterwards 12:03 to 12:14, 11 mins and 13:18 to 14:07, 49 mins. Total of 60 mins active hauling time over Ramsay."
 RB-394,Indicator Dog,Ramsay Island,Jordan Munn,NA,2017-06-25 7:00,2017-06-25 14:15,1,1,0,0,FALSE,FALSE,NA
+RB-395,Bailing Dog,Ramsay Island,Cameron Stevenson,NA,2017-06-25 9:30,2017-06-25 12:15,2,3,2,0,FALSE,FALSE,NA
 RB-396,Indicator Dog,Ramsay Island,Patrick Dawson,NA,2017-06-25 7:00,2017-06-25 14:15,1,1,0,0,FALSE,FALSE,NA
 RB-397,Indicator Dog,Ramsay Island,John Clark,NA,2017-06-25 7:00,2017-06-25 14:15,1,1,0,0,FALSE,FALSE,NA
 RB-398,Helicopter,Ramsay Island,Norm Macdonald,NA,2017-06-25 18:49,2017-06-25 19:07,0,1,0,1,FALSE,FALSE,Times taken from track
@@ -460,15 +407,20 @@ RB-405,Indicator Dog,Ramsay Island,John Clark,NA,2017-06-26 8:00,2017-06-26 14:3
 RB-406,Boat,Ramsay Island,Lennard Sparks,NA,2017-06-26 21:00,2017-06-27 0:45,0,1,1,0,FALSE,FALSE,NA
 RB-407,Boat,Ramsay Island,Cameron Stevenson,NA,2017-06-27 1:30,2017-06-27 5:00,0,1,1,0,FALSE,FALSE,NA
 RB-408,Helicopter,Ramsay Island,Norm Macdonald,NA,2017-06-27 8:45,2017-06-27 9:27,0,1,0,1,FALSE,FALSE,Times taken from track
+RB-409,Bailing Dog,Ramsay Island,Cameron Stevenson,NA,2017-06-27 9:20,2017-06-27 12:00,3,6,1,0,FALSE,FALSE,NA
 RB-410,Helicopter,Ramsay Island,Norm Macdonald,NA,2017-06-27 18:36,2017-06-27 19:41,0,1,0,1,FALSE,FALSE,Times taken from track
 RB-411,Boat,Ramsay Island,Lennard Sparks,NA,2017-06-27 21:15,2017-06-27 23:00,0,1,1,0,FALSE,FALSE,NA
 RB-412,Indicator Dog,Ramsay Island,Jordan Munn,NA,2017-06-28 7:45,2017-06-28 14:00,1,1,0,0,FALSE,FALSE,NA
+RB-413,Bailing Dog,Ramsay Island,Lennard Sparks,NA,2017-06-28 8:15,2017-06-28 14:00,1,1,0,0,FALSE,FALSE,NA
+RB-414,Bailing Dog,Ramsay Island,Cameron Stevenson,NA,2017-06-28 8:15,2017-06-28 13:45,2,1,0,0,FALSE,FALSE,NA
 RB-415,Indicator Dog,Ramsay Island,Patrick Dawson,NA,2017-06-28 8:00,2017-06-28 14:00,1,1,0,0,FALSE,FALSE,NA
 RB-416,Indicator Dog,Ramsay Island,John Clark,NA,2017-06-28 7:40,2017-06-28 14:15,1,1,0,0,FALSE,FALSE,NA
 RB-417,Boat,Lyell Island,Patrick Dawson,NA,2017-06-28 19:35,2017-06-28 20:50,0,1,1,0,FALSE,FALSE,NA
 RB-418,Helicopter,Ramsay Island,Norm Macdonald,NA,2017-06-29 7:51,2017-06-29 9:08,0,1,0,1,FALSE,FALSE,"Times taken from track. Hunt from 8:51 to 100, for 69 mins, and haul RB422 from 10:23 to 12:51."
 RB-419,Indicator Dog,Ramsay Island,Lennard Sparks,NA,2017-06-29 8:05,2017-06-29 14:50,1,1,0,0,FALSE,FALSE,NA
 RB-420,Indicator Dog,Ramsay Island,John Clark,NA,2017-06-29 8:05,2017-06-29 15:00,1,1,0,0,FALSE,FALSE,NA
+RB-421,Bailing Dog,Ramsay Island,Cameron Stevenson,NA,2017-06-29 8:45,2017-06-29 9:15,2,1,0,0,FALSE,FALSE,NA
+RB-422,Bailing Dog,Ramsay Island,Patrick Dawson,NA,2017-06-29 9:25,2017-06-29 11:20,1,1,0,0,FALSE,FALSE,NA
 RB-423,Indicator Dog,Faraday Island,Patrick Dawson,NA,2017-06-29 12:00,2017-06-29 13:30,1,1,0,0,FALSE,FALSE,NA
 RB-424,Boat,Murchison Island,Patrick Dawson,NA,2017-06-29 14:40,2017-06-29 14:55,0,1,1,0,FALSE,FALSE,NA
 RB-425,Helicopter,Ramsay Island,Norm Macdonald,NA,2017-06-29 19:24,2017-06-29 20:15,0,1,0,1,FALSE,FALSE,Times taken from track
@@ -477,8 +429,12 @@ RB-427,Boat,Lyell Island,Jordan Munn,NA,2017-06-29 20:35,2017-06-29 21:10,0,1,1,
 RB-428,Helicopter,Ramsay Island,Norm Macdonald,NA,2017-06-30 7:00,2017-06-30 8:45,0,1,0,1,FALSE,FALSE,NA
 RB-429,Indicator Dog,Ramsay Island,Lennard Sparks,NA,2017-06-30 7:30,2017-06-30 11:30,1,1,0,0,FALSE,FALSE,NA
 RB-430,Indicator Dog,Ramsay Island,Patrick Dawson,NA,2017-06-30 7:15,2017-06-30 11:30,1,1,0,0,FALSE,FALSE,NA
+RB-431,Bailing Dog,Ramsay Island,Cameron Stevenson,NA,2017-06-30 7:30,2017-06-30 9:30,2,1,0,0,FALSE,FALSE,NA
+RB-432,Bailing Dog,Ramsay Island,John Clark,NA,2017-06-30 10:05,2017-06-30 11:25,2,1,0,0,FALSE,FALSE,NA
 RB-433,Indicator Dog,Ramsay Island,Jordan Munn,NA,2017-07-01 7:15,2017-07-01 11:20,1,1,0,0,FALSE,FALSE,NA
 RB-434,Indicator Dog,Ramsay Island,Lennard Sparks,NA,2017-07-01 7:20,2017-07-01 11:30,1,1,0,0,FALSE,FALSE,NA
+RB-435,Bailing Dog,Ramsay Island,Lennard Sparks,NA,2017-07-01 11:40,2017-07-01 13:10,1,1,0,0,FALSE,FALSE,NA
+RB-436,Bailing Dog,Ramsay Island,Cameron Stevenson,NA,2017-07-01 9:45,2017-07-01 11:20,2,2,2,0,FALSE,FALSE,NA
 RB-437,Indicator Dog,Ramsay Island,Patrick Dawson,NA,2017-07-01 7:15,2017-07-01 13:50,1,1,0,0,FALSE,FALSE,NA
 RB-438,Indicator Dog,Ramsay Island,John Clark,NA,2017-07-01 7:15,2017-07-01 13:30,1,1,0,0,FALSE,FALSE,NA
 RB-439,Boat,Murchison Island,Jordan Munn,NA,2017-07-01 13:10,2017-07-01 13:50,0,1,1,0,FALSE,FALSE,NA
@@ -487,6 +443,9 @@ RB-441,Helicopter,Ramsay Island,Norm Macdonald,NA,2017-07-02 7:40,2017-07-02 10:
 RB-442,Indicator Dog,Ramsay Island,Lennard Sparks,NA,2017-07-02 8:05,2017-07-02 12:40,1,1,0,0,FALSE,FALSE,NA
 RB-443,Indicator Dog,Ramsay Island,John Clark,NA,2017-07-02 8:10,2017-07-02 12:45,1,1,0,0,FALSE,FALSE,NA
 RB-444,Helicopter,Ramsay Island,Cameron Stevenson,NA,2017-07-02 9:30,2017-07-02 9:40,0,1,0,1,TRUE,FALSE,Opportunistic no track
+RB-445,Bailing Dog,Ramsay Island,Cameron Stevenson,NA,2017-07-02 9:45,2017-07-02 11:30,2,3,2,0,FALSE,FALSE,NA
+RB-446,Bailing Dog,House Island,Cameron Stevenson,NA,2017-07-02 11:30,2017-07-02 12:45,3,3,2,0,FALSE,FALSE,NA
+RB-447,Bailing Dog,House Island,Patrick Dawson,NA,2017-07-02 11:30,2017-07-02 12:45,1,1,0,0,FALSE,FALSE,NA
 RB-448,Helicopter,Ramsay Island,Norm Macdonald,NA,2017-07-02 12:50,2017-07-02 12:55,0,1,0,1,TRUE,FALSE,Opportunistic. No Track
 RB-449,Boat,Ramsay Island,Lennard Sparks,NA,2017-07-02 21:00,2017-07-03 1:00,0,1,1,0,FALSE,FALSE,NA
 RB-450,Boat,Ramsay Island,Cameron Stevenson,NA,2017-07-03 1:30,2017-07-03 6:10,0,1,1,0,FALSE,FALSE,NA
@@ -501,17 +460,22 @@ RB-458,Indicator Dog,Murchison Island,Patrick Dawson,NA,2017-07-04 14:40,2017-07
 RB-459,Helicopter,Ramsay Island,Norm Macdonald,NA,2017-07-04 16:25,2017-07-04 17:30,0,1,0,1,TRUE,FALSE,Opportunistic. Time taken from track.
 RB-460,Boat,Ramsay Island,Lennard Sparks,NA,2017-07-04 22:10,2017-07-05 1:50,0,1,1,0,FALSE,FALSE,NA
 RB-461,Helicopter,Ramsay Island,Norm Macdonald,NA,2017-07-05 7:19,2017-07-05 9:06,0,1,0,1,FALSE,FALSE,Time taken from track. Morning hunt - might end prematurely? Track seems cut short. Track split for Haul 10:28-12:50 RB463.
+RB-462,Indicator Dog,Ramsay Island,Cameron Stevenson,NA,2017-07-05 7:30,2017-07-05 11:40,3,2,2,0,FALSE,FALSE,NA
+RB-463,Bailing Dog,Ramsay Island,Patrick Dawson,NA,2017-07-05 9:20,2017-07-05 11:40,1,1,0,0,FALSE,FALSE,NA
 RB-464,Indicator Dog,Ramsay Island,John Clark,NA,2017-07-05 7:30,2017-07-05 9:30,1,1,0,0,FALSE,FALSE,NA
 RB-465,Boat,Ramsay Island,Lennard Sparks,NA,2017-07-05 22:30,2017-07-06 3:30,0,1,1,0,FALSE,FALSE,NA
+RB-466,Bailing Dog,Ramsay Island,Cameron Stevenson,NA,2017-07-06 8:00,2017-07-06 12:30,1,4,2,0,FALSE,FALSE,NA
 RB-467,Indicator Dog,Ramsay Island,John Clark,NA,2017-07-06 8:00,2017-07-06 12:30,1,1,0,0,FALSE,FALSE,NA
 RB-468,Helicopter,Ramsay Island,Norm Macdonald,NA,2017-07-06 12:14,2017-07-06 13:05,0,1,0,1,FALSE,FALSE,"Time taken from track. Hunt from 13:14 to 14:05, for 51 minutes, and haul from 8:52 to 11:23 RB466."
 RB-469,Indicator Dog,Ramsay Island,Patrick Dawson,NA,2017-07-07 9:15,2017-07-07 14:30,1,1,0,0,FALSE,FALSE,NA
 RB-470,Indicator Dog,Ramsay Island,John Clark,NA,2017-07-07 11:50,2017-07-07 14:30,1,1,0,0,FALSE,FALSE,NA
 RB-471,Helicopter,Ramsay Island,Norm Macdonald,NA,2017-07-07 18:47,2017-07-07 19:39,0,1,0,1,FALSE,FALSE,NA
 RB-472,Boat,Ramsay Island,Patrick Dawson,NA,2017-07-07 22:30,2017-07-08 3:00,0,1,1,0,FALSE,FALSE,NA
+RB-473,Bailing Dog,Ramsay Island,Cameron Stevenson,NA,2017-07-08 8:00,2017-07-08 12:55,3,3,2,0,FALSE,FALSE,NA
 RB-474,Indicator Dog,Ramsay Island,John Clark,NA,2017-07-08 13:20,2017-07-08 16:30,1,1,0,0,FALSE,FALSE,NA
 RB-475,Helicopter,Ramsay Island,Norm Macdonald,NA,2017-07-08 8:04,2017-07-08 10:12,0,1,0,1,FALSE,FALSE,"Times taken from track. Bailing event RB473 from 12:20 to 12:58, 38 minutes, and 13:20-13:39, 19 minutes."
 RB-476,Helicopter,Ramsay Island,Norm Macdonald,NA,2017-07-09 7:31,2017-07-09 10:12,0,1,0,1,FALSE,FALSE,This even originally overlapped with a bailing event that had heli support so the times had to be split.
+RB-477,Bailing Dog,Ramsay Island,Cameron Stevenson,NA,2017-07-09 7:30,2017-07-09 13:30,2,5,2,0,FALSE,FALSE,"Helicopter, two boats, Pat, John, and Lenny"
 RB-478,Indicator Dog,Ramsay Island,Patrick Dawson,NA,2017-07-09 13:00,2017-07-09 15:00,1,1,0,0,FALSE,FALSE,NA
 RB-479,Indicator Dog,Ramsay Island,Jordan Munn,NA,2017-07-09 7:45,2017-07-09 13:30,1,1,0,0,FALSE,FALSE,NA
 RB-480,Boat,Ramsay Island,Patrick Dawson,NA,2017-07-09 23:35,2017-07-10 3:35,0,1,1,0,FALSE,FALSE,NA
@@ -521,12 +485,15 @@ RB-483,Indicator Dog,Ramsay Island,Jordan Munn,NA,2017-07-10 8:00,2017-07-10 11:
 RB-484,Boat,Ramsay Island,Lennard Sparks,NA,2017-07-10 22:35,2017-07-11 2:15,0,1,1,0,FALSE,FALSE,NA
 RB-485,Boat,Bischof Islands,Patrick Dawson,NA,2017-07-11 2:40,2017-07-11 2:50,0,1,1,0,TRUE,FALSE,NA
 RB-486,Helicopter,Ramsay Island,Norm Macdonald,NA,2017-07-11 7:42,2017-07-11 8:32,0,1,0,1,FALSE,FALSE,Times taken from track. Track split to create separate Hauling track RB487
+RB-487,Bailing Dog,Ramsay Island,Cameron Stevenson,NA,2017-07-11 7:30,2017-07-11 13:30,3,4,2,0,FALSE,FALSE,"Supported by helicopter, two boats, Jordan and John"
 RB-488,Indicator Dog,Ramsay Island,Patrick Dawson,NA,2017-07-11 13:00,2017-07-11 15:30,1,1,0,0,FALSE,FALSE,NA
 RB-489,Indicator Dog,Ramsay Island,Lennard Sparks,NA,2017-07-11 13:00,2017-07-11 15:30,1,1,0,0,FALSE,FALSE,NA
 RB-490,Helicopter,Ramsay Island,Norm Macdonald,NA,2017-07-12 7:23,2017-07-12 9:38,0,1,0,1,FALSE,FALSE,"Times taken from track. Track split to create separate Hauling track, from 11:04-14:22"
+RB-491,Bailing Dog,Ramsay Island,Cameron Stevenson,NA,2017-07-12 7:30,2017-07-12 12:30,2,5,2,0,FALSE,FALSE,"Supported by helicopter, two boats, Patrick, Lennard, and John"
 RB-492,Indicator Dog,Ramsay Island,Jordan Munn,NA,2017-07-12 8:30,2017-07-12 13:00,1,1,0,0,FALSE,FALSE,NA
 RB-493,Walking,Murchison Island,Patrick Dawson,NA,2017-07-12 19:30,2017-07-12 19:55,0,1,0,0,FALSE,FALSE,NA
 RB-494,Helicopter,Ramsay Island,Norm Macdonald,NA,2017-07-13 18:11,2017-07-13 18:51,0,1,0,1,FALSE,FALSE,Time taken from track
+RB-495,Bailing Dog,Ramsay Island,Cameron Stevenson,NA,2017-07-14 9:20,2017-07-14 11:00,3,6,2,0,FALSE,FALSE,"Supported by helicopter, two boats, Jordan, John, and Patrick"
 RB-496,Helicopter,Ramsay Island,Norm Macdonald,NA,2017-07-15 14:26,2017-07-15 15:32,0,1,0,1,FALSE,FALSE,Time taken from track. Aerial hot spot hunting but not in combination with dog hunters
 RB-497,Bailing Dog,Ramsay Island,Cameron Stevenson,NA,2017-07-15 14:30,2017-07-15 17:15,1,1,0,0,FALSE,FALSE,Team hunting
 RB-498,Bailing Dog,Ramsay Island,Cameron Stevenson,NA,2017-07-16 8:00,2017-07-16 13:45,1,1,0,0,FALSE,FALSE,Team hunting
@@ -541,12 +508,14 @@ RB-506,Indicator Dog,Ramsay Island,Jordan Munn,NA,2017-07-17 7:30,2017-07-17 14:
 RB-507,Indicator Dog,Ramsay Island,John Clark,NA,2017-07-17 7:30,2017-07-17 14:30,1,1,0,0,FALSE,FALSE,Indicator dog hunting during phase 3 but not team hunting to double check some areas they searched via team hunting yesterday
 RB-508,Helicopter,Ramsay Island,Norm Macdonald,NA,2017-07-17 19:00,2017-07-17 20:05,0,1,0,1,FALSE,FALSE,No track. Aerial hot spot hunting but not in combination with dog hunters
 RB-509,Boat,Murchison Island,Jake Pattison,NA,2017-07-17 22:10,2017-07-18 2:11,0,1,1,0,FALSE,FALSE,NA
+RB-510,Bailing Dog,Ramsay Island,Cameron Stevenson,NA,2017-07-18 7:28,2017-07-18 13:30,2,4,1,0,FALSE,FALSE,Team hunting
 RB-511,Walking,Murchison Island,Jake Pattison,NA,2017-07-18 10:35,2017-07-18 13:20,0,1,0,0,FALSE,FALSE,Walking hunt with Chris Gill spaced approximately 50-100 m apart
 RB-512,Walking,Murchison Island,Chris Gill,NA,2017-07-18 10:35,2017-07-18 13:20,0,1,0,0,FALSE,FALSE,Walking hunt with Jake Pattison spaced approximately 50-100 m apart
 RB-513,Helicopter,Ramsay Island,Norm Macdonald,NA,2017-07-18 19:00,2017-07-18 19:50,0,1,0,1,FALSE,FALSE,Times taken from track. Aerial hot spot hunting but not in combination with dog hunters. Deer observed on House Island en route to float camp
 RB-514,Helicopter,House Island,Norm Macdonald,NA,2017-07-18 19:50,2017-07-18 19:58,0,1,0,1,TRUE,FALSE,Opportunistic hunting on House Island on return hunt on Ramsay
 RB-515,Boat,Faraday Island,Jake Pattison,NA,2017-07-18 22:00,2017-07-19 1:00,0,1,1,0,FALSE,FALSE,NA
 RB-516,Helicopter,House Island,Norm Macdonald,NA,2017-07-19 7:20,2017-07-19 7:27,0,1,0,1,FALSE,FALSE,Time taken from track. Aerial hot spot hunting but not in combination with dog hunters.
+RB-517,Bailing Dog,House Island,Cameron Stevenson,NA,2017-07-19 7:00,2017-07-19 10:20,2,6,2,0,FALSE,FALSE,Team hunting with two boats
 RB-518,Indicator Dog,House Island,Patrick Dawson,NA,2017-07-19 0:00,2017-07-19 13:15,1,1,0,0,FALSE,FALSE,NA
 RB-519,Bailing Dog,Ramsay Island,Cameron Stevenson,NA,2017-07-19 10:50,2017-07-19 13:15,1,1,0,0,FALSE,FALSE,Team hunting
 RB-520,Walking,Murchison Island,Jake Pattison,NA,2017-07-19 10:40,2017-07-19 13:40,0,1,0,0,FALSE,FALSE,Walking hunt with Chris Gill spaced approximately 50-100 m apart
@@ -558,14 +527,46 @@ RB-525,Helicopter,Hotspring Island,Norm Macdonald,NA,2017-07-19 9:19,2017-07-19 
 RB-526,Helicopter,Hotspring Island,Norm Macdonald,NA,2017-05-05 17:53,2017-05-05 18:12,0,1,0,1,FALSE,FALSE,Added based on tracks
 RB-527,Helicopter,Murchison Island,Norm Macdonald,NA,2017-05-05 17:42,2017-05-05 17:53,0,1,0,1,FALSE,FALSE,Added based on tracks
 RB-528,Helicopter,Lyell Island,Norm Macdonald,NA,2017-05-05 11:01,2017-05-05 11:42,0,1,0,1,FALSE,FALSE,Added based on tracks
-RB-534,Bailing Dog,House Island,Lennard Sparks,NA,2017-09-16 7:45,2017-09-16 8:05,1,1,0,0,FALSE,FALSE,Hunted with Meg and Sue (2 dogs)
 RB-529,Helicopter,Ramsay Island,Norm Macdonald,NA,2017-05-05 11:44,2017-05-05 11:59,0,1,0,1,FALSE,FALSE,Added based on tracks
 RB-530,Helicopter,House Island,Norm Macdonald,NA,2017-05-12 18:51,2017-05-12 18:57,0,1,0,1,FALSE,FALSE,Times taken from track
 RB-531,Helicopter,Hotspring Island,Norm Macdonald,NA,2017-05-12 18:57,2017-05-12 19:04,0,1,0,1,FALSE,FALSE,Times taken from track
+RB-532,Bailing Dog,Murchison Island,Lennard Sparks,NA,2017-09-15 14:20,2017-09-15 15:33,2,4,0,0,FALSE,FALSE,Hunted with Meg and Sue (2 dogs)
+RB-533,Boat,Murchison Island,Lennard Sparks,NA,2017-09-15 15:33,2017-09-15 16:20,0,4,1,0,FALSE,FALSE,Four hunters in two boats did circumnav of Murchison
+RB-534,Bailing Dog,House Island,Lennard Sparks,NA,2017-09-16 7:45,2017-09-16 8:05,2,1,0,0,FALSE,FALSE,Hunted with Meg and Sue (2 dogs)
+RB-535,Bailing Dog,House Island,Lennard Sparks,NA,2017-09-16 8:10,2017-09-16 8:50,1,5,0,0,FALSE,FALSE,"Four hunters walking house, two hunters in boats on shoreline"
+RB-536,Bailing Dog,Hotspring Island,Lennard Sparks,NA,2017-09-16 9:15,2017-09-16 10:00,2,5,0,0,FALSE,FALSE,"One hunter with 2 dogs, 2 walkers, 2 boat support"
+RB-537,Indicator Dog,Murchison Island,Lennard Sparks,NA,2017-09-16 10:15,2017-09-16 14:50,1,2,0,0,FALSE,FALSE,Two hunters with 1 dog (Sue).
+RB-538,Indicator Dog,Murchison Island,Lennard Sparks,NA,2017-09-17 8:55,2017-09-17 14:30,1,3,0,0,FALSE,FALSE,Three hunters with 1 dog (Sue)
+RB-539,Bailing Dog,Murchison Island,Lennard Sparks,NA,2017-09-17 15:00,2017-09-17 16:50,1,5,0,0,FALSE,FALSE,"2 boats, 5 hunters, 1 dog (Meg)"
+RB-540,Bailing Dog,Murchison Island,Lennard Sparks,NA,2017-09-18 8:20,2017-09-18 11:00,1,5,0,0,FALSE,FALSE,"2 boats, 5 hunters, 1 dog (Meg)"
+RB-541,Indicator Dog,Murchison Island,Lennard Sparks,NA,2017-09-18 12:15,2017-09-18 16:20,1,3,0,0,FALSE,FALSE,"3 hunters, 1 dog (Sue)"
+RB-542,Line Push,Murchison Island,Lennard Sparks,NA,2017-09-19 7:30,2017-09-19 13:15,1,5,0,0,FALSE,FALSE,"4 hunters, 1 dog (Sue), 1 boat support, Line push"
+RB-543,Bailing Dog,Murchison Island,Lennard Sparks,NA,2017-09-19 14:00,2017-09-19 16:40,1,5,0,0,FALSE,FALSE,"2 boats, 5 hunters, 1 dog (Meg)"
+RB-544,Line Push,Murchison Island,Lennard Sparks,NA,2017-09-20 8:00,2017-09-20 10:30,2,5,0,0,FALSE,FALSE,"2 dogs; 5 hunters, 0 boats, line push"
+RB-545,Line Push,Murchison Island,Lennard Sparks,NA,2017-09-20 11:15,2017-09-20 13:30,2,5,0,0,FALSE,FALSE,"2 dogs, 5 hunters, 1 boat"
+RB-546,Line Push,Murchison Island,Lennard Sparks,NA,2017-09-21 7:30,2017-09-21 11:45,2,5,0,0,FALSE,FALSE,"2 dogs, 5 hunters, 1 boat"
+RB-547,Line Push,Murchison Island,Lennard Sparks,NA,2017-09-21 12:15,2017-09-21 15:25,1,5,0,0,FALSE,FALSE,"1 dog, 5 hunters, 1 boat"
+RB-548,Line Push,Murchison Island,Lennard Sparks,NA,2017-09-22 8:05,2017-09-22 14:35,2,5,0,0,FALSE,FALSE,"2 dogs, 5 hunters, 1 boat"
+RB-549,Indicator Dog,Murchison Island,Lennard Sparks,NA,2017-09-29 14:00,2017-09-29 17:30,1,2,0,0,FALSE,FALSE,"1 dog, 2 hunter"
+RB-550,Boat,Murchison Island,Lennard Sparks,NA,2017-09-29 19:00,2017-09-29 21:30,0,4,1,0,FALSE,FALSE,"2 boats, 4 hunters"
+RB-551,Line Push,Murchison Island,Lennard Sparks,NA,2017-09-30 7:40,2017-09-30 14:40,2,4,0,0,FALSE,FALSE,"2 dogs, 1 boat, 4 hunters"
+RB-552,Boat,Murchison Island,Lennard Sparks,NA,2017-09-30 19:30,2017-09-30 21:30,0,4,1,0,FALSE,FALSE,"4 hunters, 2 boats, 0 dogs"
+RB-553,Indicator Dog,Murchison Island,Lennard Sparks,NA,2017-10-01 7:30,2017-10-01 12:20,1,4,0,0,FALSE,FALSE,"4 hunters, 1 dog (Sue)."
+RB-554,Bailing Dog,Murchison Island,Lennard Sparks,NA,2017-10-01 13:00,2017-10-01 17:30,2,4,0,0,FALSE,FALSE,"4 hunters, 2 dogs"
 RB-555,Walking,Murchison Island,Tauren Collinson,NA,2017-10-01 8:00,2017-10-01 12:00,0,1,0,0,FALSE,FALSE,"1 hunter, no dog"
+RB-556,Bailing Dog,Murchison Island,Lennard Sparks,NA,2017-10-02 7:30,2017-10-02 8:00,2,4,0,0,FALSE,FALSE,"4 hunters, 2 dogs, 2 boats (The hunter count includes those on the boats)"
+RB-557,Bailing Dog,Murchison Island,Lennard Sparks,NA,2017-10-02 8:15,2017-10-02 13:00,2,4,0,0,FALSE,FALSE,"4 hunters, 2 dogs, 1 boat"
 RB-558,Indicator Dog,Faraday Island,Lennard Sparks,NA,2017-10-02 14:15,2017-10-02 16:30,1,1,0,0,FALSE,FALSE,"1 hunter, 1 dog (Sue)"
 RB-559,Indicator Dog,Murchison Island,Lennard Sparks,NA,2017-10-03 7:30,2017-10-03 13:30,1,1,0,0,FALSE,FALSE,"1 hunter, 1 dog (Sue)"
+RB-560,Walking,Faraday Island,Gerry Morigeau,NA,2017-10-03 7:45,2017-10-03 13:15,0,3,0,0,FALSE,FALSE,"3 hunters, 0 dogs"
+RB-561,Line Push,Murchison Island,Lennard Sparks,NA,2017-10-03 14:30,2017-10-03 16:30,1,6,0,0,FALSE,FALSE,"6 hunters, 1 dog"
+RB-562,Line Push,Murchison Island,Lennard Sparks,NA,2017-10-04 8:00,2017-10-04 15:00,2,7,0,0,FALSE,FALSE,"6 hunters, 2 dogs"
+RB-563,Line Push,Murchison Island,Lennard Sparks,NA,2017-10-05 8:30,2017-10-05 14:40,2,5,0,0,FALSE,FALSE,"5 hunters, 2 dogs, 1 boat"
+RB-564,Line Push,Murchison Island,Lennard Sparks,NA,2017-10-06 8:00,2017-10-06 11:00,2,5,0,0,FALSE,FALSE,"5 hunters, 2 dogs, 1 boat"
+RB-565,Line Push,Murchison Island,Lennard Sparks,NA,2017-10-06 11:30,2017-10-06 14:00,2,5,0,0,FALSE,FALSE,"5 hunters, 2 dogs, 2 boats"
+RB-566,Bailing Dog,Hotspring Island,Lennard Sparks,NA,2017-10-06 14:30,2017-10-06 16:00,2,4,0,0,FALSE,FALSE,"4 hunters, 1 boat, 2 dogs"
 RB-567,Walking,Murchison Island,Tauren Collinson,NA,2017-10-06 14:40,2017-10-06 16:20,0,1,0,0,FALSE,FALSE,"1 hunter, no dog"
+RB-568,Indicator Dog,Faraday Island,Lennard Sparks,NA,2017-10-07 8:00,2017-10-07 15:45,1,3,0,0,FALSE,FALSE,"3 hunters, 1 dog (Sue)"
 RB-569,Indicator Dog,Murchison Island,Lennard Sparks,NA,2017-09-17 8:55,2017-09-17 14:30,1,1,0,0,FALSE,FALSE,"3 hunters, 1 dog (Sue)"
 RB18-001,Bailing Dog,House Island,Lennard Sparks,NA,2018-04-07 14:00,2018-04-07 15:00,3,1,1,0,FALSE,FALSE,NA
 RB18-002,Bailing Dog,Hotsprings Island,Lennard Sparks,NA,2018-04-07 15:00,2018-04-07 16:00,3,1,1,0,FALSE,FALSE,NA
@@ -604,4 +605,3 @@ RB18-034,Bailing Dog,Sgang Gwaay Island,Lennard Sparks,NA,2018-04-27 12:30,2018-
 RB18-035,Bailing Dog,Sgang Gwaay Island,Lennard Sparks,NA,2018-04-28 8:00,2018-04-28 16:15,3,4,0,0,FALSE,FALSE,NA
 RB18-036,Bailing Dog,Sgang Gwaay Island,Lennard Sparks,NA,2018-04-29 7:30,2018-04-29 14:30,3,4,0,0,FALSE,FALSE,NA
 RB18-037,Bailing Dog,Sgang Gwaay Island,Lennard Sparks,NA,2018-04-30 7:00,2018-04-30 11:00,3,4,0,0,FALSE,FALSE,NA
-RB-110,Helicopter,Ramsay Island,Norm Macdonald,NA,2017-05-08 19:10,2017-05-08 20:30,0,1,0,1,FALSE,FALSE,NA
