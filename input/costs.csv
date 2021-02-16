@@ -1,8 +1,8 @@
 ﻿Type,HourlyRate,DailyRate
 BaitHunter,180,1800
 BaitHunterLead,280,2800
-CampManager,80,800
-BoatPlusOperator,95,900
+BaitHunterAvg,230,2300
+BoatPlusOperator,90,900
 Dog,40,400
 DogHunter,90,900
 HeliHunter,120,1200
