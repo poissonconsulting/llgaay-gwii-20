@@ -21,6 +21,7 @@ sbf_save_plot(x_name='sexage', caption="Count of animals grouped by age and sex.
 
 
 y<-filter(data, year(DateTimeEncounter)<2018)
+y<-filter(y, month(DateTimeEncounter)<9)
 z<-filter(data, year(DateTimeEncounter)>=2018)
 
 
@@ -31,7 +32,7 @@ gp <- gp + scale_x_datetime(breaks=date_breaks("1 month"))#, labels = date_forma
 gp<- gp + limits=c(as.POSIXct('2017/04/15'), as.POSIXct('2017/10/31'))
 sbf_open_window()
 sbf_print(gp)
-sbf_save_plot(x_name='huntingtypethrutime2017', caption="Plot of number of deer killed by hunting method through time for 2017 operations.")
+sbf_save_plot(x_name='huntingtypethrutime2017', caption="Plot of number of deer killed by hunting method through time for 2017 summer operations.")
 
 
 gp<- ggplot (y, aes(DateTimeEncounter))+
@@ -41,7 +42,7 @@ gp <- gp + scale_x_datetime(breaks=date_breaks("1 month"), labels = date_format(
 gp <- gp + facet_wrap(~Island)
 sbf_open_window()
 sbf_print(gp)
-sbf_save_plot(x_name='huntypetimebyisl2017', caption="Plot of number of deer killed by hunting method through time by island for 2017 operations.")
+sbf_save_plot(x_name='huntypetimebyisl2017', caption="Plot of number of deer killed by hunting method through time by island for 2017 summer operations.")
 
 
 gp<- ggplot (z, aes(DateTimeEncounter))+
