@@ -16,6 +16,8 @@ check_data(event, values = list(
 # ))
 
 
+ps_duplicates(as_tibble(encounter), c("HuntingEventNumber", "EncounterID"))
+
 #check all primary key values for each of three datafiles is unique
 check_key(event, key = "HuntingEventNumber")
 check_key(encounter, key = c("HuntingEventNumber", "EncounterID"))

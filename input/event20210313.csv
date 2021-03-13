@@ -11,11 +11,11 @@ RB-009,Bait Station,Ramsay Island,Jason Reger,RA10,2017-04-23 13:20,2017-04-23 2
 RB-010,Bait Station,Ramsay Island,Tony DeNicola,RA08,2017-04-23 13:32,2017-04-23 20:00,0,1,0,0,FALSE,FALSE,NA
 RB-011,Bait Station,Ramsay Island,Ryan Rodts,RA12,2017-04-23 12:20,2017-04-23 20:00,0,1,0,0,FALSE,FALSE,NA
 RB-012,Bait Station,Ramsay Island,Dane Stevens,RA17,2017-04-23 15:00,2017-04-23 17:30,0,1,0,0,FALSE,FALSE,NA
-RB-013,Walking,Ramsay Island,Dane Stevens,NA,2017-04-23  19:15:00 PM,2017-04-23  20:15:00 PM,0,1,0,0,FALSE,FALSE,walking Ra4 - Ra17 - Ra18- Ra17 - Ra4   animal shot walking between Ra17 and Ra4 N52.56132  W131.39499
+RB-013,Walking,Ramsay Island,Dane Stevens,NA,2017-04-23 19:50,2017-04-23 20:15,0,1,0,0,FALSE,FALSE,walking Ra4 - Ra17 - Ra18- Ra17 - Ra4   animal shot walking between Ra17 and Ra4 N52.56132  W131.39499
 RB-014,Walking,Ramsay Island,Dane Stevens,NA,2017-04-22 12:00,2017-04-22 15:00,0,1,0,0,FALSE,FALSE,walking Ra4 - Ra17 - Ra16- Ra3 NB 2017/04/22 is correct date
 RB-015,Bait Station,Ramsay Island,Jason Reger,RA09,2017-04-24 15:15,2017-04-24 19:45,0,1,0,0,FALSE,FALSE,NA
 RB-016,Bait Station,Ramsay Island,Dane Stevens,RA16,2017-04-24 12:00,2017-04-24 17:30,0,1,0,0,FALSE,FALSE,NA
-RB-017,Walking,Ramsay Island,Dane Stevens,NA,2017-04-24  17:30:00 PM,2017-04-24  18:30:00 AM,0,1,0,0,FALSE,FALSE,walking  R4 to R16 return
+RB-017,Walking,Ramsay Island,Dane Stevens,NA,2017-04-24 17:30,2017-04-24 18:30,0,1,0,0,FALSE,FALSE,walking  R4 to R16 return
 RB-018,Bait Station,Ramsay Island,Tony DeNicola,RA11,2017-04-24 15:20,2017-04-24 20:00,0,1,0,0,FALSE,FALSE,NA
 RB-019,Bait Station,Ramsay Island,Ryan Rodts,RA14,2017-04-24 16:00,2017-04-24 20:00,0,1,0,0,FALSE,FALSE,NA
 RB-020,Bait Station,Ramsay Island,Ryan Rodts,RA07,2017-04-26 16:00,2017-04-26 21:00,0,1,0,0,FALSE,FALSE,NA
@@ -474,7 +474,7 @@ RB-472,Boat,Ramsay Island,Patrick Dawson,NA,2017-07-07 22:30,2017-07-08 3:00,0,2
 RB-473,Bailing Dog,Ramsay Island,Cameron Stevenson,NA,2017-07-08 8:00,2017-07-08 12:55,3,3,2,1,FALSE,FALSE,NA
 RB-474,Indicator Dog,Ramsay Island,John Clark,NA,2017-07-08 13:20,2017-07-08 16:30,1,1,0,0,FALSE,FALSE,NA
 RB-475,Helicopter,Ramsay Island,Norm Macdonald,NA,2017-07-08 8:04,2017-07-08 10:12,0,1,0,1,FALSE,FALSE,"Times taken from track. Bailing event RB473 from 12:20 to 12:58, 38 minutes, and 13:20-13:39, 19 minutes."
-RB-476,Helicopter,Ramsay Island,Norm Macdonald,NA,2017-07-09 7:31,2017-07-09  NA,0,1,0,1,FALSE,FALSE,This even originally overlapped with a bailing event that had heli support so the times had to be split.
+RB-476,Helicopter,Ramsay Island,Norm Macdonald,NA,2017-07-09 7:31,NA,0,1,0,1,FALSE,FALSE,This even originally overlapped with a bailing event that had heli support so the times had to be split.
 RB-477,Bailing Dog,Ramsay Island,Cameron Stevenson,NA,2017-07-09 7:30,2017-07-09 13:30,2,5,2,1,FALSE,FALSE,"Helicopter, two boats, Pat, John, and Lenny"
 RB-478,Indicator Dog,Ramsay Island,Patrick Dawson,NA,2017-07-09 13:00,2017-07-09 15:00,1,1,0,0,FALSE,FALSE,NA
 RB-479,Indicator Dog,Ramsay Island,Jordan Munn,NA,2017-07-09 7:45,2017-07-09 13:30,1,1,0,0,FALSE,FALSE,NA
