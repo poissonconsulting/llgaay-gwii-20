@@ -1,6 +1,6 @@
 source("header.R")
 
-islands <- read_csv("input/islands.csv")
+islands <- read_xlsx("input/islands.xlsx")
 event <- read_csv("input/event.csv")
 encounter <- read_csv("input/encounter.csv")
 huntingteam <- read_csv("input/huntingteam.csv")
