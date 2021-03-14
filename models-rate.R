@@ -23,34 +23,41 @@ model <- model("model{
   sPopnDisperse ~ dnorm(0, 2^-2) T(0,)
   for(i in 1:nIsland) {
     ePopnDisperse[i] ~ dgamma(sPopnDisperse^-2, sPopnDisperse^-2)
-    bPopn[i] ~ dpois(0.3 * Area[i] * ePopnDisperse[i])
+    bPopn1[i] ~ dpois(0.3 * Area[i] * ePopnDisperse[i])
   }
   for(i in 1:nIsland) {
-    ePopn[i,1] <- bPopn[i]
-    ePopn[i,2] <- ePopn[i,1] - DeerTotal[i,1]
+    bPopn[i,1] <- bPopn1[i]
+    bPopn[i,2] <- bPopn[i,1] - DeerTotal[i,1]
     for(j in 2:nDay) {
-      ePopn[i,j+1] <- ePopn[i,j] - DeerTotal[i,j]
+      bPopn[i,j+1] <- bPopn[i,j] - DeerTotal[i,j]
     }
   }
-  bEfficiency ~ dnorm(0, 2^-2)
   bEfficiencyDensity ~ dnorm(1, 1^-2)
-  sEfficiencyType ~ dnorm(0, 2^-2) T(0,)
   sEfficiencyDensityType ~ dnorm(0, 2^-2) T(0,)
   for(i in 1:nType) {
-    bEfficiencyType[i] ~ dnorm(0, sEfficiencyType^-2)
+    bEfficiencyType[i] ~ dnorm(0, 2^-2)
     bEfficiencyDensityType[i] ~ dnorm(0, sEfficiencyDensityType^-2)
   }
   
   sDeerDisperse ~ dnorm(0, 2^-2) T(0,)
   for(i in 1:nObs) {
-    eDensity[i] <- ePopn[Island[i],Day[i]] / Area[Island[i]]
+    eDensity[i] <- bPopn[Island[i],Day[i]] / Area[Island[i]]
     eEffort[i] <- Hours[i] * HourlyRate[i]
-    log(eEfficiency[i]) <- bEfficiency + bEfficiencyType[Type[i]] + (bEfficiencyDensity + bEfficiencyDensityType[Type[i]]) * log(eDensity[i])
+    log(eEfficiency[i]) <- bEfficiencyType[Type[i]] + (bEfficiencyDensity + bEfficiencyDensityType[Type[i]]) * (log(eDensity[i]) - log(0.3))
     eDeer[i] <- eEffort[i] * eEfficiency[i] 
     eDeerDisperse[i] ~ dgamma(sDeerDisperse^-2, sDeerDisperse^-2)
     Deer[i] ~ dpois(eDeer[i] * eDeerDisperse[i])
   }
 }",
+new_expr = "
+  for(i in 1:nObs) {
+    eDensity[i] <- bPopn[Island[i],Day[i]] / Area[Island[i]]
+    eEffort[i] <- Hours[i] * HourlyRate[i]
+    log(eEfficiency[i]) <- bEfficiencyType[Type[i]] + (bEfficiencyDensity + bEfficiencyDensityType[Type[i]]) * (log(eDensity[i]) - log(0.3))
+    eDeer[i] <- eEffort[i] * eEfficiency[i] 
+    eDeerDisperse[i] ~ dgamma(sDeerDisperse^-2, sDeerDisperse^-2)
+    Deer[i] ~ dpois(eDeer[i] * eDeerDisperse[i])
+  }",
 modify_data = function(data) {
   data$Day <- data$Day + 1L
   data$nDay <- max(data$Day)
@@ -74,9 +81,7 @@ modify_data = function(data) {
   
   data[c("Island", "Day", "Type", "Deer", "Hours")] %<>% 
     as_tibble() %>%
-    filter(!Type %in%  c("Bailing Dog",
-                         "Indicator Dog", 
-                         "Line Push", "Opportunistic", "Walking")) %>%
+    filter(!Type %in%  c("Opportunistic")) %>%
     mutate(Type = droplevels(Type))
   data$nObs <- length(data$Deer)
   data
@@ -86,7 +91,7 @@ gen_inits = function(data) {
   inits$bPopn1 <- apply(data$DeerTotal, MARGIN = 1, FUN = sum) + 1L
   inits
 },
-random_effects = list(bEfficiencyType = "Type",
+random_effects = list(bPopn = "Day",
                       bEfficiencyDensityType = "Type"),
 select_data = list(`Day-` = dtt_date(paste("2017-", c("04-21", "10-06"))),
                    Island = factor("Ramsay", c("Ramsay", "Murchison", "House")),
