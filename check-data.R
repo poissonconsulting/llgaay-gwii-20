@@ -5,18 +5,14 @@ sbf_load_datas()
 
 check_data(event, values = list(
   HuntingEventNumber = "",
-  Dogs = as.numeric(0:7)
+  Dogs = 0:7
 ))
 
 #Bug found here by Joe Jan 9/2021
-# check_data(encounter, values = list(
-#   HuntingEventNumber = "",
-#   EncounterID = "",
-#   LifeStage = factor(c("", NA))
-# ))
-
-
-ps_duplicates(as_tibble(encounter), c("HuntingEventNumber", "EncounterID"))
+check_data(encounter, values = list(
+  HuntingEventNumber = "",
+  EncounterID = ""
+))
 
 #check all primary key values for each of three datafiles is unique
 check_key(event, key = "HuntingEventNumber")

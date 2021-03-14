@@ -7,7 +7,7 @@ sbf_load_datas()
 sbf_set_sub("deer")
 
 #scatterplot to determine which effort metric to use (are they predictive on the 1:1 line and what is the bias)
-gp<-ggplot (data=effdata, aes(DiffTime,TrackTime, colour=Type))+
+gp<-ggplot (data=event, aes(DiffTime,TrackTime, colour=Type))+
   geom_point()
 sbf_open_window()
 sbf_print(gp)
