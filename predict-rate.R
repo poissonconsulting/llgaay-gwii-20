@@ -32,17 +32,19 @@ density <- data %>%
   new_data(seq = c("Type", "DensityDependent"), 
            ref = list(Density = c(0.01, 0.3)), 
            obs_only = TRUE) %>%
-  filter(Type != "Miscellaneous") %>%
-  predict(analysis, new_data = ., new_values = list(Density = density$Density), 
+  filter(Type != "Miscellaneous")
+
+density %<>%
+  predict(analysis, new_data = ., new_values = list(Density = .$Density), 
                    new_expr = 
 "for(i in 1:nObs) {
-  log(prediction[i]) <- bEfficiencyType[Type[i]] + DensityDependent[i] * log(Density[i])
+    log(prediction[i]) <- bEfficiencyType[Type[i]] + DensityDependent[i] * bEfficiencyDensityType[Type[i]] * log(Density[i])
 }")
 
 gp <- ggplot(data = density, aes(x = Type, y = estimate)) +
   facet_grid(Density~., scales = "free_y") +
   geom_pointrange(aes(ymin = lower, ymax = upper)) +
-  scale_x_continuous("Hunting Method") +
+  scale_x_discrete("Hunting Method") +
   scale_y_continuous("Deer / Hourly Helicopter Team") +
   expand_limits(y = 0) +
   NULL
