@@ -1,9 +1,15 @@
 source("header.R")
 
-#changing of single dataframe happens in clean
-
 sbf_set_sub("read")
 sbf_load_datas()
+
+helicrew <- costs %>%
+  filter(Type %in% c("HeliHunter", "HeliPlusOperator")) %>%
+  use_series("HourlyRate") %>%
+  sum()
+
+costs %<>%
+  mutate(HourlyRate = HourlyRate / helicrew)
 
 encounter %<>%
   rename(LifeStage = DeerLifeStage,

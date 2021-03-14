@@ -32,9 +32,16 @@ model <- model("model{
       ePopn[i,j+1] <- ePopn[i,j] - DeerTotal[i,j]
     }
   }
+  bEfficiency ~ dnorm(0, 2^-2)
+  for(i in 1:nType) {
+    bEfficiencyType[i] ~ dnorm(0, 2^-2)
+  }
+  
   sDeerDisperse ~ dnorm(0, 2^-2) T(0,)
   for(i in 1:nObs) {
     eDensity[i] <- ePopn[Island[i],Day[i]] / Area[Island[i]]
+    eEffort[i] <- Hours[i] * HourlyRate[i]
+    log(eEfficiency[i]) <- bEfficiency + bEfficiencyType[Type[i]]
     eRate[i] <- 1
     eDeerDisperse[i] ~ dgamma(sDeerDisperse^-2, sDeerDisperse^-2)
     Deer[i] ~ dpois(eRate[i] * Hours[i] * eDeerDisperse[i])
@@ -83,7 +90,7 @@ select_data = list(`Day-` = dtt_date(paste("2017-", c("04-21", "10-06"))),
                                      "Helicopter", "Indicator Dog", 
                                      "Line Push", "Opportunistic", "Walking")),
                    Hours = c(0.05, 14),
-                   HourlyRate = c(130, 2400))
+                   HourlyRate = c(0.05, 1.5))
 )
 
 sbf_save_block(template(model), "template", caption = "Model description.")

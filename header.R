@@ -17,7 +17,7 @@ palette(c(
 
 theme_set(theme_Poisson())
 
-set_analysis_mode("report")
+set_analysis_mode("quick")
 
 sbf_set_main("output")
 sbf_reset_sub()

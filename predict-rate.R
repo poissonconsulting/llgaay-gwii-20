@@ -16,13 +16,24 @@ coef %>% print(n = nrow(.))
 sbf_save_table(glance, caption = "Model convergence")
 sbf_save_table(coef, caption = "Model coefficients")
 
-count <- predict(analysis, new_data = "X")
+gp <- ggplot(data = data, aes(x = Day, y = Deer)) +
+  facet_wrap(~Type, scales = "free_y") +
+  geom_point(aes(color = Island), alpha = 2/3,
+             position = position_jitter(height = 0.1)) +
+  expand_limits(y = 0) +
+  scale_color_manual(values = c("black", "blue", "red")) +
+  theme(legend.position = "bottom")
 
-gp <- ggplot(data = count) +
-  aes(x = X, y = estimate) +
-  geom_pointrange(aes(ymin = lower, ymax = upper)) +
-
-sbf_open_window(3)
+sbf_open_window()
 sbf_print(gp)
 
-sbf_save_plot(x_name = "x", report = FALSE, caption = "The predicted relationship between Y and X (with 95% CIs)")
+gp <- gp + aes(x = Day, y = Deer / Hours)
+
+sbf_open_window()
+sbf_print(gp)
+
+gp <- gp + aes(x = Day, y = Deer / (Hours * HourlyRate) * 1000)
+
+sbf_open_window()
+sbf_print(gp)
+
