@@ -12,6 +12,12 @@ source("check-data.R")
 
 source("plot-deer.R")
 
+source("manipulate-rate.R")
+source("analyse-rate.R")
+source("predict-rate.R")
+source("residuals-rate.R")
+source("sensitivity-rate.R")
+
 #source("knit-report.R")
 
 source("session-info.R")

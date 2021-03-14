@@ -9,10 +9,10 @@ data <- inner_join(event, encounter, by = "HuntingEventNumber")
 sbf_set_sub("deer")
 
 #scatterplot to determine which effort metric to use (are they predictive on the 1:1 line and what is the bias)
-gp<-ggplot (data=event, aes(DiffTime,TrackTime, colour=Type))+
-  geom_point()
-sbf_open_window()
-sbf_print(gp)
+# gp<-ggplot (data=event, aes(Hours,TrackTime, colour=Type))+
+#   geom_point()
+# sbf_open_window()
+# sbf_print(gp)
 
 #sex ratio by age for deer that were sexed which is most (%?)
 gp <- ggplot(data, aes(Age)) + 

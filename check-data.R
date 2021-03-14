@@ -5,13 +5,15 @@ sbf_load_datas()
 
 check_data(event, values = list(
   HuntingEventNumber = "",
-  Dogs = 0:7
+  Dogs = 0:7,
+  Hours = c(1, 14),
+  Island = factor("")
 ))
 
-#Bug found here by Joe Jan 9/2021
 check_data(encounter, values = list(
   HuntingEventNumber = "",
-  EncounterID = ""
+  EncounterID = "",
+  Status = factor("")
 ))
 
 #check all primary key values for each of three datafiles is unique
