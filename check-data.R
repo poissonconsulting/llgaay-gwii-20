@@ -6,7 +6,7 @@ sbf_load_datas()
 check_data(event, values = list(
   HuntingEventNumber = "",
   Dogs = 0:7,
-  Hours = c(1, 14),
+  Hours = c(0.05, 14),
   Island = factor("")
 ))
 
