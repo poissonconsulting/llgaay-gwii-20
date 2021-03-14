@@ -42,9 +42,9 @@ model <- model("model{
     eDensity[i] <- ePopn[Island[i],Day[i]] / Area[Island[i]]
     eEffort[i] <- Hours[i] * HourlyRate[i]
     log(eEfficiency[i]) <- bEfficiency + bEfficiencyType[Type[i]]
-    eRate[i] <- 1
+    eDeer[i] <- eEffort[i] * eEfficiency[i] 
     eDeerDisperse[i] ~ dgamma(sDeerDisperse^-2, sDeerDisperse^-2)
-    Deer[i] ~ dpois(eRate[i] * Hours[i] * eDeerDisperse[i])
+    Deer[i] ~ dpois(eDeer[i] * eDeerDisperse[i])
   }
 }",
 modify_data = function(data) {
