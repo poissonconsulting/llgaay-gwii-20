@@ -21,8 +21,9 @@ data <- encounter %>%
          Island = factor(Island, levels = c("Ramsay", "Murchison", "House")),
          Type = as.character(Type),
          Type = if_else(OpportunisticHunting, "Opportunistic", Type),
-         Type = factor(Type)) %>%
-  select(HuntingEventNumber, Island, Area, Day, Type, Hours, HourlyRate, Deer)
+         Type = factor(Type),
+         DensityDependent = Type %in% c("Bait Station", "Helicopter", "Boat")) %>%
+  select(HuntingEventNumber, Island, Area, Day, Type, DensityDependent, Hours, HourlyRate, Deer)
 
 sbf_set_sub("rate")
 sbf_save_data(data)

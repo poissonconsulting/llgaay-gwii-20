@@ -34,14 +34,13 @@ model <- model("model{
   }
   for(i in 1:nType) {
     bEfficiencyType[i] ~ dnorm(0, 2^-2)
-    bEfficiencyDensityType[i] ~ dnorm(1, 2^-2)
   }
   
   sDeerDisperse ~ dnorm(0, 2^-2) T(0,)
   for(i in 1:nObs) {
     eDensity[i] <- bPopn[Island[i],Day[i]] / Area[Island[i]]
     eEffort[i] <- Hours[i] * HourlyRate[i]
-    log(eEfficiency[i]) <- bEfficiencyType[Type[i]] + bEfficiencyDensityType[Type[i]] * (log(eDensity[i]) - log(0.3))
+    log(eEfficiency[i]) <- bEfficiencyType[Type[i]] +  DensityDependent[i] * log(eDensity[i])
     eDeer[i] <- eEffort[i] * eEfficiency[i] 
     eDeerDisperse[i] ~ dgamma(sDeerDisperse^-2, sDeerDisperse^-2)
     Deer[i] ~ dpois(eDeer[i] * eDeerDisperse[i])
@@ -51,7 +50,7 @@ new_expr = "
   for(i in 1:nObs) {
     eDensity[i] <- bPopn[Island[i],Day[i]] / Area[Island[i]]
     eEffort[i] <- Hours[i] * HourlyRate[i]
-    log(eEfficiency[i]) <- bEfficiencyType[Type[i]] + bEfficiencyDensityType[Type[i]] * (log(eDensity[i]) - log(0.3))
+    log(eEfficiency[i]) <- bEfficiencyType[Type[i]] +  DensityDependent[i] * log(eDensity[i])
     eDeer[i] <- eEffort[i] * eEfficiency[i] 
     eDeerDisperse[i] ~ dgamma(sDeerDisperse^-2, sDeerDisperse^-2)
     Deer[i] ~ dpois(eDeer[i] * eDeerDisperse[i])
@@ -77,7 +76,7 @@ modify_data = function(data) {
     select(-Island) %>%
     as.matrix()
   
-  data[c("Island", "Day", "Type", "Deer", "Hours")] %<>% 
+  data[c("Island", "Day", "Type", "Deer", "Hours", "HourlyRate", "DensityDependent")] %<>% 
     as_tibble() %>%
     filter(!Type %in%  c("Opportunistic", "Walking", "Line Push")) %>%
     mutate(Type = as.character(Type),
@@ -101,7 +100,8 @@ select_data = list(`Day-` = dtt_date(paste("2017-", c("04-21", "10-06"))),
                                      "Helicopter", "Indicator Dog", 
                                      "Line Push", "Opportunistic", "Walking")),
                    Hours = c(0.05, 14),
-                   HourlyRate = c(0.05, 1.5)),
+                   HourlyRate = c(0.05, 1.5),
+                   DensityDependent = TRUE),
 nthin = 100L
 )
 
