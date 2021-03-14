@@ -1,6 +1,6 @@
 ---
-title: "llgaay-gwii 2020"
-author: "Irvine, R.L., Thorley, J.L. & Dalgarno, S.I.J."
+title: "Llgaay gwii 2017"
+author: "Irvine, R.L. & Thorley, J.L."
 bibliography: bibliography.bib
 ---
   
@@ -13,6 +13,7 @@ library(poisreport)
 nheaders <- 2L
 
 rename <- c(
+  "rate" = "Removal",
   "map" = "Maps" # to avoid rendering problems!
 )
 
@@ -29,29 +30,31 @@ cat(report_draft())
 
 The suggested citation for this [analytic appendix](https://www.poissonconsulting.ca/analytic-appendices.html) is:
   
-  ```{r}
+```{r}
 cat(report_citation(file_name()))
 ```
 
 ## Background
 
+To restore balance, a deer removal program was implemented on various islands in Gwaii Haanas.
+
 The primary goal of the current analyses is to answer the following questions:
   
-  > Is y affected by x?
-  
+> What was the relative efficiency of the removal methods?
+
+> How many deer were remaining on the islands?
+
+> What would the cost of removing the remaining deer been?
+
 ### Data Preparation
   
-The data were prepared for analysis using `r substr(R.version.string,1,15)` [@r_core_team_r_2020].
-
-Key assumptions of the data preparation included:
-  
-- The data were recorded correctly.
+The data were provided by Parks Canada in the form of Excel spreadsheets and prepared for analysis using `r substr(R.version.string,1,15)` [@r_core_team_r_2020].
 
 ### Statistical Analysis
 
 Model parameters were estimated using Bayesian methods.
-The estimates were produced using JAGS [@plummer_jags:_2003] and STAN [@carpenter_stan_2017].
-For additional information on Bayesian estimation the reader is referred to @mcelreath_statistical_2016, respectively.
+The estimates were produced using JAGS [@plummer_jags:_2003].
+For additional information on Bayesian estimation the reader is referred to @mcelreath_statistical_2016.
 
 Unless stated otherwise, the Bayesian analyses used weakly informative normal and half-normal prior distributions [@gelman_prior_2017].
 The posterior distributions were estimated from `r getOption("mb.nchains", 3L) * getOption("mb.niters", 500L) ` Markov Chain Monte Carlo (MCMC) samples thinned from the second halves of `r getOption("mb.nchains", 3L)` chains [@kery_bayesian_2011, pp. 38-40].
@@ -71,10 +74,16 @@ The analyses were implemented using `r substr(R.version.string,1,15)` [@r_core_t
 
 #### Model
 
-The data were analysed using a model.
+The data were analysed using a removal model.
+
 Key assumptions of the model include:
-  
-- The data are normally distributed.
+
+- There is no migration among the islands during the course of the study.
+- The efficiency of bait station, helicopter and boat hunting is directly proportional to the deer density.
+- The efficiency of all other methods is independent of deer density.
+- The effort is the relative cost of the hunting event.
+- The expected number of deer removed is the product of the efficiency and effort.
+- The actual number of deer removed is gamma-Poisson distributed.
 
 ### Model Templates
 
@@ -100,8 +109,11 @@ cat(sbr_figures(sort = sort, rename = rename, nheaders = nheaders, drop = drop))
 
 The organisations and individuals whose contributions have made this analytic appendix possible include:
   
-- A Company
-  - FirstName LastName
-- FirstName LastName
+- Parks Canada
+  - Nadine
+  - Christine Bentley
+  - Charlotte
+- Poisson Consulting
+  - Sebastian Dalgarno
 
 ## References

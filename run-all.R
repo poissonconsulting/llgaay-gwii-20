@@ -1,7 +1,7 @@
 if (FALSE) {
   source("install-packages.R")
   source("update-packages.R")
-
+  
   source("archive-main.R")
   source("remove-main.R")
 }
@@ -18,6 +18,7 @@ source("predict-rate.R")
 source("residuals-rate.R")
 source("sensitivity-rate.R")
 
-#source("knit-report.R")
-
-source("session-info.R")
+if(FALSE) {
+  source("knit-report.R")
+  source("session-info.R")
+}
