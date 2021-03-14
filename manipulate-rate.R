@@ -3,30 +3,43 @@ source("header.R")
 sbf_set_sub("clean")
 sbf_load_datas()
 
-encounter %<>%
+data <- encounter %>%
   as_tibble() %>%
-  group_by(HuntingEventNumber, Status) %>%
+  filter(Status == "Killed") %>%
+  group_by(HuntingEventNumber) %>%
   summarise(Deer = n(), .groups = "keep") %>%
-  ungroup() %>%
-  pivot_wider(names_from = "Status", values_from = "Deer")
-
-data <- event %>% 
-  left_join(encounter, by = "HuntingEventNumber") %>% 
-  mutate(Dayte = dtt_dayte(DateTimeOutingStart),
-         Year = dtt_year(DateTimeOutingStart),
-         Annual = factor(Year)) %>%
-  select(HuntingEventNumber, Island, Year, Annual, Dayte, Type, OpportunisticHunting, 
-         GridSearch, Hours, HourlyRate, Deer = Killed)
+  ungroup() %>% 
+  right_join(event, by = "HuntingEventNumber") %>%
+  replace_na(list(Deer = 0L)) %>%
+  filter(Island %in% c("Ramsay Island", "Murchison Island", "Hotspring Island", "House Island"),
+         dtt_year(DateTimeOutingStart) == 2017,
+         !GridSearch,
+         !(OpportunisticHunting & Deer == 0)) %>%
+  mutate(Date = dtt_date(DateTimeOutingStart),
+         Island = droplevels(Island),
+         Type = as.character(Type),
+         Type = if_else(OpportunisticHunting, "Opportunistic", Type),
+         Type = factor(Type)) %>%
+  select(HuntingEventNumber, Island, Date, Type, Hours, HourlyRate, Deer)
 
 sbf_set_sub("rate")
 sbf_save_data(data)
 
-data %<>% 
-  mutate(Rate = Deer / Hours)
+gp <- ggplot(data = data, aes(x = Date, y = Deer)) +
+  facet_wrap(~Type, scales = "free_y") +
+  geom_point(aes(color = Island)) +
+  expand_limits(y = 0) +
+  theme(legend.position = "bottom")
 
-gp <- ggplot(data = data, aes(x = Dayte, y = Rate)) +
-  facet_grid(Island ~ Year) +
-  geom_point()
+sbf_open_window()
+sbf_print(gp)
+
+gp <- gp + aes(x = Date, y = Deer / Hours)
+
+sbf_open_window()
+sbf_print(gp)
+
+gp <- gp + aes(x = Date, y = Deer / (Hours * HourlyRate) * 1000)
 
 sbf_open_window()
 sbf_print(gp)
