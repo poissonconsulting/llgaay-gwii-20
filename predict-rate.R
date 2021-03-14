@@ -32,6 +32,7 @@ density <- data %>%
   new_data(seq = c("Type", "DensityDependent"), 
            ref = list(Density = c(0.01, 0.3)), 
            obs_only = TRUE) %>%
+  filter(Type != "Miscellaneous") %>%
   predict(analysis, new_data = ., new_values = list(Density = density$Density), 
                    new_expr = 
 "for(i in 1:nObs) {
@@ -39,12 +40,17 @@ density <- data %>%
 }")
 
 gp <- ggplot(data = density, aes(x = Type, y = estimate)) +
-  facet_grid(Density~.) +
+  facet_grid(Density~., scales = "free_y") +
   geom_pointrange(aes(ymin = lower, ymax = upper)) +
+  scale_x_continuous("Hunting Method") +
+  scale_y_continuous("Deer / Hourly Helicopter Team") +
+  expand_limits(y = 0) +
   NULL
 
-sbf_open_window()
+sbf_open_window(5,4)
 sbf_print(gp)
+
+sbf_save_plot(x_name = "density", caption = "The hunting rate by method")
 
 gp <- ggplot(data = data, aes(x = Day, y = Deer)) +
   facet_wrap(~Type, scales = "free_y") +
