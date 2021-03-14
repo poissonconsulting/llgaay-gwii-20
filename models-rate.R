@@ -54,7 +54,7 @@ new_expr = "
     eDeer[i] <- eEffort[i] * eEfficiency[i] 
     predict[i] <- eDeer[i]
     fit[i] <- predict[i]
-    residual[i] <- res_gammma_pois(Deer[i], fit[i], sDeerDisperse)
+    residual[i] <- res_gamma_pois(Deer[i], fit[i], sDeerDisperse)
   }",
 modify_data = function(data) {
   data$Day <- data$Day + 1L
