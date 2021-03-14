@@ -51,6 +51,20 @@ modify_data = function(data) {
     pivot_wider(names_from = "Day", values_from = "Deer") %>%
     select(-Island) %>%
     as.matrix()
+  
+  event <- tibble(Island = data$Island, Day = data$Day, Type = data$Type, Deer = data$Deer) %>%
+    filter(!Type %in%  c("Bailing Dog",
+                         "Indicator Dog", 
+                         "Line Push", "Opportunistic", "Walking")) %>%
+    mutate(Type = droplevels(Type)) %>%
+    arrange(Island, Day)
+  
+  data$Island <- event$Island
+  data$Day <- event$Day
+  data$Type <- event$Type
+  data$Deer <- event$Deer
+  
+  print(data)
   data
 },
 gen_inits = function(data) {
@@ -62,7 +76,10 @@ random_effects = list(bPopn = c("Island", "Day")),
 select_data = list(`Day-` = dtt_date(paste("2017-", c("04-21", "10-06"))),
                    Island = factor("Ramsay", c("Ramsay", "Murchison", "House")),
                    Area = c(32, 1700),
-                   Deer = c(0L, 15L))
+                   Deer = c(0L, 15L),
+                   Type = factor("Helipcopter", c("Bailing Dog", "Bait Station", "Boat", 
+                                     "Helicopter", "Indicator Dog", 
+                                     "Line Push", "Opportunistic", "Walking")))
 )
 
 sbf_save_block(template(model), "template", caption = "Model description.")
