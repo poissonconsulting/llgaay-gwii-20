@@ -474,8 +474,8 @@ RB-472,Boat,Ramsay Island,Patrick Dawson,NA,2017-07-07 22:30,2017-07-08 03:00,0,
 RB-473,Bailing Dog,Ramsay Island,Cameron Stevenson,NA,2017-07-08 08:00,2017-07-08 12:55,3,3,2,1,FALSE,FALSE,NA
 RB-474,Indicator Dog,Ramsay Island,John Clark,NA,2017-07-08 13:20,2017-07-08 16:30,1,1,0,0,FALSE,FALSE,NA
 RB-475,Helicopter,Ramsay Island,Norm Macdonald,NA,2017-07-08 08:04,2017-07-08 10:12,0,1,0,1,FALSE,FALSE,"Times taken from track. Bailing event RB473 from 12:20 to 12:58, 38 minutes, and 13:20-13:39, 19 minutes."
-RB-476,Helicopter,Ramsay Island,Norm Macdonald,NA,2017-07-09 07:31,NA,0,1,0,1,FALSE,FALSE,This even originally overlapped with a bailing event that had heli support so the times had to be split.
-RB-477,Bailing Dog,Ramsay Island,Cameron Stevenson,NA,2017-07-09 07:30,2017-07-09 13:30,2,5,2,1,FALSE,FALSE,"Helicopter, two boats, Pat, John, and Lenny"
+RB-476,Helicopter,Ramsay Island,Norm Macdonald,NA,2017-07-09 07:30,2017-07-09 08:30,0,1,0,1,FALSE,FALSE,This even originally overlapped with a bailing event that had heli support so the times had to be split.
+RB-477,Bailing Dog,Ramsay Island,Cameron Stevenson,NA,2017-07-09 08:30,2017-07-09 13:30,2,5,2,1,FALSE,FALSE,"Helicopter, two boats, Pat, John, and Lenny"
 RB-478,Indicator Dog,Ramsay Island,Patrick Dawson,NA,2017-07-09 13:00,2017-07-09 15:00,1,1,0,0,FALSE,FALSE,NA
 RB-479,Indicator Dog,Ramsay Island,Jordan Munn,NA,2017-07-09 07:45,2017-07-09 13:30,1,1,0,0,FALSE,FALSE,NA
 RB-480,Boat,Ramsay Island,Patrick Dawson,NA,2017-07-09 23:35,2017-07-10 03:35,0,1,1,0,FALSE,FALSE,NA
@@ -568,7 +568,7 @@ RB-567,Walking,Murchison Island,Tauren Collinson,NA,2017-10-06 14:40,2017-10-06 
 RB-568,Indicator Dog,Faraday Island,Lennard Sparks,NA,2017-10-07 08:00,2017-10-07 15:45,1,3,0,0,FALSE,FALSE,"3 hunters, 1 dog (Sue)"
 RB-569,Indicator Dog,Murchison Island,Lennard Sparks,NA,2017-09-17 08:55,2017-09-17 14:30,1,3,0,0,FALSE,FALSE,"3 hunters, 1 dog (Sue)"
 RB18-001,Bailing Dog,House Island,Lennard Sparks,NA,2018-04-07 14:00,2018-04-07 15:00,3,1,1,0,FALSE,FALSE,NA
-RB18-002,Bailing Dog,Hotsprings Island,Lennard Sparks,NA,2018-04-07 15:00,2018-04-07 16:00,3,1,1,0,FALSE,FALSE,NA
+RB18-002,Bailing Dog,Hotspring Island,Lennard Sparks,NA,2018-04-07 15:00,2018-04-07 16:00,3,1,1,0,FALSE,FALSE,NA
 RB18-003,Indicator Dog,Faraday Island,Lennard Sparks,NA,2018-04-08 08:15,2018-04-08 14:20,1,2,1,0,FALSE,FALSE,NA
 RB18-004,Bailing Dog,Murchison Island,Lennard Sparks,NA,2018-04-08 17:00,2018-04-08 18:30,2,1,1,0,FALSE,FALSE,NA
 RB18-005,Boat,Faraday Island,Judson Brown,NA,2018-04-08 19:30,2018-04-08 21:45,1,3,1,0,FALSE,FALSE,NA
@@ -590,7 +590,7 @@ RB18-020,Boat,Lyell Island,Lennard Sparks,NA,2018-04-20 08:30,2018-04-20 12:30,1
 RB18-021,Bailing Dog,Howay Island,Lennard Sparks,NA,2018-04-21 09:30,2018-04-21 13:30,3,6,2,0,FALSE,FALSE,NA
 RB18-022,Bailing Dog,Faraday Island,Lennard Sparks,NA,2018-04-22 07:30,2018-04-22 12:30,3,6,1,0,FALSE,FALSE,NA
 RB18-023,Boat,Lyell Island,Peter Dyment,NA,2018-04-22 10:30,2018-04-22 12:30,0,4,1,0,FALSE,FALSE,NA
-RB18-024,Bailing Dog,Bischofs Island,Lennard Sparks,NA,2018-04-22 13:30,2018-04-22 16:30,3,5,2,0,FALSE,FALSE,NA
+RB18-024,Bailing Dog,Bischof Islands,Lennard Sparks,NA,2018-04-22 13:30,2018-04-22 16:30,3,5,2,0,FALSE,FALSE,NA
 RB18-025,Bailing Dog,Langtry Island,Lennard Sparks,NA,2018-04-24 09:00,2018-04-24 09:30,3,2,2,0,FALSE,FALSE,NA
 RB18-026,Bailing Dog,Sgang Gwaay Island,Lennard Sparks,NA,2018-04-25 11:30,2018-04-25 12:00,2,4,0,0,FALSE,FALSE,NA
 RB18-027,Indicator Dog,Sgang Gwaay Island,Lennard Sparks,NA,2018-04-25 13:00,2018-04-25 17:30,1,4,0,0,FALSE,FALSE,NA
