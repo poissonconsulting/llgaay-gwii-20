@@ -34,10 +34,9 @@ model <- model("model{
   }
 }",
 modify_data = function(data) {
-  data$Day <- data$Date + 1L
+  data$Day <- data$Day + 1L
   data$nDay <- max(data$Day)
-  data$Date <- NULL
-  
+
   data$Area <- tibble(Area = data$Area, Island = data$Island) %>%
     distinct() %>%
     arrange(Island) %>%
@@ -57,12 +56,10 @@ modify_data = function(data) {
 gen_inits = function(data) {
   inits <- list()
   inits$bPopn1 <- apply(data$DeerTotal, MARGIN = 1, FUN = sum) + 1L
-  print(inits$bPopn1 / data$Area)
-  print(inits)
-  stop()
   inits
 },
-select_data = list(`Date-` = dtt_date(paste("2017-", c("04-21", "10-06"))),
+random_effects = list(bPopn = c("Island", "Day")),
+select_data = list(`Day-` = dtt_date(paste("2017-", c("04-21", "10-06"))),
                    Island = factor("Ramsay", c("Ramsay", "Murchison", "House")),
                    Area = c(32, 1700),
                    Deer = c(0L, 15L))

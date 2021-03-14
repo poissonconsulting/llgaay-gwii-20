@@ -15,19 +15,19 @@ data <- encounter %>%
          dtt_year(DateTimeOutingStart) == 2017,
          !GridSearch,
          !(OpportunisticHunting & Deer == 0)) %>%
-  mutate(Date = dtt_date(DateTimeOutingStart),
+  mutate(Day = dtt_date(DateTimeOutingStart),
          Island = as.character(Island),
          Island = str_replace(Island, "\\s+Island$", ""),
          Island = factor(Island, levels = c("Ramsay", "Murchison", "House")),
          Type = as.character(Type),
          Type = if_else(OpportunisticHunting, "Opportunistic", Type),
          Type = factor(Type)) %>%
-  select(HuntingEventNumber, Island, Area, Date, Type, Hours, HourlyRate, Deer)
+  select(HuntingEventNumber, Island, Area, Day, Type, Hours, HourlyRate, Deer)
 
 sbf_set_sub("rate")
 sbf_save_data(data)
 
-gp <- ggplot(data = data, aes(x = Date, y = Deer)) +
+gp <- ggplot(data = data, aes(x = Day, y = Deer)) +
   facet_wrap(~Type, scales = "free_y") +
   geom_point(aes(color = Island), alpha = 2/3,
              position = position_jitter(height = 0.1)) +
@@ -38,12 +38,12 @@ gp <- ggplot(data = data, aes(x = Date, y = Deer)) +
 sbf_open_window()
 sbf_print(gp)
 
-gp <- gp + aes(x = Date, y = Deer / Hours)
+gp <- gp + aes(x = Day, y = Deer / Hours)
 
 sbf_open_window()
 sbf_print(gp)
 
-gp <- gp + aes(x = Date, y = Deer / (Hours * HourlyRate) * 1000)
+gp <- gp + aes(x = Day, y = Deer / (Hours * HourlyRate) * 1000)
 
 sbf_open_window()
 sbf_print(gp)
