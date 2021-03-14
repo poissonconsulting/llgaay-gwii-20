@@ -38,14 +38,14 @@ density %<>%
   predict(analysis, new_data = ., new_values = list(Density = .$Density), 
                    new_expr = 
 "for(i in 1:nObs) {
-    log(prediction[i]) <- bEfficiencyType[Type[i]] + DensityDependent[i] * bEfficiencyDensityType[Type[i]] * log(Density[i])
+    log(prediction[i]) <- bEfficiencyType[Type[i]] + DensityDependent[i] * log(Density[i])
 }")
 
 gp <- ggplot(data = density, aes(x = Type, y = estimate)) +
   facet_grid(Density~., scales = "free_y") +
   geom_pointrange(aes(ymin = lower, ymax = upper)) +
   scale_x_discrete("Hunting Method") +
-  scale_y_continuous("Deer / Hourly Helicopter Team") +
+  scale_y_continuous("Rate (deer/heli hour)") +
   expand_limits(y = 0) +
   NULL
 
@@ -53,6 +53,8 @@ sbf_open_window(5,4)
 sbf_print(gp)
 
 sbf_save_plot(x_name = "density", caption = "The hunting rate by method")
+
+# estimate cost to get all remaining deer for each island with 99% certainty
 
 gp <- ggplot(data = data, aes(x = Day, y = Deer)) +
   facet_wrap(~Type, scales = "free_y") +

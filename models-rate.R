@@ -34,14 +34,13 @@ model <- model("model{
   }
   for(i in 1:nType) {
     bEfficiencyType[i] ~ dnorm(0, 5^-2)
-    bEfficiencyDensityType[i] ~ dnorm(1, 1^-2)
   }
   
   sDeerDisperse ~ dnorm(0, 2^-2) T(0,)
   for(i in 1:nObs) {
     eDensity[i] <- bDensity[Island[i],Day[i]]
     eEffort[i] <- Hours[i] * HourlyRate[i]
-    log(eEfficiency[i]) <- bEfficiencyType[Type[i]] + DensityDependent[i] * bEfficiencyDensityType[Type[i]] * log(eDensity[i])
+    log(eEfficiency[i]) <- bEfficiencyType[Type[i]] + DensityDependent[i] * log(eDensity[i])
     eDeer[i] <- eEffort[i] * eEfficiency[i] 
     eDeerDisperse[i] ~ dgamma(sDeerDisperse^-2, sDeerDisperse^-2)
     Deer[i] ~ dpois(eDeer[i] * eDeerDisperse[i])
@@ -51,7 +50,7 @@ new_expr = "
   for(i in 1:nObs) {
     eDensity[i] <- bDensity[Island[i],Day[i]]
     eEffort[i] <- Hours[i] * HourlyRate[i]
-    log(eEfficiency[i]) <- bEfficiencyType[Type[i]] + DensityDependent[i] * bEfficiencyDensityType[Type[i]] * log(eDensity[i])
+    log(eEfficiency[i]) <- bEfficiencyType[Type[i]] + DensityDependent[i] * log(eDensity[i])
     eDeer[i] <- eEffort[i] * eEfficiency[i] 
     predict[i] <- eDeer[i]
     fit[i] <- predict[i]
@@ -101,12 +100,10 @@ gen_inits = function(data) {
 random_effects = list(bPopn = "Day",
                       bDensity = "Day"),
 select_data = list(`Day-` = dtt_date(paste("2017-", c("04-21", "10-06"))),
-                   Island = factor("Ramsay", c("Ramsay", "Murchison", "House")),
+                   Island = factor(""),
                    Area = c(32, 1700),
                    Deer = c(0L, 15L),
-                   Type = factor("Helicopter", c("Bailing Dog", "Bait Station", "Boat", 
-                                     "Helicopter", "Indicator Dog", 
-                                     "Line Push", "Miscellaneous")),
+                   Type = factor(""),
                    Hours = c(0.05, 14),
                    HourlyRate = c(0.05, 1.5),
                    DensityDependent = TRUE),

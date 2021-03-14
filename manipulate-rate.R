@@ -12,17 +12,16 @@ data <- encounter %>%
   right_join(event, by = "HuntingEventNumber") %>%
   replace_na(list(Deer = 0L)) %>%
   filter(Island %in% c("Ramsay Island", "Murchison Island", "House Island"),
-         dtt_year(DateTimeOutingStart) == 2017,
-         !GridSearch,
-         !(OpportunisticHunting & Deer == 0)) %>%
+         dtt_year(DateTimeOutingStart) == 2017) %>%
   mutate(Day = dtt_date(DateTimeOutingStart),
          Island = as.character(Island),
          Island = str_replace(Island, "\\s+Island$", ""),
          Island = factor(Island, levels = c("Ramsay", "Murchison", "House")),
          Type = as.character(Type),
-         Type = if_else(OpportunisticHunting, "Opportunistic", Type),
-         Type = if_else(Type %in% c("Opportunistic", "Walking"), "Miscellaneous", Type),
-         Type = factor(Type),
+         Type = if_else(GridSearch, "Miscellaneous", Type),
+         Type = if_else(OpportunisticHunting, "Miscellaneous", Type),
+         Type = if_else(Type %in% c("Line Push", "Walking"), "Miscellaneous", Type),
+         Type = factor(Type, levels = c("Bait Station", "Boat", "Helicopter", "Indicator Dog", "Bailing Dog", "Miscellaneous")),
          DensityDependent = Type %in% c("Bait Station", "Helicopter", "Boat")) %>%
   select(HuntingEventNumber, Island, Area, Day, Type, DensityDependent, Hours, HourlyRate, Deer)
 
