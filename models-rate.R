@@ -20,7 +20,7 @@ description %<>% arrange(Parameter)
 sbf_save_table(description, caption = "Parameter descriptions.")
 
 model <- model("model{
-  sPopnDisperse ~ dnorm(0, 1^-2) T(0,)
+  sPopnDisperse ~ dnorm(0, 2^-2) T(0,)
   for(i in 1:nIsland) {
     ePopnDisperse[i] ~ dgamma(sPopnDisperse^-2, sPopnDisperse^-2)
     bPopn[i] ~ dpois(0.3 * Area[i] * ePopnDisperse[i])
@@ -33,15 +33,19 @@ model <- model("model{
     }
   }
   bEfficiency ~ dnorm(0, 2^-2)
+  bEfficiencyDensity ~ dnorm(1, 1^-2)
+  sEfficiencyType ~ dnorm(0, 2^-2) T(0,)
+  sEfficiencyDensityType ~ dnorm(0, 2^-2) T(0,)
   for(i in 1:nType) {
-    bEfficiencyType[i] ~ dnorm(0, 2^-2)
+    bEfficiencyType[i] ~ dnorm(0, sEfficiencyType^-2)
+    bEfficiencyDensityType[i] ~ dnorm(0, sEfficiencyDensityType^-2)
   }
   
   sDeerDisperse ~ dnorm(0, 2^-2) T(0,)
   for(i in 1:nObs) {
     eDensity[i] <- ePopn[Island[i],Day[i]] / Area[Island[i]]
     eEffort[i] <- Hours[i] * HourlyRate[i]
-    log(eEfficiency[i]) <- bEfficiency + bEfficiencyType[Type[i]]
+    log(eEfficiency[i]) <- bEfficiency + bEfficiencyType[Type[i]] + (bEfficiencyDensity + bEfficiencyDensityType[Type[i]]) * log(eDensity[i])
     eDeer[i] <- eEffort[i] * eEfficiency[i] 
     eDeerDisperse[i] ~ dgamma(sDeerDisperse^-2, sDeerDisperse^-2)
     Deer[i] ~ dpois(eDeer[i] * eDeerDisperse[i])
@@ -82,6 +86,8 @@ gen_inits = function(data) {
   inits$bPopn1 <- apply(data$DeerTotal, MARGIN = 1, FUN = sum) + 1L
   inits
 },
+random_effects = list(bEfficiencyType = "Type",
+                      bEfficiencyDensityType = "Type"),
 select_data = list(`Day-` = dtt_date(paste("2017-", c("04-21", "10-06"))),
                    Island = factor("Ramsay", c("Ramsay", "Murchison", "House")),
                    Area = c(32, 1700),
@@ -90,7 +96,8 @@ select_data = list(`Day-` = dtt_date(paste("2017-", c("04-21", "10-06"))),
                                      "Helicopter", "Indicator Dog", 
                                      "Line Push", "Opportunistic", "Walking")),
                    Hours = c(0.05, 14),
-                   HourlyRate = c(0.05, 1.5))
+                   HourlyRate = c(0.05, 1.5)),
+nthin = 100L
 )
 
 sbf_save_block(template(model), "template", caption = "Model description.")
