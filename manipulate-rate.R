@@ -21,6 +21,7 @@ data <- encounter %>%
          Island = factor(Island, levels = c("Ramsay", "Murchison", "House")),
          Type = as.character(Type),
          Type = if_else(OpportunisticHunting, "Opportunistic", Type),
+         Type = if_else(Type %in% c("Opportunistic", "Walking"), "Miscellaneous", Type),
          Type = factor(Type),
          DensityDependent = Type %in% c("Bait Station", "Helicopter", "Boat")) %>%
   select(HuntingEventNumber, Island, Area, Day, Type, DensityDependent, Hours, HourlyRate, Deer)

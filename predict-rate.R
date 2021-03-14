@@ -27,6 +27,25 @@ popn <- filter(coef, str_detect(term, "bPopn")) %>%
   select(Island, Deer, estimate, lower, upper) %>%
   print()
 
+density <- data %>%
+  mutate(Density = 0.3) %>%
+  new_data(seq = c("Type", "DensityDependent"), 
+           ref = list(Density = c(0.01, 0.3)), 
+           obs_only = TRUE) %>%
+  predict(analysis, new_data = ., new_values = list(Density = density$Density), 
+                   new_expr = 
+"for(i in 1:nObs) {
+  log(prediction[i]) <- bEfficiencyType[Type[i]] + DensityDependent[i] * log(Density[i])
+}")
+
+gp <- ggplot(data = density, aes(x = Type, y = estimate)) +
+  facet_grid(Density~.) +
+  geom_pointrange(aes(ymin = lower, ymax = upper)) +
+  NULL
+
+sbf_open_window()
+sbf_print(gp)
+
 gp <- ggplot(data = data, aes(x = Day, y = Deer)) +
   facet_wrap(~Type, scales = "free_y") +
   geom_point(aes(color = Island), alpha = 2/3,
