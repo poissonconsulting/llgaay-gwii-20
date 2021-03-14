@@ -19,6 +19,7 @@ encounter %<>%
 
 event %<>%
   rename(Type = PrimaryHuntingType) %>%
+  left_join(islands, by = "Island") %>%
   mutate(Island = factor(
     Island,
     levels = c(

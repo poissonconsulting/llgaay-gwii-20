@@ -2,6 +2,7 @@ source("header.R")
 
 year <- "2020c"
 
+islands <- read_csv("input/islands.csv")
 event <- read_csv("input/event20210313.csv")
 encounter <- read_csv("input/encounter20210313.csv")
 huntingteam <- read_csv("input/huntingteam20210313.csv")

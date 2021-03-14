@@ -22,7 +22,7 @@ data <- encounter %>%
          Type = as.character(Type),
          Type = if_else(OpportunisticHunting, "Opportunistic", Type),
          Type = factor(Type)) %>%
-  select(HuntingEventNumber, Island, Date, Type, Hours, HourlyRate, Deer)
+  select(HuntingEventNumber, Island, Area, Date, Type, Hours, HourlyRate, Deer)
 
 sbf_set_sub("rate")
 sbf_save_data(data)
