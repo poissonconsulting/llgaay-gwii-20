@@ -1,8 +1,10 @@
 source("header.R")
 library (scales)
 
-sbf_set_sub("tidy")
+sbf_set_sub("clean")
 sbf_load_datas()
+
+data <- inner_join(event, encounter, by = "HuntingEventNumber")
 
 sbf_set_sub("deer")
 
