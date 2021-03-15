@@ -14,7 +14,7 @@ glance %>% print()
 coef %>% print(n = nrow(.))
 
 sbf_save_table(glance, caption = "Model convergence")
-sbf_save_table(coef, caption = "Model coefficients")
+sbf_save_table(coef, caption = "Model terms (with 98% CIs)")
 
 total_deer <- data %>%
   group_by(Island) %>%
@@ -28,9 +28,9 @@ popn <- filter(coef, str_detect(term, "bPopn")) %>%
   mutate(across(c(estimate, lower, upper), function(x) x - Removed)) %>%
   print()
 
-sbf_save_table(popn, caption = "The total number of deer removed and the estimated number of remaining deer by island (with 95% CIs)")
+sbf_save_table(popn, caption = "The total number of deer removed and the estimated number of remaining deer by island (with 98% CIs)")
 
-density <- data %>%
+efficiency <- data %>%
   mutate(Density = 0.3) %>%
   new_data(seq = c("Type", "DensityDependent"), 
            ref = list(Density = c(0.01, 0.3)), 
@@ -45,7 +45,7 @@ density <- data %>%
     Density == 0.01 ~ "Low Density (0.01 ind/ha)",
     Density == 0.3 ~ "High Density (0.30 ind/ha)"))
 
-gp <- ggplot(data = density, aes(x = Type, y = estimate)) +
+gp <- ggplot(data = efficiency, aes(x = Type, y = estimate)) +
   facet_grid(DensityLevel~., scales = "free_y") +
   geom_pointrange(aes(ymin = lower, ymax = upper)) +
   scale_x_discrete("Method") +
@@ -57,28 +57,36 @@ gp <- ggplot(data = density, aes(x = Type, y = estimate)) +
 sbf_open_window(3,4)
 sbf_print(gp)
 
-sbf_save_plot(x_name = "density", caption = "The removal rate by method and density")
+sbf_save_plot(x_name = "efficiency", caption = "The removal efficiency by method and density")
 
-# estimate cost to get all remaining deer for each island with 99% certainty
+efficiency_data <- data %>%
+  new_data(seq = c("Type", "DensityDependent"), 
+           ref = list(Island = unique(.$Island),
+                      Day = seq(min(.$Day), max(.$Day), by = 10)), 
+           obs_only = TRUE) %>%
+  predict(analysis, new_data = .)
 
-gp <- ggplot(data = data, aes(x = Day, y = Deer)) +
+gp <- ggplot(data = data) +
+  aes(x = Day, y = Deer / (Hours * HourlyRate), color = Island) +
   facet_wrap(~Type, scales = "free_y") +
-  geom_point(aes(color = Island), alpha = 2/3,
-             position = position_jitter(height = 0.1)) +
+  geom_point(alpha = 2/3, position = position_jitter(height = 0.1)) +
+  geom_line(data = efficiency_data, aes(y = estimate)) +
   expand_limits(y = 0) +
+  scale_x_date("Date") +
   scale_color_manual(values = c("black", "blue", "red")) +
   theme(legend.position = "bottom")
 
 sbf_open_window()
-sbf_print(gp)
+sbf_print(gp + ylab("Efficiency (ind/heli.hr)"))
+
+sbf_save_plot(x_name = "data", caption = "The removal efficiency by date, method and island with the estimated removal efficiency")
 
 gp <- gp + aes(x = Day, y = Deer / Hours)
 
 sbf_open_window()
 sbf_print(gp)
 
-gp <- gp + aes(x = Day, y = Deer / (Hours * HourlyRate))
+gp <- gp + aes(x = Day, y = Deer)
 
 sbf_open_window()
 sbf_print(gp)
-

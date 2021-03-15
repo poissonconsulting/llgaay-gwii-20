@@ -21,7 +21,7 @@ sort <- c(
   "description", "coef", "glance", "map"
 )
 
-drop <- NULL
+drop <- "deer"
 ```
 
 ```{r}
@@ -44,7 +44,7 @@ The primary goal of the current analyses is to answer the following questions:
 
 > How many deer were remaining on the islands?
 
-> What would the cost of removing the remaining deer been?
+> What would the cost of removing the remaining deer have been?
 
 ### Data Preparation
   
@@ -55,7 +55,6 @@ The data were provided by Parks Canada in the form of Excel spreadsheets and pre
 Model parameters were estimated using Bayesian methods.
 The estimates were produced using JAGS [@plummer_jags:_2003].
 For additional information on Bayesian estimation the reader is referred to @mcelreath_statistical_2016.
-
 
 Unless stated otherwise, the Bayesian analyses used weakly informative normal and half-normal prior distributions [@gelman_prior_2017].
 The posterior distributions were estimated from `r getOption("mb.nchains", 3L) * getOption("mb.niters", 500L) ` Markov Chain Monte Carlo (MCMC) samples thinned from the second halves of `r getOption("mb.nchains", 3L)` chains [@kery_bayesian_2011, pp. 38-40].

@@ -60,8 +60,8 @@ new_expr = "
     eEffort[i] <- Hours[i] * HourlyRate[i]
     log(eEfficiency[i]) <- bEfficiencyType[Type[i]] + DensityDependent[i] * log(eDensity[i])
     eDeer[i] <- eEffort[i] * eEfficiency[i] 
-    predict[i] <- eDeer[i]
-    fit[i] <- predict[i]
+    prediction[i] <- eDeer[i]
+    fit[i] <- prediction[i]
     residual[i] <- res_gamma_pois(Deer[i], fit[i], sDeerDisperse)
   }",
 modify_data = function(data) {
