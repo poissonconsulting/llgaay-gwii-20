@@ -3,19 +3,18 @@ source("header.R")
 sbf_set_sub("rate")
 
 description <- c(
-  "`bDensity1[i]`" = "Expected density of deer on `i`^th^ island at start of first day",
+  "`bDensity1[i]`" = "Expected density of deer on `i`^th^ island at start of first `Day`",
   "`Area[i]`" = "Surface area of `i`^th^ island (hectares)",
   "`PopnMin[i]`" = "Total number of deer removed from `i`^th^ island",
-  "`bPopn1[i]`" = "Number of deer on `i`^th^ island at start of first day",
-  "`bPopn[i,j]`" = "Number of deer on `i`^th^ island at start of `j`^th^ day",
-  "`bDensity[i,j]`" = "Density of deer on `i`^th^ island at start of `j`^th^ day",
-  "`DeerTotal[i,j]`" = "Total number of deer removed from `i`^th^ Island on `j`^th^ day",
+  "`bPopn1[i]`" = "Number of deer on `i`^th^ island at start of first `Day`",
+  "`bPopn[i,j]`" = "Number of deer on `i`^th^ island at start of `j`^th^ `Day`",
+  "`bDensity[i,j]`" = "Density of deer on `i`^th^ island at start of `j`^th^ `Day`",
+  "`DeerTotal[i,j]`" = "Total number of deer removed from `i`^th^ Island on `j`^th^ `Day`",
   "`bEfficiencyType[i]`" = "Efficiency of `i`^th^ method (at a density of 1 deer per hectare)",
   "`sDeerDisperse`" = "SD of extra-Poisson varation in `Deer`",
   "`Hours`" = "Duration of `i`^th^ outing (hours)",
   "`HourlyRate`" = "Relative cost of `i`^th^ outing (helicopter crew hourly rate)",
-  "`HourlyRate`" = "Relative cost of `i`^th^ outing (helicopter crew hours)",
-  "`Day`" = "Day of `i`^th^ outing",
+  "`Day[i]`" = "Days since April 20th 2017 of `i`^th^ outing",
   "`Deer[i]`" = "Number of deer removed during `i`^th^ outing"
 )
 

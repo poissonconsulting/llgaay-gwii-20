@@ -56,17 +56,27 @@ Model parameters were estimated using Bayesian methods.
 The estimates were produced using JAGS [@plummer_jags:_2003].
 For additional information on Bayesian estimation the reader is referred to @mcelreath_statistical_2016.
 
+
 Unless stated otherwise, the Bayesian analyses used weakly informative normal and half-normal prior distributions [@gelman_prior_2017].
 The posterior distributions were estimated from `r getOption("mb.nchains", 3L) * getOption("mb.niters", 500L) ` Markov Chain Monte Carlo (MCMC) samples thinned from the second halves of `r getOption("mb.nchains", 3L)` chains [@kery_bayesian_2011, pp. 38-40].
 Model convergence was confirmed by ensuring that the potential scale reduction factor $\hat{R} \leq `r round(getOption("mb.rhat", 1.05), 2)`$ [@kery_bayesian_2011, pp. 40] and the effective sample size [@brooks_handbook_2011] $\textrm{ESS} \geq  `r getOption("mb.nchains", 3L) * getOption("mb.niters", 500) * round(getOption("mb.esr", 0.1), 2)`$ for each of the monitored parameters [@kery_bayesian_2011, pp. 61].
 
-The parameters are summarised in terms of the point *estimate*, standard deviation (*sd*), the *z-score*, *lower* and *upper* 95% confidence/credible limits (CLs) and the *p-value* [@kery_bayesian_2011, pp. 37, 42].
-The estimate is the median (50th percentile) of the MCMC samples, the z-score is $\mathrm{mean}/\mathrm{sd}$ and the 95% CLs are the 2.5th and 97.5th percentiles.
-A p-value of 0.05 indicates that the lower or upper 95% CL is 0.
+The parameters are summarised in terms of the point *estimate*, *lower* and *upper* 95% credible limits (CLs) and the surprisal *s-value* [@greenland_valid_2019]. 
+The estimate is the median (50th percentile) of the MCMC samples while the 95% CLs are the 2.5th and 97.5th percentiles.
+The s-value can be considered a test of directionality. 
+More specifically it indicates how surprising (in bits) it would be to discover that the true value of the parameter is in the opposite direction to the estimate. 
+An s-value of 4.3 bits, which is equivalent to a p-value [@kery_bayesian_2011; @greenland_living_2013] of 0.05, indicates that the surprise would be equivalent to throwing 4.3 heads in a row.
+The condition that non-essential explanatory variables have s-values $\geq$ 4.3 bits provides a useful model selection heuristic [@kery_bayesian_2011].
+
+Model adequacy was assessed via posterior predictive checks [@kery_bayesian_2011].
+More specifically, the number of zeros and the first four central moments (mean, variance, skewness and kurtosis) for the deviance residuals were compared to the expected values by simulating new residuals.
+In this context the s-value indicates how surprising each metric is given the estimated posterior probability distribution for the residual variation.
+
+Where computationally practical, the sensitivity of the parameters to the choice of prior distributions was evaluated by increasing the standard deviations of all normal, half-normal and log-normal priors by an order of magnitude and then using $\hat{R}$ to test whether the samples where drawn from the same posterior distribution [@thorley_fishing_2017].
 
 The results are displayed graphically by plotting the modeled relationships between particular variables and the response(s) with the remaining variables held constant.
 In general, continuous and discrete fixed variables are held constant at their mean and first level values, respectively, while random variables are held constant at their typical values (expected values of the underlying hyperdistributions) [@kery_bayesian_2011, pp. 77-82].
-When informative the influence of particular variables is expressed in terms of the *effect size* (i.e., percent change or n-fold in the response variable) with 95% confidence/credible intervals [CIs, @bradford_using_2005].
+When informative the influence of particular variables is expressed in terms of the *effect size* (i.e., percent or n-fold change in the response variable) with 95% credible intervals [CIs, @bradford_using_2005].
 
 The analyses were implemented using `r substr(R.version.string,1,15)` [@r_core_team_r_2020] and the [`mbr`](https://www.poissonconsulting.ca/mbr) family of packages.
 

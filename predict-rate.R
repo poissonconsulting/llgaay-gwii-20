@@ -32,27 +32,29 @@ density <- data %>%
   new_data(seq = c("Type", "DensityDependent"), 
            ref = list(Density = c(0.01, 0.3)), 
            obs_only = TRUE) %>%
-  filter(Type != "Miscellaneous")
-
-density %<>%
+  filter(Type != "Miscellaneous") %>%
   predict(analysis, new_data = ., new_values = list(Density = .$Density), 
                    new_expr = 
 "for(i in 1:nObs) {
     log(prediction[i]) <- bEfficiencyType[Type[i]] + DensityDependent[i] * log(Density[i])
-}")
+}") %>%
+  mutate(DensityLevel = case_when(
+    Density == 0.01 ~ "Low Density (0.01 ind/ha)",
+    Density == 0.3 ~ "High Density (0.30 ind/ha)"))
 
 gp <- ggplot(data = density, aes(x = Type, y = estimate)) +
-  facet_grid(Density~., scales = "free_y") +
+  facet_grid(DensityLevel~., scales = "free_y") +
   geom_pointrange(aes(ymin = lower, ymax = upper)) +
-  scale_x_discrete("Hunting Method") +
-  scale_y_continuous("Rate (deer/heli hour)") +
+  scale_x_discrete("Method") +
+  scale_y_continuous("Efficiency (ind/heli.hr)") +
   expand_limits(y = 0) +
+  theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5)) +
   NULL
 
-sbf_open_window(5,4)
+sbf_open_window(3,4)
 sbf_print(gp)
 
-sbf_save_plot(x_name = "density", caption = "The hunting rate by method")
+sbf_save_plot(x_name = "density", caption = "The removal rate by method and density")
 
 # estimate cost to get all remaining deer for each island with 99% certainty
 
