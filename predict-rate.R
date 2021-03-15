@@ -24,8 +24,11 @@ total_deer <- data %>%
 popn <- filter(coef, str_detect(term, "bPopn")) %>%
   select(estimate, lower, upper) %>%
   bind_cols(total_deer) %>%
-  select(Island, Deer, estimate, lower, upper) %>%
+  select(Island, Removed = Deer, estimate, lower, upper) %>%
+  mutate(across(c(estimate, lower, upper), function(x) x - Removed)) %>%
   print()
+
+sbf_save_table(popn, caption = "The total number of deer removed and the estimated number of remaining deer by island (with 95% CIs)")
 
 density <- data %>%
   mutate(Density = 0.3) %>%
