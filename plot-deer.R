@@ -5,41 +5,50 @@ sbf_set_sub("clean")
 sbf_load_datas()
 
 data <- inner_join(event, encounter, by = "HuntingEventNumber")
+
 sbf_set_sub("deer")
-y<-filter(data, year(DateTimeEncounter)<2018)
-#y<-filter(y, month(DateTimeEncounter)<9)
-z<-filter(data, year(DateTimeEncounter)>=2018)
 
-gp<- ggplot (y, aes(DateTimeEncounter))+
+data %<>% 
+    mutate(Year = dtt_year(DateTimeEncounter))
+
+gp<- ggplot(filter(data, Year == 2017), aes(DateTimeEncounter)) +
     geom_histogram(aes(fill=Method), binwidth=1*3600*24*7)+
-    xlab("2017 Operations") + ylab("Deer Killed") +labs(fill="Hunting Method")
+    scale_x_datetime("2017 Operations", breaks=date_breaks("1 month"), labels = date_format("%b")) +
+    ylab("Deer Killed") +
+    labs(fill="Hunting Method") +
+    NULL
 
-gp <- gp + scale_x_datetime(breaks=date_breaks("1 month"), labels = date_format("%b"))
 sbf_open_window()
 sbf_print(gp)
+
 sbf_save_plot(x_name='huntingtypethrutime2017', caption="Plot of number of deer killed by hunting method through time for 2017 operations.")
 
-
-gp<- ggplot (y, aes(DateTimeEncounter))+
+gp<- ggplot(filter(data, Year == 2017), aes(DateTimeEncounter)) +
+    facet_wrap(~IslandHaida) +
     geom_histogram(aes(fill=Method), binwidth=1*3600*24*7)+
-    xlab("2017 Operations") + ylab("Deer Killed") +labs(fill="Hunting Method")
+    scale_x_datetime("2017 Operations", 
+                     breaks=date_breaks("1 month"), labels = date_format("%b")) +
+    ylab("Deer Killed") +
+    labs(fill="Hunting Method") +
+    theme (legend.position = "bottom") +
+    NULL
 
-gp <- gp + scale_x_datetime(breaks=date_breaks("1 month"), labels = date_format("%b"))
-gp <- gp + theme (legend.position = "bottom")
-gp <- gp + facet_wrap(~IslandHaida)
 sbf_open_window()
 sbf_print(gp)
+
 sbf_save_plot(x_name='huntypetimebyisl2017', caption="Plot of number of deer killed by hunting method through time by island for 2017 operations.")
 
+gp<- ggplot(filter(data, Year == 2018), aes(DateTimeEncounter)) +
+    facet_wrap(~IslandHaida) +
+    geom_histogram(aes(fill=Method), binwidth=1*3600*24*3) +
+    scale_x_datetime("2018 Operations", breaks=date_breaks("1 week"), labels = date_format("%b-%d")) +
+    ylab("Deer Killed") + 
+    labs(fill="Hunting Method") +
+    NULL
 
-gp<- ggplot (z, aes(DateTimeEncounter))+
-    geom_histogram(aes(fill=Method), binwidth=1*3600*24*3)+
-    xlab("2018 Operations") + ylab("Deer Killed") +labs(fill="Hunting Method")
-
-gp <- gp + scale_x_datetime(breaks=date_breaks("1 week"), labels = date_format("%b-%d"))
-gp <- gp + facet_wrap(~IslandHaida)
 sbf_open_window()
 sbf_print(gp)
+
 sbf_save_plot(x_name='huntingtypetimebyis2018', caption="Plot of number of deer killed by hunting method through time for 2018 operations.")
 
 # gp<- ggplot(data, aes(Method))+
