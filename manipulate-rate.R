@@ -17,13 +17,13 @@ data <- encounter %>%
          Island = as.character(Island),
          Island = str_replace(Island, "\\s+Island$", ""),
          Island = factor(Island, levels = c("Ramsay", "Murchison", "House")),
-         Type = as.character(Type),
-         Type = if_else(GridSearch, "Miscellaneous", Type),
-         Type = if_else(OpportunisticHunting, "Miscellaneous", Type),
-         Type = if_else(Type %in% c("Line Push", "Walking"), "Miscellaneous", Type),
-         Type = factor(Type, levels = c("Bait Station", "Boat", "Helicopter", "Indicator Dog", "Bailing Dog", "Miscellaneous")),
-         DensityDependent = Type %in% c("Bait Station", "Helicopter", "Boat")) %>%
-  select(HuntingEventNumber, Island, Area, Day, Type, DensityDependent, Hours, HourlyRate, Deer)
+         Method = as.character(Method),
+         Method = if_else(GridSearch, "Miscellaneous", Method),
+         Method = if_else(OpportunisticHunting, "Miscellaneous", Method),
+         Method = if_else(Method %in% c("Line Push", "Walking"), "Miscellaneous", Method),
+         Method = factor(Method, levels = c("Bait Station", "Boat", "Helicopter", "Indicator Dog", "Bailing Dog", "Miscellaneous")),
+         DensityDependent = Method %in% c("Bait Station", "Helicopter", "Boat")) %>%
+  select(HuntingEventNumber, Island, Area, Day, Method, DensityDependent, Hours, HourlyRate, Deer)
 
 sbf_set_sub("rate")
 sbf_save_data(data)

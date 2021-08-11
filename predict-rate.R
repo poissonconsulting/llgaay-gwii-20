@@ -32,20 +32,20 @@ sbf_save_table(popn, caption = "The total number of deer removed and the estimat
 
 efficiency <- data %>%
   mutate(Density = 0.3) %>%
-  new_data(seq = c("Type", "DensityDependent"), 
+  new_data(seq = c("Method", "DensityDependent"), 
            ref = list(Density = c(0.01, 0.3)), 
            obs_only = TRUE) %>%
-  filter(Type != "Miscellaneous") %>%
+  filter(Method != "Miscellaneous") %>%
   predict(analysis, new_data = ., new_values = list(Density = .$Density), 
                    new_expr = 
 "for(i in 1:nObs) {
-    log(prediction[i]) <- bEfficiencyType[Type[i]] + DensityDependent[i] * log(Density[i])
+    log(prediction[i]) <- bEfficiencyMethod[Method[i]] + DensityDependent[i] * log(Density[i])
 }") %>%
   mutate(DensityLevel = case_when(
     Density == 0.01 ~ "Low Density (0.01 ind/ha)",
     Density == 0.3 ~ "High Density (0.30 ind/ha)"))
 
-gp <- ggplot(data = efficiency, aes(x = Type, y = estimate)) +
+gp <- ggplot(data = efficiency, aes(x = Method, y = estimate)) +
   facet_grid(DensityLevel~., scales = "free_y") +
   geom_pointrange(aes(ymin = lower, ymax = upper)) +
   scale_x_discrete("Method") +
@@ -60,7 +60,7 @@ sbf_print(gp)
 sbf_save_plot(x_name = "efficiency", caption = "The removal efficiency by method and density")
 
 efficiency_data <- data %>%
-  new_data(seq = c("Type", "DensityDependent"), 
+  new_data(seq = c("Method", "DensityDependent"), 
            ref = list(Island = unique(.$Island),
                       Day = seq(min(.$Day), max(.$Day), by = 10)), 
            obs_only = TRUE) %>%
@@ -68,7 +68,7 @@ efficiency_data <- data %>%
 
 gp <- ggplot(data = data) +
   aes(x = Day, y = Deer / (Hours * HourlyRate), color = Island) +
-  facet_wrap(~Type, scales = "free_y") +
+  facet_wrap(~Method, scales = "free_y") +
   geom_point(alpha = 2/3, position = position_jitter(height = 0.1)) +
   geom_line(data = efficiency_data, aes(y = estimate)) +
   expand_limits(y = 0) +

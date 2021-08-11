@@ -10,7 +10,7 @@ description <- c(
   "`bPopn[i,j]`" = "Number of deer on `i`^th^ island at start of `j`^th^ `Day`",
   "`bDensity[i,j]`" = "Density of deer on `i`^th^ island at start of `j`^th^ `Day`",
   "`DeerTotal[i,j]`" = "Total number of deer removed from `i`^th^ Island on `j`^th^ `Day`",
-  "`bEfficiencyType[i]`" = "Efficiency of `i`^th^ method (at a density of 1 deer per hectare)",
+  "`bEfficiencyMethod[i]`" = "Efficiency of `i`^th^ method (at a density of 1 deer per hectare)",
   "`sDeerDisperse`" = "SD of extra-Poisson varation in `Deer`",
   "`Hours`" = "Duration of `i`^th^ outing (hours)",
   "`HourlyRate`" = "Relative cost of `i`^th^ outing (helicopter crew hourly rate)",
@@ -40,15 +40,15 @@ model <- model("model{
       bDensity[i,j] <- bPopn[i,j] / Area[i]
     }
   }
-  for(i in 1:nType) {
-    bEfficiencyType[i] ~ dnorm(0, 5^-2)
+  for(i in 1:nMethod) {
+    bEfficiencyMethod[i] ~ dnorm(0, 5^-2)
   }
   
   sDeerDisperse ~ dnorm(0, 2^-2) T(0,)
   for(i in 1:nObs) {
     eDensity[i] <- bDensity[Island[i],Day[i]]
     eEffort[i] <- Hours[i] * HourlyRate[i]
-    log(eEfficiency[i]) <- bEfficiencyType[Type[i]] + DensityDependent[i] * log(eDensity[i])
+    log(eEfficiency[i]) <- bEfficiencyMethod[Method[i]] + DensityDependent[i] * log(eDensity[i])
     eDeer[i] <- eEffort[i] * eEfficiency[i] 
     eDeerDisperse[i] ~ dgamma(sDeerDisperse^-2, sDeerDisperse^-2)
     Deer[i] ~ dpois(eDeer[i] * eDeerDisperse[i])
@@ -58,7 +58,7 @@ new_expr = "
   for(i in 1:nObs) {
     eDensity[i] <- bDensity[Island[i],Day[i]]
     eEffort[i] <- Hours[i] * HourlyRate[i]
-    log(eEfficiency[i]) <- bEfficiencyType[Type[i]] + DensityDependent[i] * log(eDensity[i])
+    log(eEfficiency[i]) <- bEfficiencyMethod[Method[i]] + DensityDependent[i] * log(eDensity[i])
     eDeer[i] <- eEffort[i] * eEfficiency[i] 
     prediction[i] <- eDeer[i]
     fit[i] <- prediction[i]
@@ -111,7 +111,7 @@ select_data = list(`Day-` = dtt_date(paste("2017-", c("04-21", "10-06"))),
                    Island = factor(""),
                    Area = c(32, 1700),
                    Deer = c(0L, 15L),
-                   Type = factor(""),
+                   Method = factor(""),
                    Hours = c(0.05, 14),
                    HourlyRate = c(0.05, 1.5),
                    DensityDependent = TRUE),
