@@ -5,17 +5,15 @@ sbf_set_sub("clean")
 sbf_load_datas()
 
 data <- inner_join(event, encounter, by = "HuntingEventNumber")
-
 sbf_set_sub("deer")
-
 y<-filter(data, year(DateTimeEncounter)<2018)
 #y<-filter(y, month(DateTimeEncounter)<9)
 z<-filter(data, year(DateTimeEncounter)>=2018)
 
-
 gp<- ggplot (y, aes(DateTimeEncounter))+
-  geom_histogram(aes(fill=Method), binwidth=1*3600*24*7)+NULL+
-  xlab("Time") + ylab("Deer Killed") +labs(fill="Hunting Method")
+    geom_histogram(aes(fill=Method), binwidth=1*3600*24*7)+
+    xlab("2017 Operations") + ylab("Deer Killed") +labs(fill="Hunting Method")
+
 gp <- gp + scale_x_datetime(breaks=date_breaks("1 month"), labels = date_format("%b"))
 sbf_open_window()
 sbf_print(gp)
@@ -23,23 +21,26 @@ sbf_save_plot(x_name='huntingtypethrutime2017', caption="Plot of number of deer 
 
 
 gp<- ggplot (y, aes(DateTimeEncounter))+
-  geom_histogram(aes(fill=Method), binwidth=1*3600*24*7)+NULL+
-  xlab("Time") + ylab("Deer Killed") +labs(fill="Hunting Method")
+    geom_histogram(aes(fill=Method), binwidth=1*3600*24*7)+
+    xlab("2017 Operations") + ylab("Deer Killed") +labs(fill="Hunting Method")
+
 gp <- gp + scale_x_datetime(breaks=date_breaks("1 month"), labels = date_format("%b"))
+gp <- gp + theme (legend.position = "bottom")
 gp <- gp + facet_wrap(~IslandHaida)
 sbf_open_window()
 sbf_print(gp)
-sbf_save_plot(x_name='huntypetimebyisl2017', caption="Plot of number of deer killed by hunting method through time by island for 2017 summer operations.")
+sbf_save_plot(x_name='huntypetimebyisl2017', caption="Plot of number of deer killed by hunting method through time by island for 2017 operations.")
 
 
 gp<- ggplot (z, aes(DateTimeEncounter))+
-  geom_histogram(aes(fill=Method), binwidth=1*3600*24*3)+NULL+
-  xlab("Time") + ylab("Deer Killed") +labs(fill="Hunting Method")
+    geom_histogram(aes(fill=Method), binwidth=1*3600*24*3)+
+    xlab("2018 Operations") + ylab("Deer Killed") +labs(fill="Hunting Method")
+
 gp <- gp + scale_x_datetime(breaks=date_breaks("1 week"), labels = date_format("%b-%d"))
 gp <- gp + facet_wrap(~IslandHaida)
 sbf_open_window()
 sbf_print(gp)
-sbf_save_plot(x_name='huntingtypethrutime2018', caption="Plot of number of deer killed by hunting method through time for 2018 operations.")
+sbf_save_plot(x_name='huntingtypetimebyis2018', caption="Plot of number of deer killed by hunting method through time for 2018 operations.")
 
 # gp<- ggplot(data, aes(Method))+
 #   geom_bar(aes(fill=Status))
