@@ -57,6 +57,7 @@ model <- model("model{
 new_expr = "
   for(i in 1:nObs) {
     eDensity[i] <- bDensity[Island[i],Day[i]]
+    ePopn[i] <- bPopn1[Island[i]]
     eEffort[i] <- Hours[i] * HourlyRate[i]
     log(eEfficiency[i]) <- bEfficiencyMethod[Method[i]] + DensityDependent[i] * log(eDensity[i])
     eDeer[i] <- eEffort[i] * eEfficiency[i]
