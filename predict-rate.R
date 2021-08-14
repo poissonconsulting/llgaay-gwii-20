@@ -16,6 +16,13 @@ coef %>% print(n = nrow(.))
 sbf_save_table(glance, caption = "Model convergence")
 sbf_save_table(coef, caption = "Model terms (with 98% CIs)")
 
+total_costs <- data %>%
+  group_by(Island) %>%
+  summarise(Cost = sum(Hours * HourlyRate), .groups = "keep") %>%
+  ungroup()
+
+sbf_save_table(total_costs, caption = "The total costs spent in heli hours by island (with 98% CIs)")
+
 total_deer <- data %>%
   group_by(Island) %>%
   summarise(Removed = sum(Deer), .groups = "keep") %>%
@@ -51,13 +58,19 @@ remaining_indicator <- remaining
 remaining_indicator$mcmc %<>% combine_samples(indicator, fun = prod)
 remaining_indicator %<>% 
   coef(simplify = TRUE, conf_level = 0.98) %>%
-  select(Island, estimate, lower, upper)
+  select(Island, estimate, lower, upper) %>%
+  print()
+
+sbf_save_table(remaining_indicator, caption = "The estimated cost in heli hours of removing the number of remaining deer using indicator dogs by island (with 98% CIs)")
 
 remaining_bailing <- remaining 
 remaining_bailing$mcmc %<>% combine_samples(bailing, fun = prod)
 remaining_bailing %<>% 
   coef(simplify = TRUE, conf_level = 0.98) %>%
-  select(Island, estimate, lower, upper)
+  select(Island, estimate, lower, upper) %>%
+  print()
+
+sbf_save_table(remaining_bailing, caption = "The estimated cost in heli hours of removing the number of remaining deer using bailing dogs by island (with 98% CIs)")
 
 efficiency <- data %>%
   mutate(Density = 0.3) %>%
