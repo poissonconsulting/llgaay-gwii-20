@@ -69,24 +69,48 @@ efficiency_data <- data %>%
 gp <- ggplot(data = data) +
   aes(x = Day, y = Deer / (Hours * HourlyRate), color = Island) +
   facet_wrap(~Method, scales = "free_y") +
-  geom_point(alpha = 2/3, position = position_jitter(height = 0.1)) +
-  geom_line(data = efficiency_data, aes(y = estimate)) +
+  geom_point(alpha = 2/3) +
   expand_limits(y = 0) +
   scale_x_date("Date") +
   scale_color_manual(values = c("black", "blue", "red")) +
   theme(legend.position = "bottom")
 
-sbf_open_window()
-sbf_print(gp + ylab("Efficiency (ind/heli.hr)"))
-
-sbf_save_plot(x_name = "data", caption = "The removal efficiency by date, method and island with the estimated removal efficiency")
-
-gp <- gp + aes(x = Day, y = Deer / Hours)
+gp_efficiency <- gp + 
+  ylab("Efficiency (ind/heli.hr)") + 
+  geom_line(data = efficiency_data, aes(y = estimate))
 
 sbf_open_window()
-sbf_print(gp)
+sbf_print(gp_efficiency)
 
-gp <- gp + aes(x = Day, y = Deer)
+sbf_save_plot(x_name = "efficiency_data", caption = "The removal efficiency by date, method and island with the estimated removal efficiency")
+
+cost_data <- data %>%
+  new_data(seq = c("Method", "DensityDependent"), 
+           ref = list(Island = unique(.$Island),
+                      Day = seq(min(.$Day), max(.$Day), by = 10)), 
+           obs_only = TRUE) %>%
+  predict(analysis, new_data = ., term = "eCost")
+
+gp_cost <- gp + 
+  aes(x = Day, y = (Hours * HourlyRate) / Deer) +
+  geom_line(data = cost_data, aes(y = estimate)) +
+  ylab("Cost (heli.hr/ind)")
 
 sbf_open_window()
-sbf_print(gp)
+sbf_print(gp_cost)
+
+sbf_save_plot(x_name = "cost_data", caption = "The cost by date, method and island with the estimated cost")
+
+gp_deer_hours <- gp + 
+  aes(x = Day, y = Deer / Hours) +
+  ylab("Efficiency (ind/hr)")
+  
+sbf_open_window()
+sbf_print(gp_deer_hours)
+
+gp_deer <- gp + 
+  aes(x = Day, y = Deer) +
+  ylab("Rate (ind)")
+
+sbf_open_window()
+sbf_print(gp_deer)

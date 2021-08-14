@@ -59,7 +59,8 @@ new_expr = "
     eDensity[i] <- bDensity[Island[i],Day[i]]
     eEffort[i] <- Hours[i] * HourlyRate[i]
     log(eEfficiency[i]) <- bEfficiencyMethod[Method[i]] + DensityDependent[i] * log(eDensity[i])
-    eDeer[i] <- eEffort[i] * eEfficiency[i] 
+    eDeer[i] <- eEffort[i] * eEfficiency[i]
+    eCost[i] <- 1/eDeer[i]
     prediction[i] <- eDeer[i]
     fit[i] <- prediction[i]
     residual[i] <- res_gamma_pois(Deer[i], fit[i], sDeerDisperse)
