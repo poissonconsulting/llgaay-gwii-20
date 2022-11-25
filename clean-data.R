@@ -4,11 +4,13 @@ sbf_set_sub("read")
 sbf_load_datas()
 
 helicrew <- costs %>%
-  filter(Type %in% c("HeliHunter", "HeliPlusOperator")) %>%
+  rename(Method = Type) %>%
+  filter(Method %in% c("HeliHunter", "HeliPlusOperator")) %>%
   use_series("HourlyRate") %>%
   sum()
 
 costs %<>%
+  rename(Method = Type) %>%
   mutate(HourlyRate = HourlyRate / helicrew)
 
 encounter %<>%
@@ -24,7 +26,7 @@ encounter %<>%
   ps_coords_to_sfc(c("Longitude", "Latitude"), crs = 4269)
 
 event %<>%
-  rename(Type = PrimaryHuntingType) %>%
+  rename(Method = PrimaryHuntingType) %>%
   left_join(islands, by = "Island") %>%
   mutate(Island = factor(
     Island,
@@ -42,20 +44,20 @@ event %<>%
       "Howay Island"
     )
   ),
-  across(c(LeadHunter, Type), factor),
+  across(c(LeadHunter, Method), factor),
   across(c(DateTimeOutingStart, DateTimeOutingEnd), dtt_date_time),
   across(c(Dogs, Hunters, Boats, Helicopters), as.integer),
   Hours = as.numeric(difftime(DateTimeOutingEnd, DateTimeOutingStart, units = "hours")),
   HunterRate = case_when(
-    Type == "Bait Station" ~ costs$HourlyRate[costs$Type == "BaitHunterAvg"],
-    Type %in% c("Boat", "Walking") ~ costs$HourlyRate[costs$Type == "HunterAvg"],
-    Type == "Helicopter" ~ costs$HourlyRate[costs$Type == "HeliHunter"],
-    Type %in% c("Bailing Dog","Indicator Dog","Line Push") ~ costs$HourlyRate[costs$Type =="DogHunter"],
+    Method == "Bait Station" ~ costs$HourlyRate[costs$Method == "BaitHunterAvg"],
+    Method %in% c("Boat", "Walking") ~ costs$HourlyRate[costs$Method == "HunterAvg"],
+    Method == "Helicopter" ~ costs$HourlyRate[costs$Method == "HeliHunter"],
+    Method %in% c("Bailing Dog","Indicator Dog","Line Push") ~ costs$HourlyRate[costs$Method =="DogHunter"],
     TRUE ~ NA_real_),
   HourlyRate = Hunters * HunterRate,
-  HourlyRate = HourlyRate + Dogs * costs$HourlyRate[costs$Type=="Dog"],
-  HourlyRate = HourlyRate + Helicopters * costs$HourlyRate[costs$Type=="HeliPlusOperator"],
-  HourlyRate = HourlyRate + Boats * costs$HourlyRate[costs$Type=="BoatPlusOperator"],
+  HourlyRate = HourlyRate + Dogs * costs$HourlyRate[costs$Method=="Dog"],
+  HourlyRate = HourlyRate + Helicopters * costs$HourlyRate[costs$Method=="HeliPlusOperator"],
+  HourlyRate = HourlyRate + Boats * costs$HourlyRate[costs$Method=="BoatPlusOperator"],
   Cost = Hours * HourlyRate)
 
 sbf_set_sub("clean", rm = TRUE)

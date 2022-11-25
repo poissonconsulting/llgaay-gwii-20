@@ -18,7 +18,8 @@ rename <- c(
 )
 
 sort <- c(
-  "description", "coef", "glance", "map"
+  "description", "coef", "glance", "sensitivity", "ppc", "map", "efficiency", 
+  "cost_data", "efficiency_data", "total_costs"
 )
 
 drop <- "deer"
