@@ -7,6 +7,10 @@ sbf_save_table(rename(island, ScentTrials = Detections, EffectiveCoverage = ObsE
 
 sbf_save_table(costs, caption = "The estimated hourly costs (in $) by crew member and equipment.", sub = "costs")
 
+huntingteam %<>%
+  mutate(across(c(TrackTime,TrackLength), ~as.numeric(.x)),
+         across(TrackFileError, ~as.logical(.x)))
+
 helicrew <- costs %>%
   rename(Method = Type) %>%
   filter(Method %in% c("HeliHunter", "HeliPlusOperator")) %>%
@@ -18,6 +22,10 @@ costs %<>%
   mutate(HourlyRate = HourlyRate / helicrew)
 
 encounter %<>%
+  mutate(across(c(HuntingEventNumber, DeerLifeStage, DeerSex), ~str_trim(.x)),
+         across(c(DeerLifeStage,DateTimeEncounter, DeerSex,SampleID, CommentEncounter), ~na_if(.x, "NA")),
+         across(DateTimeEncounter, ~dtt_date_time(.x, tz = "UTC")),
+         across(c(ToothID,Age,Latitude,Longitude), ~as.numeric(.x))) %>%
   rename(LifeStage = DeerLifeStage,
          Status = DeerStatus,
          Sex = DeerSex) %>%
@@ -30,16 +38,15 @@ encounter %<>%
   ps_coords_to_sfc(c("Longitude", "Latitude"), crs = 4269)
 
 islands %<>%
+  mutate(across(Area, ~as.numeric(.x))) %>%
   mutate(Area = Area / 100)
 
-event %>%
-  filter(Island %in% c("Ramsay Island", "Murchison Island", "Hotspring Island")) %>%
-  filter(!OpportunisticHunting, !GridSearch) %>%
-  filter(!PrimaryHuntingType %in% c("Walking", "Line Push")) %>%
-  count(PrimaryHuntingType, Dogs, Boats, Helicopters, OpportunisticHunting, GridSearch) %>%
-  arrange(PrimaryHuntingType, Dogs, Boats, Helicopters)
-
 event %<>%
+  mutate(across(c(Dogs, Hunters, Boats, Helicopters), ~as.integer(.x)),
+         across(c(BaitStationID, CommentEvent), ~na_if(.x, "NA")),
+         across(c(OpportunisticHunting, GridSearch), ~as.logical(.x)),
+         across(c(DateTimeOutingStart, DateTimeOutingEnd), ~dtt_date_time(.x, tz = "UTC")),
+         across(CommentEvent, ~str_trim(.x))) %>%
   rename(Method = PrimaryHuntingType) %>%
   left_join(islands, by = "Island") %>%
   mutate(Island = factor(
