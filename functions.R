@@ -1,3 +1,17 @@
+download_data <- function(resource_id) {
+  url <- "https://open.canada.ca/data/en/api/action/datastore_search?limit=1000&resource_id="
+  
+  paste0(url, resource_id) %>%
+    request() %>%
+    req_perform() %>%
+    extract2("body") %>%
+    rawToChar() %>%
+    jsonlite::fromJSON() %>%
+    extract2("result") %>%
+    extract2("records") %>%
+    select(!"_id")
+}
+
 print.data.frame <- function(x, ...) {
   print(tibble::as_tibble(x), ...)
 }

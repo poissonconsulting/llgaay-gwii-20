@@ -1,4 +1,6 @@
 library(poispkgs)
+library(httr2)
+library(jsonlite)
 library(loo)
 
 stopifnot(packageVersion("poispkgs") >= "0.0.1.9017")
