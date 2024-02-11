@@ -7,24 +7,6 @@ sbf_save_table(rename(island, ScentTrials = Detections, EffectiveCoverage = ObsE
 
 sbf_save_table(costs, caption = "The estimated hourly costs (in $) by crew member and equipment.", sub = "costs")
 
-detection %<>%
-  filter(Island == "Ramsay") %>%
-  mutate(DetectionDate = dtt_date(paste(Year, Month, Day, sep = "-")),
-         across(c(StartDeploy, `End Deploy`), mdy),
-         Sex = case_when(
-           Sex == "M" ~ "Male",
-           Sex == "F" ~ "Female",
-           TRUE ~ NA_character_)) %>%
-  check_data(values = list(Count = c(1, 1), Island = c("Ramsay", "Ramsay"), 
-                           Species = c("Deer", "Deer"))) %>%
-  identity() %>%
-  select(Camera, StartDeploy, EndDeploy = `End Deploy`, DetectionDate, Sex, Comments = Comment)
-
-camera %<>%
-  filter(Island == "Ramsay",
-         str_detect(Code, "^RaBSC\\d{1,2}$")) %>%
-  ps_coords_to_sfc(c("Longdd", "Latdd"))
-
 helicrew <- costs %>%
   rename(Method = Type) %>%
   filter(Method %in% c("HeliHunter", "HeliPlusOperator")) %>%

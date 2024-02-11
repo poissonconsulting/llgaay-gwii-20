@@ -20,10 +20,6 @@ costs <- tibble::tribble(
   "HeliPlusOperator",   1560
 )
 
-# detection <- read_xlsx("input/CameraDataJuly20-Aug27-2017Ramsay.xlsx", sheet = "Aug2017-Jan2018CamData")
-# camera <- read_xlsx("input/CameraDataJuly20-Aug27-2017Ramsay.xlsx", sheet = "Metadata",
-#                     skip = 6)
-
 islands %<>%
   mutate(Area = as.numeric(Area))
 
