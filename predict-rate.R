@@ -134,7 +134,7 @@ gp <- ggplot(data = filter(data, !is.na(Method))) +
   facet_wrap(~Method) +
   geom_point(alpha = 2/3) +
   scale_x_date("Date") +
-  scale_color_manual(values = c("black", "blue", "red")) +
+  scale_color_disc_poisson() +
   theme(legend.position = "bottom")
 
 gp_efficiency <- gp + 
@@ -206,7 +206,7 @@ percent_completion <- percent_completion$mcmc %>% collapse_chains() %>%
 gp <- ggplot(data = percent_completion, aes(y = value, x = Island)) +
   geom_violin(aes(fill = Island), linewidth = 0) +
   scale_y_continuous("Eradication Completion (%)", labels = percent) +
-  scale_fill_manual(values = c("black", "blue", "red")) +
+  scale_fill_disc_poisson() +
   NULL
 
 sbf_open_window(6,3)
