@@ -3,7 +3,6 @@ source("header.R")
 islands <- download_data("6990e632-bc99-4805-aa8c-36fd23c5f8f3")
 event <- download_data("b91cbeb4-18a1-4b81-88a8-a46f40efa4f5")
 encounter <- download_data("a691dd5d-c3e4-4ab5-b23c-2c190f83a697")
-huntingteam <- download_data("2145143e-e3fa-4e4f-a8df-c8efefc7becc")
 
 costs <- tibble::tribble(
   ~Type, ~HourlyRate,

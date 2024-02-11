@@ -18,7 +18,6 @@ check_data(encounter, values = list(
 
 check_key(event, key = "HuntingEventNumber")
 check_key(encounter, key = c("HuntingEventNumber", "EncounterID"))
-check_key(huntingteam, key = c("HuntingEventNumber", "Hunter"))
 
 chk_join(encounter, event, by = "HuntingEventNumber")
 

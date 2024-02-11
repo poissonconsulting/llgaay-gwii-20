@@ -7,10 +7,6 @@ sbf_save_table(rename(island, ScentTrials = Detections, EffectiveCoverage = ObsE
 
 sbf_save_table(costs, caption = "The estimated hourly costs (in $) by crew member and equipment.", sub = "costs")
 
-huntingteam %<>%
-  mutate(across(c(TrackTime,TrackLength), ~as.numeric(.x)),
-         across(TrackFileError, ~as.logical(.x)))
-
 helicrew <- costs %>%
   rename(Method = Type) %>%
   filter(Method %in% c("HeliHunter", "HeliPlusOperator")) %>%
