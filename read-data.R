@@ -4,7 +4,7 @@ source("header.R")
 
 islands <- download_data("6990e632-bc99-4805-aa8c-36fd23c5f8f3")
 event <- download_data("b91cbeb4-18a1-4b81-88a8-a46f40efa4f5")
-#encounter <- download_data("b91cbeb4-18a1-4b81-88a8-a46f40efa4f5")
+encounter <- download_data("a691dd5d-c3e4-4ab5-b23c-2c190f83a697")
 huntingteam <- download_data("2145143e-e3fa-4e4f-a8df-c8efefc7becc")
 
 costs <- tibble::tribble(
@@ -21,19 +21,24 @@ costs <- tibble::tribble(
 )
 
 islands %<>%
-  mutate(Area = as.numeric(Area))
+  mutate(across(Area, ~as.numeric(.x)))
 
 huntingteam %<>%
-  mutate(TrackTime = as.numeric(TrackTime),
-         TrackLength = as.numeric(TrackLength),
-         TrackFileError = as.logical(TrackFileError))
+  mutate(across(c(TrackTime,TrackLength), ~as.numeric(.x)),
+         across(TrackFileError, ~as.logical(.x)))
 
 event %<>%
-  mutate(across(c(Dogs, Hunters, Boats, Helicopters), ~as.integer(.x))) %>%
-  mutate(across(c(BaitStationID, CommentEvent), ~na_if(.x, "NA")),
+  mutate(across(c(Dogs, Hunters, Boats, Helicopters), ~as.integer(.x)),
+         across(c(BaitStationID, CommentEvent), ~na_if(.x, "NA")),
          across(c(OpportunisticHunting, GridSearch), ~as.logical(.x)),
          across(c(DateTimeOutingStart, DateTimeOutingEnd), ~dtt_date_time(.x, tz = "UTC")),
-         CommentEvent = str_trim(CommentEvent))
+         across(CommentEvent, ~str_trim(.x)))
+
+encounter %<>%
+  mutate(across(c(HuntingEventNumber, DeerLifeStage, DeerSex), ~str_trim(.x)),
+         across(c(DeerLifeStage,DateTimeEncounter, DeerSex,SampleID, CommentEncounter), ~na_if(.x, "NA")),
+         across(DateTimeEncounter, ~dtt_date_time(.x, tz = "UTC")),
+         across(c(ToothID,Age,Latitude,Longitude), ~as.numeric(.x)))
 
 island <- tribble(
   ~Island, ~Detections,~ObsEff,
@@ -49,4 +54,3 @@ sbf_save_datas()
 if(FALSE) {
   sbf_compare_data_archive()
 }
-
