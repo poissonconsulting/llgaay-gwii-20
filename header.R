@@ -13,11 +13,6 @@ if (getDoParWorkers() == 1) {
 options(sbf.ask = FALSE)
 options(tibble.print_max = 20)
 
-palette(c(
-  "black", "red", "blue", "green4", "brown", "slategray", "orchid",
-  "lightskyblue", "aquamarine4", "orange3"
-))
-
 theme_set(theme_Poisson())
 
 set_analysis_mode("paper")
