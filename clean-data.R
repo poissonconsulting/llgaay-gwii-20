@@ -19,7 +19,7 @@ costs %<>%
 
 encounter %<>%
   mutate(across(c(HuntingEventNumber, DeerLifeStage, DeerSex), ~str_trim(.x)),
-         across(c(DeerLifeStage,DateTimeEncounter, DeerSex,SampleID, CommentEncounter), ~na_if(.x, "NA")),
+         across(c(DeerLifeStage,DateTimeEncounter, DeerSex,SampleID, ToothID,Age,Latitude,Longitude, CommentEncounter), ~na_if(.x, "NA")),
          across(DateTimeEncounter, ~dtt_date_time(.x, tz = "UTC")),
          across(c(ToothID,Age,Latitude,Longitude), ~as.numeric(.x))) %>%
   rename(LifeStage = DeerLifeStage,
