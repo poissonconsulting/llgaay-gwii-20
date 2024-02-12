@@ -1,6 +1,8 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
+[![DOI](https://zenodo.org/badge/231636929.svg)](https://zenodo.org/doi/10.5281/zenodo.10648280)
+
 # Llgaay gwii sdiihlda – Restoring Balance project.
 
 The title is in the Skidegate dialect of Xaayda /Haida for Restoring
