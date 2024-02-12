@@ -138,7 +138,7 @@ gp <- ggplot(data = filter(data, !is.na(Method))) +
   theme(legend.position = "bottom")
 
 gp_efficiency <- gp + 
-  scale_y_log10("Efficiency (ind/heli.hr)", sec.axis = sec_axis(~1/., breaks = c(0.1,1,10,100,1000), name = "Cost (heli.hr/ind)")) + 
+  scale_y_log10("Efficiency (ind/heli.hr)", sec.axis = sec_axis(~1/., breaks = c(0.1,1,10,100,1000), name = "Cost (heli.hr/ind)", labels = c("0.10", "1.00", "10.00", "100.00", "1,000.00"))) + 
   geom_line(data = efficiency_data, aes(y = estimate), alpha = 1/2)
 
 sbf_open_window()
