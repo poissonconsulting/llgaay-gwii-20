@@ -27,7 +27,7 @@ drop <- "deer"
 ```
 
 ```{r}
-cat(report_draft())
+cat(report_draft(final = TRUE))
 ```
 
 The suggested citation for this [analytic appendix](https://www.poissonconsulting.ca/analytic-appendices.html) is:
