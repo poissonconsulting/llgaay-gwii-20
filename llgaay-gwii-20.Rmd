@@ -1,6 +1,6 @@
 ---
-title: "Llgaay Gwii sdiihlda (Restoring Balance project) 2017"
-author: "Irvine, R.L. & Thorley, J.L."
+title: "Llgaay Gwii sdiihlda (Restoring Balance project) 2014-2019"
+author: "Thorley, J.L. & Irvine, R.L."
 bibliography: bibliography.bib
 ---
   
